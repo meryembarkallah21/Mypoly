@@ -1,0 +1,82 @@
+{% extends 'etudiant/espace/cours/liste_ue/list-ue.html.twig' %}
+
+
+{% block contenu %}
+
+            <div class="card-body">
+                <div class="row">
+                    {% for UE in s2 %}
+                        {% set nbr = UE.no %}
+                        <div class="cont  col-md-6">
+                            <h5 style="margin-left:15px" class="mb-4 mt-3 col-md-12"><span class="badge badge-dark">{{ UE.name }}
+                                                                </span><small class="h6 text-info" style="font-weight:bold;">
+                                    {% if nbr | length > 0 %} {{  nbr | length }} matières
+                                    {% else %}
+                                        vide
+                                    {% endif %}</small></h5>
+
+                            <div class="col-md-12">
+                                <div class="bg-white rounded border shadow-sm mb-4">
+                                    {% for ec in UE.no %}
+                                        {% set cour = [] %}
+                                        {% set i = 0 %}
+
+                                        {% for cours in ec.cours %}
+                                            {% set cour = cour|merge({ (i) : cours })   %}
+                                        {% endfor %}
+                                        <div class="gold-members p-3 border-bottom">
+                                            {% if cour %}
+                                                {% set data = cour[0] %}
+                                                <a href="{{ path('cours' ,{ 'id' :data.id }) }}" class="float-right badge badge-warning">suivre cours</a>
+                                            {% else %}
+                                                <a href="" disabled class="float-right badge badge-warning">suivre cours</a>
+                                            {% endif %}
+                                            <h6 class="float-right badge badge-info">Crédit: {{ ec.coeff }}</h6>
+                                            <div class="media">
+                                                <div class="mr-3"><i
+                                                            class="icofont-ui-press
+                                                                            {% set cpt=0 %}
+                                                                            {% for stat in ec.statusEcs %}
+                                                                                {% for st in Status %}
+                                                                                             {% if stat == st and stat.status%}
+                                                                                             {% set cpt=1 %}
+                                                                                                         text-success
+                                                                                             {% endif %}
+                                                                                {% endfor %}
+                                                                            {% endfor %}
+                                                                            {% if cpt == 0 %}
+                                                                                text-danger
+                                                                            {% endif %}
+                                                                             food-item"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6 class="mb-1">{{ ec.name }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% else %}
+                                        <div class="gold-members p-3 border-bottom">
+                                            <div class="media">
+                                                <div class="mr-3"><i class="icofont-ui-press text-secondary food-item"></i></div>
+                                                <div class="media-body">
+                                                    <h6 class="mb-1"><p>Unité vide pour l'instant</p></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p>il n'y as pas d'UE disponible en Semestre 2 pour l"instant</p>
+
+                    {% endfor %}
+                </div>
+            </div>
+
+
+
+
+{% endblock %}

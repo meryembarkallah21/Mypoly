@@ -1,0 +1,203 @@
+{# empty Twig template #}
+<!-- Modal -->
+<style>
+    .modal-title{
+        color:white;
+    }
+    {# checkbox style #}
+    input[type="checkbox"].check {
+        display: none;
+    }
+    input[type="checkbox"].check + label {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 3rem;
+        height: 1.5rem;
+        border-radius: 1.5rem;
+        padding:2px;
+        background-color: #c0ceda ;
+        transition: all 0.5s ;
+    }
+    input[type="checkbox"].check + label::before {
+        box-sizing: border-box;
+        display: block;
+        content: "";
+        height: calc(1.5rem - 4px);
+        width: calc(1.5rem - 4px);
+        border-radius: 50%;
+        background-color: #fff;
+        transition: all 0.5s ;
+    }
+    input[type="checkbox"].check:checked + label {
+        background-color: #00B7E8 ;
+    }
+    input[type="checkbox"].check:checked + label::before {
+        margin-left: 1.5rem ;
+    }
+</style>
+<div id="creer" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h4 class="modal-title">Créer Bibliothèque</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ path('admin_bibliotheque_new') }}" method="post" class="validate">
+                {{ form_start(form) }}
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content" style="display: block;">
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label class="control-label" style="" for="_filiere">Mention<span class="required">*</span>
+                                        </label>
+                                        <select id="_filiere"  name="_filiere" class="form-control">
+                                            <option class="text-center" value="">--- Choisir mention ---</option>
+                                            {% for filiere in filieres %}
+                                                <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label class="control-label" for="_niveau">Niveau<span class="required">*</span>
+                                        </label>
+                                        <select id="_niveau"  name="_niveau" class="form-control">
+                                            <option class="text-center" value="">--- Choisir niveau ---</option>
+                                            {% for cycle in niveaux %}
+                                                <option  value="{{ cycle.id }}"> {{ cycle.code }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label class="control-label" for="_parcours">Parcours<span class="required">*</span>
+                                        </label>
+                                        <select id="_parcours"  name="_parcours" class="form-control">
+                                            <option class="text-center" value="">--- Choisir parcours ---</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label class="control-label">Semestre<span class="required">*</span>
+                                        </label>
+                                        {{ form_widget(form.Semestre) }}
+                                        {{ form_errors(form.Semestre) }}
+                                    </div>
+
+
+
+
+
+
+
+
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label class="control-label">Ec<span class="required">*</span>
+                                        </label>
+                                        {{ form_widget(form.ec) }}
+                                        {{ form_errors(form.ec) }}
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label class="control-label" for="type">Type<span class="required">*</span>
+                                        </label>
+                                        {{ form_widget(form.type) }}
+                                        {{ form_errors(form.type) }}
+                                    </div>
+
+
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label class="control-label" for="title">Titre<span class="required">*</span>
+                                        </label>
+                                        {{ form_widget(form.title) }}
+                                        {{ form_errors(form.title) }}
+                                    </div>
+
+
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label class="control-label">Fichier<span class="required">*</span>
+                                        </label>
+                                        <input type="file" name="doc" class="form-control" required>
+                                    </div>
+
+
+                                    <label class="control-label col-md-12 col-sm-12 col-xs-12" for="description">Description du document<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        {{ form_widget(form.description) }}
+                                        {{ form_errors(form.description) }}
+                                        <br>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12"></div>
+                                    <div class="col-md-12 col-sm-12col-xs-12">
+                                        <ul class="nav float-right">
+                                            <li>
+                                                <input type="checkbox" id="_publie" name="_publie"  class="check">
+                                                <label for="_publie"></label>
+                                            </li>
+                                            <li>
+                                                <span>  </span> Publié
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </diV>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-danger">Enregistrer</button>
+                </div>
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
+</div>
+<!--endmodal-->
+<!-- Jquery JS-->
+<script src="{{ asset('inscription/vendor/jquery/jquery.min.js') }}"></script>
+<!-- Main JS-->
+<script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+        $("#_filiere").change(function (){
+            var valfiliere = $(this).val();
+
+            $("#_niveau").change(function(){
+                var valNiveau = $(this).val();
+                var data = "niveau=" + valNiveau +"&code="+valfiliere;
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ path('get-parc') }}",
+                    data: data,
+                    success: function(data){
+                        $('#_parcours').empty();
+                        if(data.parcours){
+                            for(var i=0 ; i< data.parcours.length; i++){
+                                $('#_parcours').append('<option  value= "'+ data.parcours[i]['id'] +'">'+ data.parcours[i]['name'] +'</option>');
+                            }
+                        }
+
+                    }
+                })
+
+            })
+
+        })
+
+    });
+
+</script>

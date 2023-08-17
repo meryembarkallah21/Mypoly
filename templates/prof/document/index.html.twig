@@ -1,0 +1,152 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+
+{% block title %}Prof | document {% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+<style>
+    .modal-title{
+        color: floralwhite;
+    }
+    .float-right{
+        position: absolute;
+        right: 2%;
+        color:white;
+    }
+</style>
+<div class="container-fluid">
+    <h1 class="mt-4">Mes documents</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Mes documents</li>
+        <li class="float-right"><a  data-toggle="modal" data-target="#ajoutdoc" class="btn btn-info btn-sm"><span class="fas fa-folder-plus"></span> Ajouter</a></li>
+    </ol>
+
+    <div class="row">
+        {% for doc in app.user.document %}
+            <div class="col-xl-6">
+                <div class="card mb-4 order-list">
+                    <div class="gold-members p-4">
+                        <a href="#">
+                        </a>
+                        <div class="media">
+                            <a href="{{asset('images/motif_inscription_file/'~doc.fichier)}}">
+                                <img class="mr-3" src="{{asset('images/motif_inscription_file/'~doc.fichier)}}" alt="...">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    <span class="float-right text-success">{{ doc.title }}  <i class="feather-check-circle text-success"></i></span>
+                                </a>
+                                <br>
+                                <br>
+                                <hr>
+                                <div class="float-right">
+                                    <a href="#" id="supprimer_{{ doc.id }}" onclick="javascript:supprimerelement(this.id)" class="btn btn-sm btn-danger"><i class="feather-trash"></i> Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-md-12">
+                <p class="text-center">Aucun document ...</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- modal confirmation suppression -->
+<div class="bd-example">
+    <div class="modal fade" id="suppression" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: rgb(255, 65, 75);">
+                    <h4 class="modal-title">Confirmation avant suppression</h4>
+                    <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="suppression_form" method="POST">
+                    <div class="modal-body">
+                        <h4 id="titre_modal_suppression"></h4>
+                        <input type="hidden" name="suppressionselected" id="suppressionselected">
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <input type="submit" class="form-control btn btn-danger" value="Oui" >
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <button type="button" class="form-control btn btn-default" style="background-color: #cccccc" data-dismiss="modal">Non</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{# empty Twig template #}
+<!-- Modal creation-->
+<div id="ajoutdoc" class="modal fade bd-example-modal-lg" role="dialog">
+    <div class="modal-dialog ">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h4 class="modal-title event-header"><i class="fas fa-calendar-plus"></i>  Ajout document</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{ form_start(form_doc) }}
+            <div class="modal-body">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content" style="display: block;">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Titre :</label>
+                                        {{ form_widget(form_doc.title)}}
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Fichier :</label>
+                                        {{ form_widget(form_doc.fichierdoc) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+            {{ form_end(form_doc) }}
+        </div>
+    </div>
+</div>
+<!--endmodal-->
+<script type="text/javascript">
+    function supprimerelement(id_supprimer) {
+        var s = "supprimer_";
+        var t = s.length;
+        var idchoisi = id_supprimer.substring(t, id_supprimer.length);
+        var url = "{{ path('prof_document_supprimer', {'id': 'supprimer'}) }}";
+        url = url.replace("supprimer", idchoisi);
+        $("#suppression_form").attr('action', url);
+        $("#titre_modal_suppression").text("Etes-vous d'accord pour la suppression de cet document?");
+        $("#suppression").modal();
+    }
+</script>
+{% endblock %}
+{% block javascript %}
+{% endblock %}
+

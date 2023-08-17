@@ -1,0 +1,87 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+{% block title %} Gestion des cours | Cours {% endblock %}
+
+
+{% block main %}
+<style>
+    .tb{
+        color:royalblue;
+        margin-right:5px;
+    }
+    .ui{
+        color:gray;
+        font-size: 18px;
+        font-weight: bold;
+        margin-right:20px ;
+        border:1px solid royalblue;
+    }
+    .ui:hover{
+        background-color:royalblue;
+        color: white;
+    }
+    .ui:active{
+        background-color:royalblue;
+        color: white;
+    }
+    .status{
+        background-color: #1c7430;
+        padding:9px;
+        margin-right:10px;
+        margin-top:2px;
+        border-radius:9px;
+    }
+    .header-card{
+        background-color: #6695a0;
+        color:#fff;
+    }
+</style>
+<div class="container-fluid">
+    <h1 class="mt-4">{{ mention.parcours.fullname }}</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active"><a class="tb text-info" href="{{ path('admin_dashboard') }}">
+                Tableau de bord</a>
+            <a class="text-info" href="{{ path('index_admin_gestion_cours') }}">/Mention</a>
+            <a class="text-info" href="{{ path('parcours_admin_gestion_cours',{'id' : mention.code.id }) }}">/Parcours</a></li>/{{ mention.parcours.fullname }}
+    </ol>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card text-white mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card text-black-50 mb-4">
+                                {% for ue in ues %}
+                                     <div class="card-header header-card">{{ ue.name }}</div>
+                                     {% for ec in ue.no %}
+
+                                            <div class="gold-members p-3 border-bottom">
+                                                <div class="float-right">
+
+                                                    <h6 class="badge badge-info" >Crédit: {{ ec.coeff }}</h6>
+                                                    <a href="{{ path('admin_cours_edit' ,{'id': ec.cours[0].id }) }}" class="badge badge-success"><i class="feather-edit"></i></a>
+                                                    <a href="{{ path('admin_cours_show' ,{'id': ec.cours[0].id }) }}" class="badge badge-secondary "><i class="feather-eye"></i></a>
+
+                                                </div>
+                                                <div class="media">
+                                                    <div></div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">{{ ec.name }}</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    {% else %}
+                                         <p class="text-center">( Vide )</p>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block javascript %}
+{% endblock %}

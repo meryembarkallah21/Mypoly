@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('code_delete', {'id': code.id}) }}" onsubmit="return confirm('Vous etes sure que vous voulez supprimer cet item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ code.id) }}">
+    <a class="btn btn-success btn-sm" href="{{ path('code_edit', {'id': code.id}) }}"><span class="fas fa-edit"></span></a>
+    <button class="btn btn-danger btn-sm"><i class="fa fw fa-trash-alt"></i></button>
+</form>

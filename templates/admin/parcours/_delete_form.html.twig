@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('parcours_delete', {'id': parcour.id}) }}" onsubmit="return confirm('Vous etes sure que vous voulez supprimer cet item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ parcour.id) }}">
+    <a class="btn btn-sm btn-success" href="{{ path('parcours_edit', {'id':parcour.id}) }}"><span class="fas fa-edit"></span></a>
+    <button class="btn btn-sm btn-danger"><i class="fa fw fa-trash-alt"></i></button>
+</form>

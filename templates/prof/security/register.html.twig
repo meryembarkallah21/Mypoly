@@ -1,0 +1,120 @@
+{% extends 'prof/base.html.twig' %}
+
+{% block title %}S'inscrire{% endblock %}
+
+{% block body %}
+    {% block content %}
+            <style>
+                .errors ul li {
+                    color: red;
+                    list-style: none;
+                    margin-left: -37px;
+                }
+
+                .errors.form-label-group > input {
+                    border-bottom: 1px solid red !important;
+                    box-shadow: none !important;
+                }
+
+                .iti.iti--allow-dropdown {
+                    width: 100% !important;
+                }
+
+                .iti.iti--allow-dropdown > input {
+                    background: transparent !important;
+                    border: 0 !important;
+                    border-bottom: 1px solid #ced4da !important;
+                    border-radius: 0 !important;
+                }
+
+                .tel-errors .iti.iti--allow-dropdown > input { 
+                    border-bottom: 1px solid red !important;
+                }
+
+                .iti.iti--allow-dropdown .form-control {
+                    box-shadow: none !important;
+                }
+            </style>
+
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="d-none d-md-flex col-md-4 col-lg-6 osahan-login-left px-0"></div>
+            <div class="col-md-8 col-lg-6 justify-content-center flex-column px-0" >
+                <div class="login d-flex align-items-center py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
+                                <h3 class="login-heading mb-4">S'inscrire</h3>
+                                {{ form_start(form) }}
+                                <div class="form-label-group {% if not form.email.vars.valid %}errors{% endif %} ">
+
+                                    {{ form_widget(form.email) }}
+                                    {{ form_errors(form.email) }}
+                                    {{ form_label(form.email) }}
+
+                                </div>
+                                <div class="form-label-group" id="tel-container">
+                                    {{ form_widget(form.tel) }}
+                                </div>
+                                <div class="form-label-group {% if not form.password.vars.valid %}errors{% endif %} ">
+                                    {{ form_widget(form.password) }}
+                                    {{ form_label(form.password) }}
+                                </div>
+                                <div class="form-label-group mb-4 {% if not form.name.vars.valid %}errors{% endif %} ">
+                                    {{ form_widget(form.name) }}
+                                    {{ form_label(form.name) }}
+                                </div>
+                                <button type="submit" id="btn-customer-register"
+                                        class="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">{{ button_label|default('Valider') }}</button>
+                                <div class="text-center pt-3">
+                                    Vous avez déjà un compte? <a class="font-weight-bold"
+                                                                 href="{{ path('prof_login') }}">Se connecter</a>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('vendor/jquery/jquery-3.3.1.slim.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+
+
+                    var input = document.querySelector("#user_tel");
+
+                    errorMsg = document.querySelector("#error-msg"),
+                        validMsg = document.querySelector("#valid-msg");
+                    var tel_parent = document.getElementById("tel-container");
+
+                    // here, the index maps to the error code returned from getValidationError - see readme
+                    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+                    var iti = window.intlTelInput(input, {
+                        utilsScript: "{{ asset('vendor/tel/js/utils.js') }}", // just for formatting/placeholders etc
+                        nationalMode: false,
+                    });
+                    var reset = function () {
+                        tel_parent.classList.remove("tel-errors");
+                    };
+                    // on blur: validate
+                    input.addEventListener('blur', function () {
+                        if (input.value.trim()) {
+                            if (iti.isValidNumber()) {
+                                //validMsg.classList.remove("hide");
+                            } else {
+                                console.log("erreur");
+                                tel_parent.classList.add("tel-errors");
+                                document.getElementById("btn-customer-register").disabled = true;
+                            }
+                        }
+                    });
+                    // on keyup / change flag: reset
+                    input.addEventListener('change', reset);
+                    input.addEventListener('keyup', reset);
+                });
+            </script>
+    {% endblock %}
+
+{% endblock %}

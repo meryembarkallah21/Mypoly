@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}POLYTECH SOUSSE  | Les enseignants {% endblock %}
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('vitrine/style.css') }}">
+    <style>
+        .nav-link{
+            font-size:18px;
+        }
+        .nav-link>a{
+            color: #756f6f;
+        }
+        .top-navbar{
+            margin-left:-15px;
+            margin-right:-15px;
+        }
+        .dropdown-item{
+            font-size: 15px;
+            font-weight: bold;
+        }
+        #lead{
+            font-weight: bold;
+        }
+        #overviews{
+            margin-top:-20px;
+            margin-right:-15px;
+            margin-left:-15px;
+        }
+        #copyrights{
+            margin-left:-15px;
+            margin-right:-15px;
+        }
+        .bt{
+            margin: 2px 5px;
+        }
+    </style>
+    <!-- LOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="progress-br float shadow">
+                <div class="progress__item"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END LOADER -->
+    <div class="container-fluid">
+        <!-- ======= Top nav ======= -->
+        <!-- Start header -->
+        {{ include('vitrine/header.html.twig') }}
+        <!-- End header -->
+        <div id="overviews" class="section lb">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-8 offset-md-2">
+                        <h1 style="font-weight: bold">LES ENSEIGNANTS</h1>
+                    </div>
+                </div><!-- end title -->
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-6">
+                                        <ul class="nav">
+                                            {% for mention in mentions %}
+                                                <li class="nav-item">
+                                                    <a href="#{{ mention.name }}" class="nav-link bt btn border border-info" role="tab" data-toggle="tab">
+                                                        <img src="{{ asset('images/fichier_icon/'~mention.icon) }}" alt="..." width="30px">
+                                                        {{ mention.name }}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <img style="padding:0 40%;margin-bottom:10px; background-color:#dde3e1;" src="{{ asset('images/avatars/prof.gif') }}" alt="..." width="100%" />
+                    </div>
+                    <div class="col-md-12">
+                        <div class="tab-content">
+                            {% for mention in mentions %}
+                                <div class="tab-pane" role="tabpanel" id="{{ mention.name }}">
+                                    {% set data = [] %}
+                                    {% set i = 0 %}
+                                    {% for ec in ecs %}
+                                        {% if ec.prof in data %}
+                                        {% elseif ec.ue.mention.code == mention %}
+                                            {% set data = data| merge( { (i) : ec.prof } ) %}
+                                            {% set i = i+1 %}
+                                        {% else %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% for prof in data %}
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                                                <div class="osahan-account-page-left shadow-sm bg-white h-100">
+                                                    <div class="border-bottom p-4 ">
+                                                        <div class="osahan-user text-center">
+                                                            <div class="osahan-user-media">
+                                                                <img class="mb-3 rounded-pill shadow-sm mt-1" width="100px" src="{{ asset('images/avatars/'~prof.avatar) }}" alt="president">
+                                                                <div class="osahan-user-media-body">
+                                                                    <h5 class="mb-2" style="font-weight:bold">{{ prof.name }}</h5>
+                                                                    <h5 class="mb-2" style="font-weight:bold">{{ prof.email }}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end icon-wrapper -->
+                                        </div><!-- end col -->
+                                    {% else %}
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                                                <p class="text-center">Aucun prof pour l'instant... </p>
+                                            </div><!-- end icon-wrapper -->
+                                        </div><!-- end col -->
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                   {#  {% for prof in profs %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                                <div class="osahan-account-page-left shadow-sm bg-white h-100">
+                                    <div class="border-bottom p-4 ">
+                                        <div class="osahan-user text-center">
+                                            <div class="osahan-user-media">
+                                                <img class="mb-3 rounded-pill shadow-sm mt-1" width="100px" src="{{ asset('images/avatars/'~prof.avatar) }}" alt="president">
+                                                <div class="osahan-user-media-body">
+                                                    <h5 class="mb-2" style="font-weight:bold">{{ prof.name }}</h5>
+                                                    <h5 class="mb-2" style="font-weight:bold">{{ prof.email }}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- end icon-wrapper -->
+                        </div><!-- end col -->
+                    {% else %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                                <p class="text-center">Aucun prof ... </p>
+                            </div><!-- end icon-wrapper -->
+                        </div><!-- end col -->
+                    {% endfor %}#}
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end section -->
+        {{ include('vitrine/footer.html.twig') }}
+    {% block main %}
+    {% endblock %}
+{% endblock %}

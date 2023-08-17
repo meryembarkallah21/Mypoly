@@ -1,0 +1,290 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+{% block title %}Log in!
+{% endblock %}
+
+{% block main %}
+    <style>
+        .errors ul li {
+            color: red;
+            list-style: none;
+            margin-left: -37px;
+        }
+        .errors input {
+            border: 1px solid red;
+        }
+        .iti.iti--allow-dropdown{
+            width: 100% !important;
+         }
+         .iti.iti--allow-dropdown>input {
+            background: transparent !important;
+            border-radius: 0 !important;
+         }
+         .tel-errors .iti.iti--allow-dropdown>input {
+            border: 1px solid red !important;
+         }
+         .iti.iti--allow-dropdown .form-control {
+            box-shadow: none !important;
+         }
+         .save{
+             margin-left: 40%;
+         }
+         .save1{
+             margin-left: -10%;
+         }
+         .separation{
+             width: 70%;
+             height: 1px;
+             margin: auto;
+             margin-bottom: 10px;
+         }
+         .save3{
+             margin-left: 40%;
+         }
+         .ville{
+             padding: 0 10px;
+             width: 93%;
+             margin-left: 10px;
+         }
+         .titre{
+            font-weight: bold;
+            margin-top: 5px;
+            margin-bottom: -10px;
+         }
+    </style>
+        <div class="container-fluid">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h2 class="m-0 text-black">Profil <span class="feather-user text-info"></span></h2>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item "><a href="#" class="text-info">Tableau de Bord</a></li>
+                                <li class="breadcrumb-item active">bibliotheque</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+                <div class="card">
+                    <div class="row ">
+                                {#  {{ include('etudiant/sidebar.html.twig') }} #}
+                                <div class="col-md-9">
+                                    <div class="osahan-account-page-right p-4 h-100">
+                                        <div class="tab-content " id="myTabContent">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+
+                                                    <div class="card mb-4 order-list">
+                                                        <div class="gold-members p-4">
+                                                            {{ form_start(form) }}
+                                                                <div class="row">
+
+                                                                    <div class="col-md-5">
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group" id="tel-container">
+                                                                                <label>Telephone</label>
+                                                                                {{ form_widget(form.tel) }}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12 form-group {% if not form.avatarfile.vars.valid %}errors{% endif %}">
+                                                                            <label>Votre photo</label>
+                                                                            {{ form_widget(form.avatarfile) }}
+                                                                            {{ form_errors(form.avatarfile) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7 add_top_30">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group {% if not form.name.vars.valid %}errors{% endif %}">
+                                                                                    <label>Nom</label>
+                                                                                    {{ form_widget(form.name) }}
+                                                                                    {{ form_errors(form.name) }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group {% if not form.email.vars.valid %}errors{% endif %}">
+                                                                                    <label>Email</label>
+                                                                                    {{ form_widget(form.email) }}
+                                                                                    {{ form_errors(form.email) }}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group" >
+                                                                            <label style="margin-left: 15px">Ville</label>
+                                                                            {{ form_widget(form.ville) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <div class="form-group" >
+                                                                            <label>Adresse</label>
+                                                                            {{ form_widget(form.adresse) }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <div class="save mb-2 mr-5">
+                                                                <button type="submit" id="btn-etudiant-edit-profile" class="btn btn-success">Enregistrer</button>
+                                                            </div>
+                                                            {{ form_end(form) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mx-auto">
+                                                    <div class="card mb-4 order-list">
+
+                                                            <div class="gold-members">
+                                                                {{ form_start(form_pass)}}
+                                                                <div class="box_general padding_bottom">
+                                                                    <div class="header_box version_2 border-bottom p-3">
+                                                                        <h6 class="m-0">
+                                                                            <i class="fa fa-lock text-muted mr-2"></i>Changer de mot de passe</h6>
+                                                                    </div>
+                                                                    <div class="p-3">
+                                                                        <div class="form-group {% if not form_pass.oldPassword.vars.valid %}errors{% endif %} ">
+                                                                            <label>Mot de passe actuel</label>
+                                                                            {{ form_widget(form_pass.oldPassword) }}
+                                                                            {{ form_errors(form_pass.oldPassword) }}
+                                                                        </div>
+                                                                        <div class="form-group {% if not form_pass.newPassword.vars.valid %}errors{% endif %} ">
+                                                                            <label>Nouveau mot de passe</label>
+                                                                            {{ form_widget(form_pass.newPassword) }}
+                                                                            {{ form_errors(form_pass.newPassword) }}
+                                                                        </div>
+                                                                        <div class="form-group {% if not form_pass.confirmPassword.vars.valid %}errors{% endif %} ">
+                                                                            <label>Confirmer</label>
+                                                                            {{ form_widget(form_pass.confirmPassword) }}
+                                                                            {{ form_errors(form_pass.confirmPassword) }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="save1 mb-2 text-center">
+                                                                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                                                                </div>
+                                                                {{ form_end(form_pass) }}
+                                                            </div>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-4">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card mb-4" >
+                                                <center>
+                                                    <p class="text-center badge badge-info titre" style="width: 40%;">Ajout document</p>
+                                                </center>
+                                                {{ form_start(formDoc) }}
+                                                    <div class="gold-members p-4">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group" id="tel-container">
+                                                                <label>Titre:</label>
+                                                                {{ form_widget(formDoc.title) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 form-group {% if not form.avatarfile.vars.valid %}errors{% endif %}">
+                                                            <label>fichier du document</label>
+                                                            {{ form_widget(formDoc.fichierdoc) }}
+                                                            {{ form_errors(formDoc.fichierdoc) }}
+                                                        </div>
+                                                    </div>
+
+                                                    <center><button type="submit" class="btn btn-success">Ajouter</button></center>
+
+                                                {{ form_end(formDoc) }}
+                                                <hr>
+                                                <center>
+                                                    <p class="titre badge badge-info" style="margin-bottom: 30px;width: 40%;">
+                                                        Mes documents:
+                                                    </p>
+                                                </center>
+                                                {% for doc in user.document %}
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <p style="text-align: center">{{ doc.title }}:</p>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <center>
+                                                                <p>
+                                                                    <img src="{{ asset('images/motif_inscription_file/'~doc.fichier ) }}" width="60%" alt="">
+                                                                </p>
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                    <div class="separation bg-gradient-secondary"></div>
+                                                {% else %}
+                                                    <p style="font-size: 10px;text-align: center;margin-top: 20px;">Vous n'avez pas encore de document enregistré,<br> veuillez l'insérer s'il vous plait</p>
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                </div>
+            </div>
+        </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($){
+
+        
+        var input = document.querySelector("#user_tel");
+        
+         errorMsg = document.querySelector("#error-msg"),
+         validMsg = document.querySelector("#valid-msg");
+         var tel_parent = document.getElementById("tel-container");
+
+        // here, the index maps to the error code returned from getValidationError - see readme
+        var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        var iti = window.intlTelInput(input, {
+            utilsScript: "{{ asset('vendor/tel/js/utils.js') }}", // just for formatting/placeholders etc;
+            nationalMode: false,
+        });
+         var reset = function() {
+            tel_parent.classList.remove("tel-errors");
+            document.getElementById("btn-etudiant-edit-profile").disabled = false;
+         };
+         input.addEventListener("load", function(){
+             iti.setNumber(iti.getNumber());
+         });
+        // on blur: validate
+        input.addEventListener('blur', function() {
+            if (input.value.trim()) {
+                if (iti.isValidNumber()) {
+                    //validMsg.classList.remove("hide");
+                } else {
+                    console.log("erreur");
+                    tel_parent.classList.add("tel-errors");
+                    document.getElementById("btn-etudiant-edit-profile").disabled = true;
+                }
+            }
+        });
+        // on keyup / change flag: reset
+        input.addEventListener('change', reset);
+        input.addEventListener('keyup', reset);
+      });
+
+    </script>
+
+{% endblock %}
+

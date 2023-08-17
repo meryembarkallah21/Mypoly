@@ -1,0 +1,228 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+{% block title %} Gestion des cours | Affichage_Cours {% endblock %}
+
+
+{% block main %}
+    <style>
+        .tb{
+            color:royalblue;
+            margin-right:5px;
+        }
+        .ta{
+            color:gray;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .book-open{
+            color: #6c4079;
+        }
+        .iu{
+            margin-bottom:4px;
+        }
+        #card-header{
+            background-color:royalblue;
+            color: white;
+        }
+        div.scrol{
+            background: #eeeeee none repeat scroll 0 0;
+            border: 1px solid royalblue;
+            padding: 5px;
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: auto;
+        }
+        .btn-danger{
+            float: right;
+        }
+        .margin-crd{
+            margin-bottom:15px;
+        }
+    </style>
+    <!-- modal confirmation suppression -->
+    <div class="bd-example">
+        <div class="modal fade" id="suppression" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(255, 65, 75);">
+                        <h4 class="modal-title">Confirmation avant suppression</h4>
+                        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="suppression_form" method="POST">
+                        <div class="modal-body">
+                            <h4 id="titre_modal_suppression"></h4>
+                            <input type="hidden" name="suppressionselected" id="suppressionselected">
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <input type="submit" class="form-control btn btn-danger" value="Supprimer" >
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <button type="button" class="form-control btn btn-default" style="background-color: #cccccc" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <h1 class="mt-4"><i class="feather-book-open book-open"></i> {{ cour.titre }}</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">
+                <a class="text-info" href="{{ path('index_admin_gestion_cours') }}">/Mention</a>
+                <a class="text-info" href="{{ path('parcours_admin_gestion_cours',{'id' : cour.ec.ue.mention.code.id }) }}">/Parcours/  </a>
+                <a class="text-info" href="{{ path('admin_cours',{'id' : cour.ec.ue.mention.id }) }}">Cours</a>/voir
+            </li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <iframe src="{{ app.request.schemeAndHttpHost~asset('images/fichier_cours/'~cour.fichier) }}#toolbar=0" type="application/pdf" width="100%" height="400px" ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 margin-crd">
+                <div class="card-header" id="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Liste Fichier Supports
+                </div>
+                <div class="card-body scrol" >
+                    <div class="table-responsive">
+                        <table class="table" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Fichier</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for fichier_support in fichier_supports %}
+                                <tr>
+                                    <td><i class="fa fw fx fa-file-pdf"></i> {{ fichier_support.fichier }}</td>
+                                    <td width="150px">
+                                        <button class="btn btn-rounded btn-danger btn-xs delete-element" id="supprimer_{{ fichier_support.id }}" onclick="javascript:delelement(this.id)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td  class="text-center" colspan="2">Aucun fichier...</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 margin-crd">
+                <div class="card-header" id="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Liste Vidéos
+                </div>
+                <div class="card-body scrol">
+                    <div class="table-responsive">
+                        <table class="table" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Fichier</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for  video in videos %}
+                                <tr>
+                                    <td><i class="fa fw fx fa-file-video"></i> {{ video.lienUrl }}</td>
+                                    <td width="150px">
+                                        <button class="btn btn-rounded btn-danger btn-xs delete-element" id="supprimer_{{ video.id }}" onclick="javascript:supprimerelement(this.id)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="2">Aucune video...</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 margin-crd">
+                <div class="card-header" id="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Liste Audios
+                </div>
+                <div class="card-body scrol">
+                    <div class="table-responsive">
+                        <table class="table" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Fichier</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for audio in audios %}
+                                <tr>
+                                    <td><i class="fa fw fx fa-file-audio"></i> {{ audio.fichier }}</td>
+                                    <td width="150px">
+                                        <button class="btn btn-rounded btn-danger btn-xs delete-element" id="supprimer_{{ audio.id }}" onclick="javascript:deletelement(this.id)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="2">Aucun audio disponible...</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function deletelement(id_supprimer) {
+            var s = "supprimer_";
+            var t = s.length;
+            var idchoisi = id_supprimer.substring(t, id_supprimer.length);
+            var url = "{{ path('admin_audio_supprimer', {'id': 'supprimer'}) }}";
+            url = url.replace("supprimer", idchoisi);
+            $("#suppression_form").attr('action', url);
+            $("#titre_modal_suppression").text("Etes-vous d'accord pour la suppression de cet audio? Les éléments ratachés avec cet audio seront supprimés aussi.");
+            $("#suppression").modal();
+        }
+    </script>
+    <script type="text/javascript">
+        function delelement(id_supprimer) {
+            var s = "supprimer_";
+            var t = s.length;
+            var idchoisi = id_supprimer.substring(t, id_supprimer.length);
+            var url = "{{ path('admin_fichier_support_supprimer', {'id': 'supprimer'}) }}";
+            url = url.replace("supprimer", idchoisi);
+            $("#suppression_form").attr('action', url);
+            $("#titre_modal_suppression").text("Etes-vous d'accord pour la suppression de cet fichier? Les éléments ratachés avec cet fichier seront supprimés aussi.");
+            $("#suppression").modal();
+        }
+    </script>
+    <script type="text/javascript">
+        function supprimerelement(id_supprimer) {
+            var s = "supprimer_";
+            var t = s.length;
+            var idchoisi = id_supprimer.substring(t, id_supprimer.length);
+            var url = "{{ path('admin_videos_supprimer', {'id': 'supprimer'}) }}";
+            url = url.replace("supprimer", idchoisi);
+            $("#suppression_form").attr('action', url);
+            $("#titre_modal_suppression").text("Etes-vous d'accord pour la suppression de cet video? Les éléments ratachés avec cet video seront supprimés aussi.");
+            $("#suppression").modal();
+        }
+    </script>
+{% endblock %}

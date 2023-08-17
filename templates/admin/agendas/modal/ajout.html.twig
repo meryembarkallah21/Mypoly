@@ -1,0 +1,73 @@
+{# empty Twig template #}
+<!-- Modal -->
+<style>
+    h4{
+        color:white;
+    }
+    .modal-body{
+        margin:0 6%;
+    }
+</style>
+<div id="ajout" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <form action="{{ path('admin_agendas_new') }}" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left was-validated">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title">Ajout Agendas</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <br>
+                            <label class="col-form-label" for="file">Veuillez uploader le bon format pdf (.pdf) <span class="required">*</span>
+                            </label>
+                            <input type="file" name="file" class="form-control" required>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <br>
+                            <select class="form-control validate" name="filiere" required>
+                                <option value="">--Choisir filière --</option>
+                                {%for item in filieres %}
+                                    <option value="{{item.id}}">{{item.name}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <br>
+                            <select class="form-control validate" name="parcours" required>
+                                <option value="">--Choisir parcours --</option>
+                                {%for item in filieres %}
+                                    <optgroup label="{{ item.name }}">
+                                        {%for i in parcours %}
+                                            {% if i.code == item %}
+                                                <option value="{{i.id}}">{{i.name}}</option>
+                                            {% endif %}
+                                        {%endfor%}
+                                    </optgroup>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <br>
+                            <select class="form-control validate" name="niveau" required>
+                                <option value="">--Choisir niveau --</option>
+                                {%for item in niveau %}
+                                    <option value="{{item.id}}">{{item.code}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Femer</button>
+                    <button type="submit" class="btn btn-danger">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--endmodal-->

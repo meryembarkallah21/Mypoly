@@ -1,0 +1,35 @@
+<!--tab-menu-->
+<style>
+    .ui{
+        color:gray;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link ui {{ mention is defined ? 'active' : ''  }}" aria-current="page" href="{{ path('mention_new') }}">Mention</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link ui {{ code is defined ? 'active' : ''  }}" href="{{ path('code_new') }}">Filière</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link ui {{ cycle is defined ? 'active' : ''  }}" href="{{ path('cycle_new') }}">Niveau</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link ui {{ parcours  is defined ? 'active' : ''  }}" href="{{ path('parcours_new') }}">Parcours</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link ui {{ semestre is defined ? 'active' : ''  }}" href="{{ path('semestre_new') }}">Semestre</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link ui {{ ue is defined ? 'active' : ''  }}" href="{{ path('ue_new') }}">Unité d'Enseignement</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link ui {{ ec is defined ? 'active' : ''  }}" href="{{ path('ec_new') }}">Elément Constitutif</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link ui {{ years is defined ? 'active' : ''  }}" href="{{ path('years_new') }}">Année Univ</a>
+    </li>
+</ul>

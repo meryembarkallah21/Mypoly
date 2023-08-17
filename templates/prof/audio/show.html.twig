@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Audio{% endblock %}
+
+{% block body %}
+    <h1>Audio</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ audio.id }}</td>
+            </tr>
+            <tr>
+                <th>Fichier</th>
+                <td>{{ audio.fichier }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('audio_index') }}">back to list</a>
+
+    <a href="{{ path('audio_edit', {'id': audio.id}) }}">edit</a>
+
+    {{ include('audio/_delete_form.html.twig') }}
+{% endblock %}

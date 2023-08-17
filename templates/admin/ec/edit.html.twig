@@ -1,0 +1,74 @@
+{% extends 'admin/parametre/index.html.twig' %}
+
+{% block title %}Edit Ec{% endblock %}
+
+{% block contenu %}
+    <style>
+        #card-header{
+            background-color: #0f6674;
+            color:white;
+        }
+    </style>
+    <div class="col-xl-12">
+        <div class="card mb-4">
+            <div class="card-header" id="card-header">
+                <i class="fas fa-chart-bar mr-1"></i>
+                Editer Un Elément Constitutif
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                <table>
+                    <tr>
+                        <td width="300px">Unité d'Enseignement</td>
+                        <td {% if not form.ue.vars.valid %}errors{% endif %} width="500px">
+                            {{ form_widget(form.ue) }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="300px">Nom</td>
+                        <td {% if not form.name.vars.valid %}errors{% endif %} width="500px">
+                            {{ form_widget(form.name) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="300px">Code</td>
+                        <td {% if not form.code.vars.valid %}errors{% endif %} width="500px">
+                            {{ form_widget(form.code) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="300px">Prof</td>
+                        <td width="500px">
+                            <select class="form-control validate" name="profs" required>
+                                <option value="" >--- Choisir Prof ---</option>
+                                {%for item in prof %}
+                                    <option value="{{item.id}}">{{item.name}}</option>
+                                {%endfor%}
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="300px">Crédit</td>
+                        <td {% if not form.coeff.vars.valid %}errors{% endif %} width="500px">
+                            {{ form_widget(form.coeff) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="300px">Status</td>
+                        <td {% if not form.status.vars.valid %}errors{% endif %} width="500px">
+                            {{ form_widget(form.status) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><br><button class="btn btn-danger">{{ button_label|default('Enregistrer') }}</button></td>
+                    </tr>
+                </table>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        {% include 'admin/ec/affiche.html.twig' %}
+    </div>
+{% endblock %}

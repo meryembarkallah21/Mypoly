@@ -1,0 +1,209 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+
+{% block title %}Réinscription{% endblock %}
+
+{% block main %}
+    <link href="{{ asset('inscription/css/main.css') }}" rel="stylesheet" media="all">
+    <link href="{{ asset('css/formStyle.css') }}" rel="stylesheet" media="all">
+    <style>
+        .errors ul li {
+            color: red;
+            list-style: none;
+            margin-left: -37px;
+        }
+
+        .errors.form-label-group > input {
+            border-bottom: 1px solid red !important;
+            box-shadow: none !important;
+        }
+        .content-header{
+            margin-top: 20px;
+        }
+
+    </style>
+
+
+<div class="" style="margin-top: -19px; ">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6 izy">
+                    <h1 class="breadcrumb text-tt text-info">Réinscription </h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#" class="text-info">Réinscription</a></li>
+                        <li class="breadcrumb-item active">Tableau de Bord</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+
+            <div class="page-wrapper p-t-45 p-b-50">
+                <div class="wrapper c wrapper--w790">
+                    {{ form_start( form ) }}
+                    <h1 class="text-center text-black-50 titre">{{ inscription.mention.code }} {{ annee }}</h1>
+                    <div class="card-body bg-info">
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img class="mb-2 rounded-pill shadow-sm mt-1" style="margin-left:0px;padding-left:0px;"
+                                     width="120px" src="{{ asset('images/avatars/'~app.user.avatar )}}" alt="gurdeep singh osahan">
+                            </div>
+                            <div class="col-md-9" style="margin-top:20px;">
+                                <div class="name text-white"><b>Nom : {{ inscription.Etudiant.name }}</b></div>
+                                <div class="name text-white"><b>Adresse : {{ inscription.Etudiant.email }}</b></div>
+                                <div class="name text-white"><b>Téléphone : {{ inscription.Etudiant.tel }}</b></div>
+                            </div>
+                        </div>
+                        <hr class="bg-white">
+
+                        </br>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <input type="number"  value="{{ matricule }}" class="effet mtr" id="matricule" required name="matricule"><span class="text-white"> Mle</span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <select id="cycle"  name="cycle">
+                                    <option value="" >--niveau--</option>
+                                    <option value="{{ cycle.id }}" class="text-white effet">{{ cycle.code }} </option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="effet text-white"  value="{{ cycle.fraisInscription }}" /><span class="text-white"> Ar</span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <select id="parcours" name="parcours">
+                                    <option value="">--parcours--</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6"><label for="payement">type de payement:</label></div>
+                                    <div class="col-md-6">
+                                        <input type="radio" id="mobileMoney" onClick="bascule('boite1');" class="disp1" name="payement"  value="mobile money">
+                                        <p class="label disp1">mobile Money</p><br>
+                                        <input type="radio" class="disp2" onClick="bascule('boite2');" id="banque" name="payement" value="banque">
+                                        <p class="label disp2">banque</p>
+                                    </div>
+                                </div>
+
+                                <div name="boite1" id="boite1" style="display: none">
+
+                                    <div class=" text-center"><h5 class="title1 text-white-50">Veuillez virer votre frais d'inscription au numéro ci-dessous</h5></div><br>
+                                    <center>
+                                        <div class="form-group" style="margin-top: -20px;">
+                                            <ul>
+                                                {% for compte in comptes %}
+                                                    {% if compte.type != "banque" %}
+                                                        <li class="text-white">{{ compte.titre }}: {{ compte.compte }}</li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <li></li>
+                                            </ul>
+                                        </div>
+                                    </center>
+                                    <p class="text-white-50 title2 text-center">Veuillez entrer le numero de référence de votre transaction<br>du frais d'inscription au compte ci-dessus</p><br>
+
+                                    {{ form_widget(form.reference) }}
+
+                                </div>
+
+                                <div name="boite2" id="boite2" style="display: none">
+                                    <div class=" text-center"><h5 class="title1 text-white-50">Veuillez virer votre droit d'inscription au numero de compte ci-dessous</h5></div><br>
+
+                                    {% for compte in comptes %}
+                                        {% if compte.type == "banque" %}
+                                            <div class="text-center text-white-50 compte">( Compte {{ compte.titre }} )</div>
+                                            <center>
+                                                <div class="form-group">
+                                                    <input type="text" style="color:black;font-weight:bold;width:200px;border-color:#18B1D0;" placeholder="{{ compte.compte }}" disabled class="form-control somme text-center"/>
+                                                </div>
+                                            </center>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <p class="text-white-50 title2 text-center">inserer ici la photo du bordereau de versement <br> après l'avoir viré au compte ci-dessus</p><br>
+                                    <center>
+                                        {{ form_widget(form.fichierVir) }}
+                                        {{ form_errors(form.fichierVir) }}
+                                    </center>
+                                </div>
+                                <center><button  type="submit">Valider</button></center>
+                            </div>
+
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="outer"></div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+
+    <div id="background-wrap">
+        <div class="bubble x1"></div>
+        <div class="bubble x2"></div>
+        <div class="bubble x3"></div>
+        <div class="bubble x4"></div>
+        <div class="bubble x5"></div>
+        <div class="bubble x6"></div>
+        <div class="bubble x7"></div>
+        <div class="bubble x8"></div>
+        <div class="bubble x9"></div>
+        <div class="bubble x10"></div>
+    </div>
+
+
+
+            <!-- Jquery JS-->
+            <script src="{{ asset('inscription/vendor/jquery/jquery.min.js') }}"></script>
+            <!-- Main JS-->
+            <script type="text/javascript">
+
+                jQuery(document).ready(function ($) {
+
+                    $("#cycle").change(function(){
+                        var valNiveau = $(this).val();
+                        var data = "niveau=" + valNiveau +"&code="+{{ inscription.mention.code.id }};
+
+                        $.ajax({
+                            type: "GET",
+                            url: "{{ path('etudiant_inscription_get_fee') }}",
+                            data: data,
+                            success: function(data){
+                                $(".droit").val(data.droit +" Ar");
+
+                                if(data.parcours){
+                                    $('#parcours').empty();
+                                    for(var i=0 ; i< data.parcours.length; i++){
+                                        console.log(data.parcours);
+                                        $('#parcours').append('<option class="text-white text-center" value= "'+ data.parcours[i]['id'] +'">'+ data.parcours[i]['name'] +'</option>');
+                                    }
+                                }
+
+                            }
+                        })
+                    })
+                });
+
+
+                function bascule(elem)
+                {
+                    // Quel est l'état actuel ?
+                    etat=document.getElementById(elem).style.display;
+                    if(etat=="none"){document.getElementById(elem).style.display="initial";}
+                }
+            </script>
+</div>
+{% endblock %}

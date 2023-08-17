@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotheque{% endblock %}
+
+{% block body %}
+    <h1>Bibliotheque</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bibliotheque.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ bibliotheque.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ bibliotheque.description }}</td>
+            </tr>
+            <tr>
+                <th>Fichier</th>
+                <td>{{ bibliotheque.fichier }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ bibliotheque.status ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_bibliotheque_index') }}">back to list</a>
+
+    <a href="{{ path('admin_bibliotheque_edit', {'id': bibliotheque.id}) }}">edit</a>
+
+    {{ include('admin/bibliotheque/_delete_form.html.twig') }}
+{% endblock %}

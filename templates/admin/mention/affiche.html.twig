@@ -1,0 +1,68 @@
+<div class="card mb-4">
+    <div class="card-header" id="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Liste
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr class="text-uppercase">
+                    <th>Mention</th>
+                    <th>Niveau</th>
+                    <th>Parcours</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for mention in mentions %}
+                    <tr>
+                        <td>{{ mention.code }}</td>
+                        <td>{{ mention.cycle }}</td>
+                        {% if mention.parcours == null %}
+                            <td>Aucune parcours</td>
+                        {% else %}
+                            <td>{{ mention.parcours }}</td>
+                        {% endif %}
+                        <td>
+                            {{ include('admin/mention/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable(
+            {
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "aucune donnée trouvée",
+                    "info": "affichage de _START_ à _END_ sur _TOTAL_ élément(s)",
+                    "infoEmpty": "affichage 0 par 0 sur 0 élement(s) trouvé(s)",
+                    "infoFiltered": "",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Nombre d'affichage _MENU_ ",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Recherche:",
+                    "zeroRecords": "aucun élément trouvé",
+                    "paginate": {
+                        "first": "premier",
+                        "last": "dernier",
+                        "next": "Suivant",
+                        "previous": "Précédant"
+                    }
+                }
+            }
+        );
+    });
+</script>

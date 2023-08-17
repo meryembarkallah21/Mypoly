@@ -1,0 +1,54 @@
+<?php //App%255CEntity%255CCours%2524fichiercour
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Validator\\Constraints\\File'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\File')),
+        clone ($p['Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'binaryFormat' => [
+                false,
+            ],
+            'mimeTypes' => [
+                [
+                    'application/pdf',
+                    'application/x-pdf',
+                    'text/pdf',
+                    'text/x-pdf',
+                    'applications/vnd.pdf',
+                ],
+            ],
+            'maxSizeMessage' => [
+                'Taille de l\'image ne doit pas depasser 10Mo',
+            ],
+            'mimeTypesMessage' => [
+                'Veuillez Uploader le bon format tell que pdf',
+            ],
+            'groups' => [
+                [
+                    'Default',
+                ],
+            ],
+        ],
+        'Symfony\\Component\\Validator\\Constraints\\File' => [
+            'maxSize' => [
+                10000000,
+            ],
+        ],
+        'Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField' => [
+            'mapping' => [
+                1 => 'upload_fichier_cours',
+            ],
+            'fileNameProperty' => [
+                1 => 'fichier',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+    ],
+    []
+); }];

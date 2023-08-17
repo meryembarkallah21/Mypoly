@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Inscrire{% endblock %}
+
+{% block body %}
+    <h1>Create new Inscrire</h1>
+
+    {{ include('inscrire/_form.html.twig') }}
+
+    <a href="{{ path('inscrire_index') }}">back to list</a>
+{% endblock %}

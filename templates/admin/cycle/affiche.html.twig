@@ -1,0 +1,36 @@
+<div class="card mb-4">
+    <div class="card-header" id="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Liste
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr class="text-uppercase">
+                    <th>Nom</th>
+                    <th>Code</th>
+                    <th>Frais d' inscription</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cycle in cycles %}
+                    <tr>
+                        <td>{{ cycle.name }}</td>
+                        <td>{{ cycle.code }}</td>
+                        <td>{{ cycle.fraisInscription }}</td>
+                        <td>
+                           <center>{{ include('admin/cycle/_delete_form.html.twig') }}</center>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Aucune niveau</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

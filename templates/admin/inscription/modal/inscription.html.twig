@@ -1,0 +1,149 @@
+{# empty Twig template inscription #}
+<!-- Modal -->
+<style>
+    .iti--allow-dropdown{
+        width: 100%;
+    }
+</style>
+<div id="inscription" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h4 class="modal-title"><span class="feather-user-plus"> </span> Inscription</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ path('admin_inscrire_new') }}" method="post" class="validate">
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_content" style="display: block;">
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="card-title"><span class="fas fa-user"></span> Information étudiant</h6>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body" style="display: block;">
+                                                <div class="row">
+                                                    <div class="col-md-4 md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12" for="nom">Nom<span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <input type="text" class="form-control validate" name="nom" id="nom" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12" for="tel">Tél<span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <input type="tel" id="phone" name="tel" class="form-control" required style="width:100%"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-12col-sm-12 col-xs-12" for="ville">Ville<span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <input type="text" class="form-control validate" name="ville" id="ville" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 marging-5">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="card-title"><span class="fas fa-user-graduate"></span> Mention</h6>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body" style="display: block;">
+                                                <div class="row">
+                                                    <div class="col-md-4  md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12" for="mention">Mention<span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <select id="_fi" class="form-control validate" name="mention" required>
+                                                                    <option value="" >-- Choisir mention --</option>
+                                                                    {%for item in mentions %}
+                                                                        <option value="{{item.id}}">{{item.name}}</option>
+                                                                    {%endfor%}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4  md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12" for="niveau">Niveau <span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <select id="_ni" class="form-control validate" name="niveau" required>
+                                                                    <option value="" >-- Choisir niveau --</option>
+                                                                    {%for item in niveau %}
+                                                                        <option value="{{item.id}}">{{item.code}}</option>
+                                                                    {%endfor%}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4  md-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12" for="parcours">Parcours <span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <select id="_pa" class="form-control validate" name="parcours" required>
+                                                                    <option value="" >-- Choisir parcours --</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="card-title"><span class="fas fa-mail-bulk"></span> Compte</h6>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body" style="display: block;">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12" for="email">Adresse email<span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <input type="email" class="form-control validate" name="email" id="email" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--endmodal-->

@@ -1,0 +1,48 @@
+{% extends 'etudiant/base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+{% block content %}
+
+     <div class="col-md-6 osahan-login-left px-0">
+     </div>
+     <div class="col-md-6 d-flex  justify-content-center flex-column px-0">
+         <div class="col-lg-6 mx-auto">
+             <h3 class="mb-1">ESPACE ETUDIANT</h3>
+             <p class="mb-5">Connectez-vous à votre compte pour continuer</p>
+             <form method="post">
+                 {% if error %}
+                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                 {% endif %}
+                 <div class="d-flex align-items-center mb-4">
+                     <div class="mr-3 bg-light rounded icon p-2 osahan-icon"><i class="mdi mdi-email-outline"></i></div>
+                     <div class="w-100">
+                         <p class="mb-0 small font-weight-bold text-dark">Adresse E-mail</p>
+                         <input type="email" id="input" value="{{ last_username }}" name="email"
+                                class="form-control  form-control-sm p-0 border-input border-0 rounded-2"
+                                placeholder="Entrer votre e-mail"
+                                required>
+                     </div>
+                 </div>
+                 <div class="d-flex align-items-center mb-4">
+                     <div class="mr-3 bg-light rounded icon p-2 osahan-icon"><i class="mdi mdi-form-textbox-password"></i>
+                     </div>
+                     <div class="w-100">
+                         <p class="mb-0 small font-weight-bold text-dark">Mot de passe</p>
+                         <input type="password" name="password" id="inputPassword"
+                                class="form-control form-control-sm  p-0 border-input border-0 rounded-2"
+                                placeholder="Entrer votre mot de passe">
+                     </div>
+                 </div>
+                 <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                 >
+                 <div class="mb-3">
+                     <button type="submit" class="btn btn-primary btn-block mb-3">Se connecter</button>
+                     <p class="text-center"><a href="{{ path('etudiant_forgotten_password') }}" class="text-dark">Mot de passe oublié</a></p>
+{#                      <a href="{{ path('etudiant_register') }}" class="btn btn-light btn-block mb-2">S'inscrire</a>
+ #}                 </div>
+             </form>
+         </div>
+     </div>
+
+{% endblock %}

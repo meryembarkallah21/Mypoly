@@ -1,0 +1,90 @@
+security:
+    hide_user_not_found: false
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        admin:
+            pattern: ^/admin
+            user_checker: App\Security\UserChecker
+            anonymous: lazy
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\AdminLoginFormAuthenticator
+            logout:
+                path: admin_logout
+                # where to redirect after logout
+                target: admin_login
+
+            remember_me:
+                secret: '%kernel.secret%'
+        prof:
+            pattern: ^/prof
+            user_checker: App\Security\UserChecker
+            anonymous: lazy
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\ProfLoginFormAuthenticator
+            logout:
+                path: prof_logout
+                # where to redirect after logout
+                target: prof_login
+
+            remember_me:
+                secret: '%kernel.secret%'
+
+        etudiant:
+            pattern: ^/etudiant
+            user_checker: App\Security\UserChecker
+            anonymous: lazy
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\UserFormAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: app_login
+        main:
+            anonymous: lazy
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\UserFormAuthenticator        
+
+
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: app_login
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    # Windows configuration
+    access_control:
+          - { path: ^/?((admin\/)|(etudiant))?((login)|(inscription)|(mot-de-passe-oubliee)|(reinitialiser-mot-de-passe\/)|(activate-compte\/)), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+          - { path: ^/admin, roles: ROLE_ADMIN }
+          - { path: ^/profile, roles: ROLE_USER }
+          - { path: ^/etudiant/profile, roles: ROLE_ETUDIANT }
+          - { path: ^/prof/profil, roles: ROLE_PROFESSEUR }
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]

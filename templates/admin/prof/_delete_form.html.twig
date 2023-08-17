@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('admin_prof_delete', {'id': prof.id}) }}" onsubmit="return confirm('Vous etes sure que vous voulez supprimer cet prof?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ prof.id) }}">
+    <a href="{{ path('admin_prof_edit', {'id': prof.id}) }}"  class="btn btn-rounded btn-success btn-sm">
+        <i class="fas fa-edit"></i>
+    </a>
+    <button class="btn btn-rounded btn-danger btn-sm delete-element" ><i class="fas fa-trash-alt"></i></button>
+</form>

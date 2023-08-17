@@ -1,0 +1,38 @@
+<div class="card mb-4">
+    <div class="card-header" id="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Liste
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr class="text-uppercase">
+                    <th>Mention</th>
+                    <th>Niveau</th>
+                    <th>Nom</th>
+                    <th>Code</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for parcour in parcours %}
+                    <tr>
+                        <td>{{ parcour.code }}</td>
+                        <td>{{ parcour.cycle }}</td>
+                        <td>{{ parcour.fullName }}</td>
+                        <td>{{ parcour.name }}</td>
+                        <td>
+                            {{ include('admin/parcours/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

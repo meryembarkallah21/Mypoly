@@ -1,0 +1,44 @@
+<div class="card mb-4">
+    <div class="card-header" id="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Liste Cours
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th >Titre</th>
+                    <th >Description</th>
+                    <th >FichierSupport</th>
+                    <th >Audio</th>
+                    <th >Video</th>
+                    <th >Status</th>
+                    <th >actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cours in cours %}
+                    {% if cours.ec.name == cour.ec.name %}
+                        <tr>
+                            <td>{{ cours.titre }}</td>
+                            <td>{{ cours.description }}</td>
+                            <td>{{ cours.fichierSupport.current }}</td>
+                            <td>{{ cours.audio.current }}</td>
+                            <td>{{ cours.videos.current }}</td>
+                            <td>{{ cours.status ? 'Activer' : 'Desactiver' }}</td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

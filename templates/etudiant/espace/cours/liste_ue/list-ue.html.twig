@@ -1,0 +1,210 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+{% block title %}mes Mentions{% endblock %}
+
+
+
+{% block main %}
+    <style>
+
+        .cont{
+        }
+
+        .float-right
+        {
+            margin-left:5px;
+        }
+
+        .card-header
+        {
+            color: white;
+        }
+        .bt{
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .btn-default
+        {
+            background-color: white;
+        }
+        .col {
+            margin-left: 50px;
+        }
+        .content-header
+        {
+            margin-top: 20px;
+        }
+        .title{
+            font-weight: bold;
+            font-family: 'comic sans MS';
+        }
+        .bold{
+            font-weight: bold;
+        }
+        .total{
+            float: right;
+            font-weight: bold;
+            margin-right: 30px;
+            margin-top: 10px;
+        }
+        .mrg{
+            margin-left: 30%;
+        }
+        .mr-3{
+            display: inline-block;
+            font-weight: bold;
+        }
+   </style>
+
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h2 class="m-0 text-dark text-black title">{{ inscrire.parcours }} {{ inscrire.mention.cycle }}</h2>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item "><a href="{{ path('etudiant') }}" class="text-info">Tableau de Bord</a></li>
+                        <li class="breadcrumb-item "><a href="{{ path('mes_mentions') }}" class="text-info">mes mentions</a></li>
+                        <li class="breadcrumb-item active">unités</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card mb-4">
+
+                        <div class="card-header bg-info">
+                            <div class="row">
+                                <nav>
+
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item col">
+                                            <a class="nav-link bt btn-default {{ s1 is defined ? 'active' : ''  }}" aria-current="page" href="{{ path('s1' ,{ 'id': inscrire.id }) }}">Semestre 1</a>
+                                        </li>
+                                        <li class="nav-item col">
+                                            <a class="nav-link bt btn-default {{ s2 is defined ? 'active' : ''  }}" href="{{ path('s2' ,{ 'id': inscrire.id }) }}">Semestre 2</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+
+                        {% block contenu %}
+                        <div class="tab-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 mrg">
+                                                <div class="mr-3">
+                                                    <i class="icofont-ui-press bold vert text-success food-item"> livre déja acheté</i>
+                                                </div>
+                                                <div class="mr-3">
+                                                    <i class="icofont-ui-press bold text-danger food-item"> vous n'avez pas encore acheté ce livre</i>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            {% for UE in s1 %}
+                                            {% set nbr = UE.no %}
+                                            <div class="cont  col-md-6">
+                                                <h5 style="margin-left:15px" class="mb-4 mt-3 col-md-12"><span class="badge badge-dark">{{ UE.name }}
+                                                        </span><small class="h6 text-info" style="font-weight:bold;">
+                                                        {% if nbr | length > 0 %} {{  nbr | length }} matières
+                                                        {% else %}
+                                                            vide
+                                                        {% endif %}</small></h5>
+
+                                                <div class="col-md-12">
+                                                    <div class="bg-white rounded border shadow-sm mb-4">
+
+                                                        {% set somme=0 %}
+                                                        {% for ec in UE.no %}
+                                                            {% set somme = somme + ec.coeff %}
+                                                        {% endfor %}
+
+                                                        {% for ec in UE.no %}
+                                                            {% set cour = [] %}
+                                                            {% set i = 0 %}
+
+                                                            {% for cours in ec.cours %}
+                                                                {% set cour = cour|merge({ (i) : cours })   %}
+                                                            {% endfor %}
+
+                                                            <div class="gold-members p-3 border-bottom">
+                                                                {% if cour %}
+                                                                    {% set data = cour[0] %}
+                                                                    <a href="{{ path('cours' ,{ 'id' :data.id }) }}" class="float-right badge badge-warning">suivre cours</a>
+                                                                {% else %}
+                                                                    <a href="" disabled class="float-right badge badge-warning">suivre cours</a>
+                                                                {% endif %}
+                                                                <h6 class="float-right badge badge-info">Crédit: {{ ec.coeff }}</h6>
+                                                                <div class="media">
+                                                                    <div class="mr-3"><i
+                                                                            class="icofont-ui-press
+                                                                            {% set cpt=0 %}
+                                                                            {% for stat in ec.statusEcs %}
+                                                                                {% for st in Status %}
+                                                                                             {% if stat == st and stat.status%}
+                                                                                             {% set cpt=1 %}
+                                                                                                         text-success
+                                                                                             {% endif %}
+                                                                                {% endfor %}
+                                                                            {% endfor %}
+                                                                            {% if cpt == 0 %}
+                                                                                text-danger
+                                                                            {% endif %}
+                                                                             food-item"></i>
+                                                                    </div>
+                                                                    <div class="media-body">
+                                                                        <h6 class="mb-1">{{ ec.name }}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        {% else %}
+                                                            <div class="gold-members p-3 border-bottom">
+                                                                <div class="media">
+                                                                    <div class="mr-3"><i class="icofont-ui-press text-secondary food-item"></i></div>
+                                                                    <div class="media-body">
+                                                                        <h6 class="mb-1"><p>Unité vide pour l'instant</p></h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        {% endfor %}
+                                                        {% if somme %}
+                                                            <div class="total badge badge-success">crédit total: {{ somme }}</div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            <p>il n'y as pas d'UE disponible en Semestre 1 pour l"instant</p>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+
+                        </div>
+
+                        {% endblock %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <link href="{{ asset('hoasan/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('hoasan/css/osahan.css" rel="stylesheet') }}">
+{% endblock %}
+

@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('fichier_support_delete', {'id': fichier_support.id}) }}" onsubmit="return confirm('Vous etes sure que vous voulez supprimer cet item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fichier_support.id) }}">
+    <button class="btn btn-rounded btn-danger btn-xs delete-element"><i class="fas fa-trash-alt"></i></button>
+</form>

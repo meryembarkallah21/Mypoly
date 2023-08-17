@@ -1,0 +1,189 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+{% block title %} Gestion des cours | parcours {% endblock %}
+
+
+
+{% block main %}
+    <style>
+        .tb{
+            color:royalblue;
+            margin-right:5px;
+        }
+        .bg-ui{
+            background-color: #c1cbcb;
+        }
+        #overlay{
+            background-size: cover;
+            opacity: 0.9;
+            background-color: #737c7c;
+
+        }
+
+        .niveau1{
+            background-color: #369d41;
+            padding:20px;
+            border-radius:30px;
+            color: #ffffff;
+            opacity:0.8;
+            font-weight: bold;
+            z-index: -1;
+        }
+        .niveau2{
+            background-color: rgba(38,82,223,0.81);
+            padding:20px;
+            border-radius:30px;
+            color: #ffffff;
+            opacity:0.8;
+            font-weight: bold;
+            z-index: -1;
+        }
+        .niveau3{
+            background-color: rgb(214, 58, 31);
+            padding:20px;
+            border-radius:30px;
+            color: #ffffff;
+            opacity:0.8;
+            font-weight: bold;
+            z-index: -1;
+        }
+
+        .tx-mg{
+            margin-top:20px;
+            color: #1c1b1b;
+            font-weight:bold;
+        }
+        .text-black{
+            color: #1c1b1b;
+            font-weight: bold;
+        }
+        .btn-cours{
+            color: royalblue;
+        }
+        .btn-cours:hover{
+            color: #e1416e;
+        }
+        .card-footer{
+            background-color: #dbdbf6;
+        }
+        .card-header{
+            background-color: #d9d9e5;
+        }
+        .text-royal{
+            color: royalblue;
+        }
+        #card-body{
+            height: 120px;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">Mes Mentions</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a class="tb text-info" href="{{ path('admin_dashboard') }}">
+                    Tableau de bord</a><a class="text-info" href="{{ path('index_admin_gestion_cours',{'id' : code.id }) }}">/Mention</a>/Parcours</li>
+        </ol>
+        <div class="row">
+
+
+                    <div class="col-xl-12">
+                        <div class="card bg-ui text-royal mb-4">
+                            <div class="card-header"><i class="fas fa-graduation-cap mr-1"></i>Licence 1</div>
+
+                                <div class="card-body" id="overlay">
+                                    <div class="row">
+                                        {% for mention in mentionL1 %}
+                                            <div class="col-xl-4">
+                                                <div class="card bg-ui text-royal mb-4">
+                                                    <div class="card-body " id="card-body">
+                                                        <p class="tx-mg">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <span class="niveau1">{{ mention.cycle.code }}</span>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="text-black"> {{ mention.parcours.fullname }} ({{ mention.parcours.name }})</div>
+                                                            </div>
+                                                        </div>
+                                                        </p>
+                                                    </div>
+                                                    <div class="card-footer"><a class="btn-cours" href="{{ path('admin_cours',{'id':mention.id }) }}"><i class="feather-eye"></i> Voir les cours</a></div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-12">
+                        <div class="card bg-ui text-royal mb-4">
+                            <div class="card-header"><i class="fas fa-graduation-cap mr-1"></i>Licence 2</div>
+
+                                <div class="card-body" id="overlay">
+                                    <div class="row">
+                                        {% for mention in mentionL2 %}
+                                            <div class="col-xl-4">
+                                                <div class="card bg-ui text-royal mb-4">
+                                                    <div class="card-body" id="card-body">
+                                                        <p class="tx-mg">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <span class="niveau2">{{ mention.cycle.code }}</span>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="text-black"> {{ mention.parcours.fullname }} ({{ mention.parcours.name }})</div>
+                                                            </div>
+                                                        </div>
+                                                        </p>
+                                                    </div>
+                                                    <div class="card-footer"><a class="btn-cours" href="{{ path('admin_cours',{'id':mention.id }) }}"><i class="feather-eye"></i> Voir les cours</a></div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-12">
+                        <div class="card bg-ui text-royal mb-4">
+                            <div class="card-header"><i class="fas fa-graduation-cap mr-1"></i>Licence 3</div>
+                            <div class="card-body" id="overlay">
+
+                                        <div class="row">
+                                            {% for mention in mentionL3 %}
+                                                <div class="col-xl-4">
+                                                    <div class="card bg-ui text-royal mb-4">
+                                                        <div class="card-body" id="card-body">
+                                                            <p class="tx-mg">
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <span class="niveau3">{{ mention.cycle.code }}</span>
+                                                                    </div>
+                                                                    <div class="col-md-9">
+                                                                        <div class="text-black"> {{ mention.parcours.fullname }} ({{ mention.parcours.name }})</div>
+                                                                    </div>
+                                                                </div>
+                                                            </p>
+                                                        </div>
+                                                        <div class="card-footer"><a class="btn-cours" href="{{ path('admin_cours',{'id':mention.id }) }}"><i class="feather-eye"></i> Voir les cours</a></div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

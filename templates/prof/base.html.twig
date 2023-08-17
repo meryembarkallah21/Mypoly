@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="{{ asset('images/polytechniqueSousse.ico') }}">
+    <title>Espace Professeur</title>
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset('security/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('security/css/osahan.css') }}" rel="stylesheet">
+    <!-- Font CSS -->
+    <link href="{{ asset('security/font/stylesheet.css') }}" rel="stylesheet">
+    <!-- Mdi icons for this template-->
+    <link href="{{ asset('security/vendor/mdi-icons/css/materialdesignicons.min.css') }}" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('security/css/custom.css') }}" rel="stylesheet">
+
+        <!-- Bootstrap core CSS-->
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome-->
+    <link href="{{ asset('vendor/fontawesome/css/all.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome-->
+    <link href="{{ asset('vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+    <!-- Select2 CSS-->
+    <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+
+        <!-- Owl Carousel -->
+    <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.theme.css') }}">
+
+    <link href="{{ asset('vendor/tel/css/intlTelInput.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/dropzone/min/dropzone.min.css') }}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+<div class="row osahan-login m-0">
+    {% block content %}
+        <div class="col-md-6 osahan-login-left px-0">
+        </div>
+        <div class="col-md-6 d-flex justify-content-center flex-column px-0">
+            <div class="col-lg-6 mx-auto">
+                <h3 class="mb-1">Welcome</h3>
+                <p class="mb-5">Sign in to your account to continue</p>
+                <form>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="mr-3 bg-light rounded p-2 osahan-icon"><i class="mdi mdi-email-outline"></i></div>
+                        <div class="w-100">
+                            <p class="mb-0 small font-weight-bold text-dark">Email Address</p>
+                            <input type="email" class="form-control form-control-sm p-0 border-input border-0 rounded-0"
+                                   placeholder="Enter Your Email">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="mr-3 bg-light rounded p-2 osahan-icon"><i class="mdi mdi-form-textbox-password"></i>
+                        </div>
+                        <div class="w-100">
+                            <p class="mb-0 small font-weight-bold text-dark">Password</p>
+                            <input type="password"
+                                   class="form-control form-control-sm p-0 border-input border-0 rounded-0"
+                                   placeholder="Enter Password">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <a href="index.html" class="btn btn-primary btn-block mb-3">Sign in</a>
+                        <p class="text-center"><a href="forgot.html" class="text-dark">Forgot password?</a></p>
+                        <a href="signup.html" class="btn btn-light btn-block mb-2">Create an account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endblock %}
+</div>
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('security/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('security/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- Core plugin JavaScript-->
+<script src="{{ asset('security/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('security/js/osahan.min.js') }}"></script>
+<!-- Select2 JavaScript-->
+<script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
+<!-- Owl Carousel -->
+<script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>
+<!-- intlTelInput -->
+<script src="{{ asset('vendor/tel/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('vendor/tel/js/intlTelInput-jquery.js') }}"></script>
+<script src="{{ asset('vendor/dropzone/min/dropzone.min.js') }}"></script>
+
+</body>
+
+</html>

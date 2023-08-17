@@ -1,0 +1,50 @@
+<div class="card mb-4">
+    <div class="card-header" id="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Liste Vidéos
+    </div>
+    <div class="card-body scrol">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Fichier</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for  video in videos %}
+                    <tr>
+                        <td> {{ video.title }}</td>
+                        <td><i class="fa fw fx fa-file-video"></i> {{ video.lienUrl }}</td>
+                        <td width="150px">
+                            <button class="btn btn-rounded btn-danger btn-xs delete-element" id="supprimer_{{ video.id }}" onclick="javascript:supprimerelement(this.id)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function supprimerelement(id_supprimer) {
+        var s = "supprimer_";
+        var t = s.length;
+        var idchoisi = id_supprimer.substring(t, id_supprimer.length);
+        var url = "{{ path('videos_delete', {'id': 'supprimer'}) }}";
+        url = url.replace("supprimer", idchoisi);
+        $("#suppression_form").attr('action', url);
+        $("#titre_modal_suppression").text("Etes-vous d'accord pour la suppression de cet item? Les éléments ratachés avec cet item seront supprimés aussi.");
+        $("#suppression").modal();
+    }
+</script>
+
+

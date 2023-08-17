@@ -1,0 +1,257 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+{% block title %} Tableau de Bord{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .bg-1{
+            background-color: #e75f99;
+        }
+        .bg-2{
+            background-color: #79cf17;
+        }
+        .bg-3{
+            background-color:#40C4FF;
+        }
+        .bg-4{
+            background-color: #be60c6;
+        }
+        .bg-1>.card-body>a ,.bg-1>.card-body>i {
+            color:white;
+        }
+        .bg-2>.card-body>a {
+            color:white;
+        }
+        .bg-3>.card-body>a , .bg-3>.card-body>i{
+            color:white;
+        }
+        .bg-4>.card-body>a , .bg-4>.card-body>i{
+            color:white;
+        }
+        .text-auther{
+            color: #7e7d7d;
+            font-weight: bold;
+            text-shadow:1px 1px 1px 1px  #fff3cd;
+        }
+        .bg-white-2{
+            background-color: #e7e7e7;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">Tableau de bord</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Tableau de bord</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="mb-4 order-list col-md-12 mx-auto">
+                    <div class="gold-members p-4">
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <div class="card bg-1">
+                                    <div class="card-body text-center">
+                                        <i class="feather-user"></i>
+                                        <a href="{{ path('prof_profil') }}">Mon Profil</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card bg-2">
+                                    <div class="card-body text-center text-white">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        <a href="{{ path('prof_mentions') }}">Mes Mentions</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card bg-3">
+                                    <div class="card-body text-center">
+                                        <i class="feather-book-open"></i>
+                                        <a href="{{ path('prof_bibliotheque') }}">Bibliothèque</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card bg-4">
+                                    <div class="card-body text-center">
+                                        <i class=" feather-clock"></i>
+                                        <a href="{{ path('prof_mes_agenda') }}">Mon agenda</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="border-bottom">
+                    <div class="card-header">
+                        <i class="feather-message-square mr-1"></i>
+                        Commentaires
+                    </div>
+                    <div class="card-body osahan-chat p-0">
+                        <div class="row m-0">
+                            <div class="border-bottom  border-info col-lg-5 col-xl-4 px-0">
+                                <div class="osahan-chat-left">
+                                    <div class="position-relative border-info text-truncate p-3 border">
+                                        <span style="font-weight: bold; text-align: center;">Ec</span>
+                                    </div>
+                                    <div class="osahan-chat-list">
+                                        {% for ec in ecs %}
+                                            {% for cour in cours %}
+                                                {% if cour.ec == ec %}
+                                                    <div class="p-3 d-flex align-items-center border-bottom osahan-post-header overflow-hidden">
+                                                        <div class="font-weight-bold mr-1 overflow-hidden">
+                                                            <div class="text-truncate">
+                                                                {{ ec.name }}
+                                                            </div>
+                                                        </div>
+                                                        <span class="ml-auto mb-auto">
+                                                        <div class="text-right text-muted pt-1 small"><a href="{{path('prof_commenter',{'id':cour.id })}}" class="btn btn-info rounded btn-sm"><span class="fas fa-eye"></span></a></div>
+                                                       </span>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="p-3 d-flex align-items-center border-bottom osahan-post-header overflow-hidden">
+                                                <div class="font-weight-bold mr-1 overflow-hidden">
+                                                    <div class="text-truncate">Aucun élément constitutif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-xl-8 px-0 ">
+                                <div class="p-3 d-flex align-items-center  border border-info osahan-post-header">
+                                    <div class="font-weight-bold mr-1 overflow-hidden">
+                                        <div class="text-truncate">Commentaires
+                                        </div>
+                                        <div class="small text-truncate overflow-hidden text-black-50"></div>
+                                    </div>
+                                    {# <span class="ml-auto">
+                                          <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                          <i class="feather-phone"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                          <i class="feather-video"></i>
+                                          </button>
+                                          <div class="btn-group">
+                                             <button type="button" class="btn btn-outline-primary btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             <i class="feather-more-vertical"></i>
+                                             </button>
+                                             <div class="dropdown-menu dropdown-menu-right">
+                                                <button class="dropdown-item" type="button"><i class="feather-trash"></i> Delete</button>
+                                                <button class="dropdown-item" type="button"><i class="feather-x-circle"></i> Turn Off</button>
+                                             </div>
+                                          </div>
+                                       </span>#}
+                                </div>
+                                <div class="osahan-chat-box p-3  border-info border bg-white-2">
+                                    {% for comment in cour.commentaire %}
+                                        <div class="text-center my-3">
+                                            <span class="px-3 py-2 small bg-white-2 shadow-sm rounded">{{ comment.time|format_date(locale='en') }}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center osahan-post-header">
+                                            <div class="dropdown-list-image mr-3 mb-auto"><img class="rounded-circle" src="{{asset('images/avatars/'~comment.auteur.avatar)}}" alt=""></div>
+                                            <div class="mr-1">
+                                                <div class="text-truncate text-auther h6 mb-3">{{ comment.auteur.email }}
+                                                </div>
+                                                <p>{{ comment.contenu }}</p>
+                                            </div>
+                                            <span class="ml-auto mb-auto">
+                                                <div class="text-right text-muted pt-1 small">{{ comment.time|format_time(locale='en') }}<br>
+                                                    {% if comment.auteur == app.user %}
+                                                        <a href="#"class="btn btn-sm" id="supprimer_{{ comment.id }}" onclick="javascript:supprimerelement(this.id)"><span class="fas text-danger fa-trash-alt"></span></a>
+                                                    {% endif %}
+                                                </div>
+                                            </span>
+                                        </div>
+                                    {% else %}
+                                        <div class="mr-1">
+                                            <div class="text-truncate text-auther h6 mb-3">Aucun commentaire...
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {{ form_start(form) }}
+                                    <div class="w-100 border-top border border-info">
+                                        <textarea placeholder="Commenter…" class="form-control border-0 p-3 shadow-none" rows="2" name="contenu" required></textarea>
+                                    </div>
+                                    <div class="p-3 d-flex align-items-center border border-info">
+                                          <div class="overflow-hidden">
+                                              {#<button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                                <i class="feather-image"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                                <i class="feather-paperclip"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                                <i class="feather-camera"></i>
+                                            </button> #}
+                                        </div>
+                                        <span class="ml-auto">
+                                           <button type="submit" class="btn btn-primary btn-sm rounded">
+                                           <i class="feather-send"></i> Envoyer
+                                           </button>
+                                           </span>
+                                    </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal confirmation suppression -->
+    <div class="bd-example">
+        <div class="modal fade" id="suppression" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(255, 65, 75);">
+                        <h4 class="modal-title">Confirmation avant suppression</h4>
+                        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="suppression_form" method="POST">
+                        <div class="modal-body">
+                            <h4 id="titre_modal_suppression"></h4>
+                            <input type="hidden" name="suppressionselected" id="suppressionselected">
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <button type="button" class="form-control btn btn-default" style="background-color: #cccccc" data-dismiss="modal">Non</button>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <input type="submit" class="form-control btn btn-danger" value="Oui" >
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function supprimerelement(id_supprimer) {
+            var s = "supprimer_";
+            var t = s.length;
+            var idchoisi = id_supprimer.substring(t, id_supprimer.length);
+            var url = "{{ path('prof_suprimer_comment', {'id': 'supprimer'}) }}";
+            url = url.replace("supprimer", idchoisi);
+            $("#suppression_form").attr('action', url);
+            $("#titre_modal_suppression").text("Etes-vous d'accord pour la suppression de cet commentaire?");
+            $("#suppression").modal();
+        }
+    </script>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

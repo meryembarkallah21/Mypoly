@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CForgotePassword%2523setNewPassword
+
+return [PHP_INT_MAX, []];

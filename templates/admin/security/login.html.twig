@@ -1,0 +1,67 @@
+{% extends 'admin/base.security.html.twig' %}
+
+{% block title %}Authentification{% endblock %}
+
+{% block body %}
+    <style>
+        .col-lg-5{
+            margin-top: 150px;
+        }
+    </style>
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Espace
+                                        Admin</h3></div>
+                                <div class="card-body">
+                                    <form method="post">
+                                        {% if error %}
+                                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
+                                        {% if app.user %}
+                                            <div class="mb-3">
+                                                Vous êtes connecté en tant que
+                                                {{ app.user.username }}, <a href="{{ path('admin_logout') }}">Se
+                                                    déconnecter</a>
+                                            </div>
+                                        {% endif %}
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputEmailAddress">E-mail</label>
+                                            <input class="form-control py-4" id="inputEmailAddress"
+                                                   value="{{ last_username }}" name="email" type="email"
+                                                   placeholder="Entrer votre address email"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputPassword">Mot de passe</label>
+                                            <input class="form-control py-4" id="inputPassword" type="password"
+                                                   name="password" placeholder="Entrer votre mot de passe"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" id="rememberPasswordCheck"
+                                                       type="checkbox" name="_remember_me"/>
+                                                <label class="custom-control-label" for="rememberPasswordCheck">Se
+                                                    souvenir du mot de passe</label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}">
+                                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                            <a class="small" href="{{ path('admin_forgotten_password') }}">Mot de passe
+                                                oublié?</a>
+                                            <button class="btn btn-primary" type="submit">Se connecter</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

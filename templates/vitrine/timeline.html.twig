@@ -1,0 +1,23 @@
+<section class="page-section">
+    <div class="container">
+        <div class="section-title row text-center">
+            <div class="col-md-8 offset-md-2">
+                <h3>NOS MENTIONS DE FORMATION</h3>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline__wrap">
+                <div class="timeline__items">
+                    {% for item in mentions %}
+                        <div class="timeline__item">
+                            <div class="timeline__content">
+                                <h2><img src="{{ asset('images/fichier_icon/'~item.icon ) }}" alt="..." width="40px" height="40px"> {{ item.name }} </h2>
+                                <p></p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,66 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+{% block title %} Tableau de Bord{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .mt-4{
+            font-family: "SansSerif";
+
+        }
+        .tb{
+            color: #4169e1;
+            margin-right: 10px;
+        }
+        .card-header-mention{
+            background-color:#4949bd;
+            color:white;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">{{ cycle.code }} en {{ name }}</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a class="tb" href="{{ path('admin_dashboard') }}">Tableau de Bord</a>/ {{ cycle.code }} en {{ name }}</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header card-header-mention">
+                <i class="fas fa-table mr-1"></i>
+                Liste des étudiants
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr class="text-uppercase">
+                            <th>Profil</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Tél</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!----><!---->
+                        {% for inscrire in inscrires %}
+                            {% if inscrire.mention.cycle.id == cycle.id and inscrire.mention.code.name == name %}
+                                <tr>
+                                    <td><img class="img-profile rounded-circle" src="/images/avatars/{{ inscrire.etudiant.avatar }}"></td>
+                                    <td>{{ inscrire.etudiant.name }}</td>
+                                    <td>{{ inscrire.etudiant.email }}</td>
+                                    <td>{{ inscrire.etudiant.tel }}</td>
+                                    <td><a href="{{ path('profil_show', {'id': inscrire.id}) }}" class="btn btn-primary btn-sm"><i class="fa fw fa-eye"></i> Voir</a></td>
+                                </tr>
+                            {% endif %}
+                        {% else %}
+                            <tr>
+                                <td colspan="3">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{{ path('admin_dashboard') }}" class="btn btn-primary"><i class="fa fw fa-reply"></i> Retour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

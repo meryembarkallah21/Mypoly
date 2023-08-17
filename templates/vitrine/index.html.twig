@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} POLYTECH SOUSSE  | Accueil{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="{{ asset('vitrine/style.css') }}">
+<link rel="stylesheet" href="{{ asset('vitrine/timeline.min.css') }}">
+<style>
+    .nav-link{
+        font-size:18px;
+    }
+    .nav-link>a{
+        color: #756f6f;
+    }
+    .top-navbar{
+        margin-left:-15px;
+        margin-right:-15px;
+    }
+    #carousel-item{
+        height:500px;
+    }
+    .carousel-indicators .active{
+        height: 3px;
+        width: 27px;
+    }
+    .dropdown-item{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    #lead{
+        font-weight: bold;
+    }
+    .nav-item:active{
+        color:olivedrab;
+    }
+    #scroll-to-top{
+        margin-bottom:30px;
+    }
+    #copyrights{
+        margin-left:-15px;
+        margin-right:-15px;
+    }
+    .timeline__content>h2{
+        color:#333;
+    }
+  </style>
+<!-- LOADER -->
+<div id="preloader">
+    <div class="loader-container">
+        <div class="progress-br float shadow">
+            <div class="progress__item"></div>
+        </div>
+    </div>
+</div>
+<!-- END LOADER -->
+<div class="container-fluid">
+    <!-- ======= Top nav ======= -->
+    <!-- Start header -->
+    {{ include('vitrine/header.html.twig') }}
+    <!-- End header -->
+    <!-- End Top nav -->
+    <!--- carousel------>
+    {{ include('vitrine/carousel.html.twig') }}
+    <!---- end carousel---------->
+    <!--- section 1------>
+    {{ include('vitrine/section-1.html.twig') }}
+    <!---- end section 1---------->
+    {{ include('vitrine/timeline.html.twig') }}
+    <!---- footer ---------------->
+    {{ include('vitrine/footer.html.twig') }}
+    <!---- end footer ------------>
+</div>
+
+{% block main %}
+{% endblock %}
+<script src="{{ asset('js/loader/timeline.min.js') }}"></script>
+<script>
+    timeline(document.querySelectorAll('.timeline'), {
+        forceVerticalMode: 700,
+        mode: 'horizontal',
+        verticalStartPosition: 'left',
+        visibleItems: 4
+    });
+</script>
+{% endblock %}

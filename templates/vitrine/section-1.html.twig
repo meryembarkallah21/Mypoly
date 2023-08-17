@@ -1,0 +1,32 @@
+<div id="overviews" class="section lb">
+    <div class="container">
+        <div class="section-title row text-center">
+            <div class="col-md-8 offset-md-2">
+                {#  {%  set cpt = 0 %}
+                {% for item in mentions %}{%  set cpt = cpt+1 %}{% endfor %}
+                <h1><strong>NOS MENTIONS DE FORMATION</strong></h1>
+                {%  set i = 0 %}
+                <p class="lead" id="lead">{% for item in mentions %}{%  set i = i+1 %} {% if i != cpt %}{{ item.name }} - {% else %}{{ item.name }}{% endif %}{% endfor %}</p>
+                #}
+            </div>
+        </div><!-- end title -->
+
+        <div class="row align-items-center">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                <div class="message-box">
+                    <h3 style="font-weight: bold">QUI SOMMES-NOUS</h3>
+                    <p>Nous sommes des professeurs d’universités venant de différents horizons, convaincus que l’UNIVERSITE DE DEMAIN sera numérique, en ligne ou à distance .</p>
+                    <p> Des professeurs d’universités, ayant plusieurs années d’expériences en matière d’enseignement de haut niveau et de grande qualité,
+                        désirant de transmettre leurs savoirs et leurs connaissances aux jeunes générations qui de plus en plus s’accommodent aux nouvelles technologies de l’information et de la communication (NTIC).</p>
+                    <a href="{{ path('quisommesnous') }}" class="hover-btn-new"><span>En savoir plus</span></a>
+                </div><!-- end messagebox -->
+            </div><!-- end col -->
+
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                <div class="post-media wow fadeIn">
+                    <img src="{{ asset('images/vitrine/polytechniqueSousse4.jpg') }}" alt="" class="img-fluid img-rounded">
+                </div><!-- end media -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end section -->

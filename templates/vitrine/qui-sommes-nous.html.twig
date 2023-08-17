@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}POLYTECH SOUSSE  | Qui Sommes Nous{% endblock %}
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('vitrine/style.css') }}">
+    <style>
+        .nav-link{
+            font-size:18px;
+        }
+        .nav-link>a{
+            color: #756f6f;
+        }
+        .top-navbar{
+            margin-left:-15px;
+            margin-right:-15px;
+        }
+        #carousel-item{
+            height:500px;
+        }
+        .carousel-indicators .active{
+            height: 3px;
+            width: 27px;
+        }
+        .dropdown-item{
+            font-size: 15px;
+            font-weight: bold;
+        }
+        #lead{
+            font-weight: bold;
+        }
+        #overviews{
+            margin-top:-20px;
+            margin-right:-15px;
+            margin-left:-15px;
+        }
+        .fadeIn{
+            margin-bottom:150px;
+            margin-left:100px;
+        }
+        #copyrights{
+            margin-left:-15px;
+            margin-right:-15px;
+        }
+    </style>
+    <!-- LOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="progress-br float shadow">
+                <div class="progress__item"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END LOADER -->
+    <div class="container-fluid">
+        <!-- ======= Top nav ======= -->
+        <!-- Start header -->
+        {{ include('vitrine/header.html.twig') }}
+        <!-- End header -->
+        <div id="overviews" class="section lb">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                        <div class="message-box">
+                            <h3 style="font-weight: bold">Bienvenue à l'école Polytechnique de Sousse</h3>
+                            <p> Placé dans un pôle stratégique, notre campus privé de plus de 10 000 mètres carrés, le plus grand de tout le Sahel a une capacité d’accueil plus de 3000 étudiants. Il se compose de plusieurs Amphithéâtres, de laboratoires de recherche, de multiples espaces pédagogiques ainsi que d’espaces dédiés aux activités sportives, culturelles et artistiques pour ses étudiants.</p>
+                           
+                        </div><!-- end messagebox -->
+                    </div><!-- end col -->
+
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                        <div class="post-media wow fadeIn">
+                            <img src="{{ asset('images/vitrine/polytechniqueSousse4.png') }}" alt="" class="img-fluid img-1 img-rounded">
+                        </div><!-- end media -->
+                        <div class="post-media wow fadeIn">
+                            <img src="{{ asset('images/vitrine/polytechniqueSousse4.png') }}" alt="" class="img-fluid img-2 img-rounded">
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end section -->
+        <!---- footer ---------------->
+        {{ include('vitrine/footer.html.twig') }}
+        <!---- end footer ------------>
+    </div>
+    {% block main %}
+    {% endblock %}
+{% endblock %}

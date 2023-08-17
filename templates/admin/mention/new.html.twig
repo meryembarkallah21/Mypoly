@@ -1,0 +1,96 @@
+{% extends 'admin/parametre/index.html.twig' %}
+
+{% block title %}New Mention{% endblock %}
+
+{% block contenu %}
+    <style>
+        #card-header{
+            background-color: #0f6674;
+            color:white;
+        }
+    </style>
+    <div class="col-xl-12">
+        <div class="card mb-4">
+            <div class="card-header" id="card-header">
+                <i class="fas fa-chart-bar mr-1"></i>
+                Créer Une Mention
+            </div>
+            <div class="card-body">
+                <form action="" method="post">
+                <table>
+                    <tr>
+                        <td width="300px">Filière</td>
+                        <td width="500px">
+                            <select id="_filiere"  name="_filiere" class="form-control">
+                                <option class="text-center" value="">--- Choisir une filière ---</option>
+                                {% for filiere in filieres %}
+                                    <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="300px">Niveau</td>
+                        <td width="500px">
+                            <select id="_niveau"  name="_niveau" class="form-control">
+                                <option class="text-center" value="">--- Choisir niveau ---</option>
+                                {% for cycle in niveaux %}
+                                    <option  value="{{ cycle.id }}"> {{ cycle.code }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="300px">Parcours</td>
+                        <td  width="500px">
+                            <select id="_parcours"  name="_parcours" class="form-control">
+                                <option class="text-center" value="">--- Choisir parcours ---</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><br><button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button></td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+        {% include 'admin/mention/affiche.html.twig' %}
+    </div>
+    <!-- Jquery JS-->
+    <script src="{{ asset('inscription/vendor/jquery/jquery.min.js') }}"></script>
+    <!-- Main JS-->
+    <script type="text/javascript">
+
+        jQuery(document).ready(function ($) {
+            $("#_filiere").change(function (){
+                var valfiliere = $(this).val();
+
+                $("#_niveau").change(function(){
+                    var valNiveau = $(this).val();
+                    var data = "niveau=" + valNiveau +"&code="+valfiliere;
+
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ path('get-parc') }}",
+                        data: data,
+                        success: function(data){
+                            $('#_parcours').empty();
+                            if(data.parcours){
+                                for(var i=0 ; i< data.parcours.length; i++){
+                                    $('#_parcours').append('<option  value= "'+ data.parcours[i]['id'] +'">'+ data.parcours[i]['name'] +'</option>');
+                                }
+                            }
+
+                        }
+                    })
+
+                })
+
+            })
+
+        });
+
+    </script>
+{% endblock %}

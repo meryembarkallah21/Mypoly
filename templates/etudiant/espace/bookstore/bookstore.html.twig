@@ -1,0 +1,122 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+
+{% block title %}BookStore{% endblock %}
+
+{% block main %}
+    <style>
+        button{
+            margin-bottom: 25px;
+        }
+        button:focus{
+            background-color: #177198;
+            color: white;
+        }
+        .dropdown-menu{
+            width: 400px;
+        }
+        .panier{
+            float: end;
+            height: 30px;
+        }
+
+    </style>
+
+            <div class="container-fluid">
+                <h1 class="mt-4">BookStore</h1>
+                <div class="row breadcrumb">
+                    <div class="col-md-3">
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item "><a href="#" class="text-info">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Bookstore</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-7"></div>
+                    <div class="col-md-2">
+                        <ol class=" mb-4">
+                            <li class="breadcrumb-item panier">
+                                <nav class="navbar navbar-expand-lg bg-transparent osahan-nav shadow-sm">
+                                    <div class="container">
+                                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                            <ul class="navbar-nav ml-auto">
+                                                <li class="nav-item dropdown dropdown-cart">
+                                                    <a class="nav-link text-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="text-primary fas fa-shopping-basket"></i> Cart
+                                                        <span class="badge badge-primary">{{ items | length }}</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0">
+                                                        <div class="p-4">
+                                                            <h3 class="mb-0">Votre panier</h3>
+                                                        </div>
+                                                        {% if items | length > 0 %}
+                                                            <div class="dropdown-cart-top-body border-top p-4">
+
+                                                                <table>
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>titre</th>
+                                                                        <th width="60px">prix</th>
+                                                                        <th>action</th>
+                                                                    </tr>
+                                                                    </thead>
+
+                                                                    <tbody>
+                                                                    {% for item in items %}
+                                                                        <tr>
+                                                                            <td><p class="mb-2"><i class="icofont-ui-press text-success food-item"></i> {{ item.book.titre }}</p></td>
+                                                                            <td>{{ item.book.prix | raw }}</td>
+                                                                            <td><a href="{{ path('cart_remove',{'id': item.book.id }) }}" class="btn btn-danger btn-sm text-white"><i class="fas fa-trash"></i></a></td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="dropdown-cart-top-footer border-top p-4">
+                                                                <p class="mb-0 font-weight-bold text-secondary">Total <span class="float-right text-dark">{{ total }} Ar</span></p>
+                                                            </div>
+                                                            <div class="dropdown-cart-top-footer border-top p-2">
+                                                                <a class="btn btn-success btn-block btn-lg" href="checkout.html"> Valider</a>
+                                                            </div>
+                                                        {% else %}
+                                                            <p>panier vide</p>
+                                                        {% endif %}
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </nav>
+
+                            </li>
+                        </ol>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+                    {% for book in books %}
+                        {% if book.livre %}
+                            <div class="col-md-3 col-sm-6 mb-4 pb-2">
+                                <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+                                    <div class="list-card-image">
+                                        <div class="favourite-heart text-white position-absolute"><span class="badge badge-success">{{ book.prix }}</span></div>
+                                        <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
+                                        <img src="{{ asset('images/photo_livre/' ~book.livre) }}" height="80%" class="img-fluid item-img">
+                                    </div>
+                                    <div class="button">
+                                        <center>
+                                            <button><a class="text-info" href="{{ path('cart_add', {'id': book.id }) }}"><span class="fas fa-shopping-cart"></span> Ajouter au panier</a></button>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+
+{% endblock %}

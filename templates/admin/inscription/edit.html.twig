@@ -1,0 +1,239 @@
+{% extends "@App/scolarite/template/template.html.twig" %}
+{% block title %} Inscription {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/OverlayScrollbars.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+{% endblock %}
+     {% block menu %}
+         <!-- Main Sidebar Container -->
+         {% include "@App/scolarite/template/sidebar.html.twig" with {'inscription' : true} %}
+         <!-- /Main Sidebar Container -->
+     {% endblock %}
+    {% block content %}
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Inscription</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{{ path('inscrire_index') }}">Inscription</a></li>
+                                <li class="breadcrumb-item active">Edition</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            {{ form_start(form,{'attr':{'class':'form-horizontal form-label-left'}})}}
+
+                            <div class="card card-primary">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Information élève</h5>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body" style="display: block;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label for="inputName2" class="col-sm-4 col-form-label"></label>
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group">
+                                                            <div class="">
+                                                                <div class="image">
+                                                                    <img src="{{ asset('uploads/images/users/'~ inscrire.eleve.photo ?? 'default.png') }}" class="elevation-2" alt="User Image">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="inputName2" class="col-sm-4 col-form-label">Photo de profil</label>
+                                                    <div class="col-sm-3">
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                {{ form_widget(form.eleve.imageFile)}}
+                                                                <label class="custom-file-label" for="exampleInputFile"></label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputName2" class="col-sm-4 col-form-label">Année scolaire</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.year,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputName" class="col-sm-4 col-form-label">Classe</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.classe,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputEmail" class="col-sm-4 col-form-label">Matricule</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.matricule,{'value':matricule,'attr':{'class':'form-control'}})}}
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Nom</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.nom,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Prénom(s)</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.prenom,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Date de naissance</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.datenais, {'attr':{'class':'datepicker form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Lieu de naissance</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.lieunais,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Séxe</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.sexe,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Adresse</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.adresse,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-primary">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Information Parents</h5>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body" style="display: block;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label for="inputName2" class="col-sm-4 col-form-label">Nom Père</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.nompere,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputName" class="col-sm-4 col-form-label">Prénom(s)</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.prenompere,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Date de naissance Père</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.datenaispere, {'attr':{'class':'datepicker form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Fonction Père</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.fonctionpere,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Nom Mère</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.nommere,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Prénom(s) Mère</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.prenommere,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Date de naissance Mère</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.datenaismere,{'attr':{'class':'datepicker form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Fonction Mère</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.fonctionmere,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">E-mail parent</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.mailparent,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-sm-4 col-form-label">Téléphone parent</label>
+                                                    <div class="col-sm-6">
+                                                        {{ form_widget(form.eleve.parent.tel,{'attr':{'class':'form-control'}})}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="offset-sm-12 col-sm-12">
+
+                                    <button type="submit" class="btn btn-danger btn-lg form-control">Enregistrer</button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+        </div>
+
+
+    {% endblock %}
+
+{%block js %}
+
+{% endblock %}

@@ -1,0 +1,54 @@
+<?php //App%255CEntity%255CAudio%2524fichieraudio
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Validator\\Constraints\\File'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Validator\\Constraints\\File')),
+        clone ($p['Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'binaryFormat' => [
+                false,
+            ],
+            'mimeTypes' => [
+                [
+                    'audio/mpeg',
+                    'audio/mp4',
+                    'video/3gpp',
+                    'audio/3gpp',
+                    'audio/mpeg3',
+                    'audio/x-mpeg-3',
+                    'video/mpeg',
+                    ' video/x-mpeg',
+                ],
+            ],
+            'mimeTypesMessage' => [
+                'Veuillez Uploader le bon format tell que mpeg, mp4 audio',
+            ],
+            'groups' => [
+                [
+                    'Default',
+                ],
+            ],
+        ],
+        'Symfony\\Component\\Validator\\Constraints\\File' => [
+            'maxSize' => [
+                20000000,
+            ],
+        ],
+        'Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField' => [
+            'mapping' => [
+                1 => 'upload_fichier_audio',
+            ],
+            'fileNameProperty' => [
+                1 => 'fichier',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[1],
+    ],
+    []
+); }];

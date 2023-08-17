@@ -1,0 +1,191 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+
+{% block title %}Prof | Profil
+{% endblock %}
+
+
+{% block main %}
+    <style>
+        .errors ul li {
+            color: red;
+            list-style: none;
+            margin-left: -37px;
+        }
+        .errors input {
+            border: 1px solid red;
+        }
+        .iti.iti--allow-dropdown{
+            width: 100% !important;
+         }
+         .iti.iti--allow-dropdown>input {
+            background: transparent !important;
+            border-radius: 0 !important;
+         }
+         .tel-errors .iti.iti--allow-dropdown>input {
+            border: 1px solid red !important;
+         }
+         .iti.iti--allow-dropdown .form-control {
+            box-shadow: none !important;
+         }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4"><span class="feather-user"></span>Mon Profil</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Mon Profil</li>
+        </ol>
+    </div>
+    <section class="section pt-4 pb-4 osahan-account-page">
+        <div class="container">
+            <div class="row">
+                {# include eto #}
+                {{ include('prof/sidebar.html.twig') }}
+                <div class="col-md-9">
+                    <div class="osahan-account-page-right shadow-sm bg-white p-4 h-100">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="card mb-4 order-list">
+                                        <div class="gold-members p-4">
+                                            {{ form_start(form) }}
+                                                <div class="row">
+                                                    
+                                                    <div class="col-md-5">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group" id="tel-container">
+                                                                <label>Téléphone</label>
+                                                                {{ form_widget(form.tel) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group {% if not form.avatarfile.vars.valid %}errors{% endif %}">
+                                                                <label for="">Photo de profil</label>
+                                                                {{ form_widget(form.avatarfile) }}
+                                                                {{ form_errors(form.avatarfile) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                {{ form_label(form.ville) }}
+                                                                {{ form_widget(form.ville) }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7 add_top_30">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group {% if not form.name.vars.valid %}errors{% endif %}">
+                                                                    <label>Nom</label>
+                                                                    {{ form_widget(form.name) }}
+                                                                    {{ form_errors(form.name) }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group {% if not form.email.vars.valid %}errors{% endif %}">
+                                                                    <label>Email</label>
+                                                                    {{ form_widget(form.email) }}
+                                                                    {{ form_errors(form.email) }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    {{ form_label(form.adresse) }}
+                                                                    {{ form_widget(form.adresse) }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                         <div class="save mb-2 ml-auto mr-5">
+                                                            <button type="submit" id="btn-etudiant-edit-profile" class="btn btn-success">Enregistrer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {{ form_end(form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mx-auto">
+                                    <div class="card mb-4 order-list">
+                                        {{ form_start(form_pass)}}
+                                            <div class="gold-members">
+                                                <div class="box_general padding_bottom">
+                                                    <div class="header_box version_2 border-bottom p-3">
+                                                        <h6 class="m-0">
+                                                            <i class="fa fa-lock text-muted mr-2"></i>Changer votre mot de passe</h6>
+                                                    </div>
+                                                    <div class="p-3">
+                                                        <div class="form-group {% if not form_pass.oldPassword.vars.valid %}errors{% endif %} ">
+                                                            <label>Ancien mot de passe</label>
+                                                            {{ form_widget(form_pass.oldPassword) }}
+                                                            {{ form_errors(form_pass.oldPassword) }}
+                                                        </div>
+                                                        <div class="form-group {% if not form_pass.newPassword.vars.valid %}errors{% endif %} ">
+                                                            <label>Nouveau mot de passe</label>
+                                                            {{ form_widget(form_pass.newPassword) }}
+                                                            {{ form_errors(form_pass.newPassword) }}
+                                                        </div>
+                                                        <div class="form-group {% if not form_pass.confirmPassword.vars.valid %}errors{% endif %} ">
+                                                            <label>Confirmer le nouveau mot de passe</label>
+                                                            {{ form_widget(form_pass.confirmPassword) }}
+                                                            {{ form_errors(form_pass.confirmPassword) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="save mb-2 text-center">
+                                                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                                                </div>
+                                            </div>
+                                        {{ form_end(form_pass) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+      jQuery(document).ready(function($){
+
+
+        var input = document.querySelector("#user_tel");
+
+         errorMsg = document.querySelector("#error-msg"),
+         validMsg = document.querySelector("#valid-msg");
+         var tel_parent = document.getElementById("tel-container");
+
+        // here, the index maps to the error code returned from getValidationError - see readme
+        var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+        var iti = window.intlTelInput(input, {
+            utilsScript: "{{ asset('vendor/tel/js/utils.js') }}", // just for formatting/placeholders etc;
+            nationalMode: false,
+        });
+         var reset = function() {
+            tel_parent.classList.remove("tel-errors");
+            document.getElementById("btn-etudiant-edit-profile").disabled = false;
+         };
+         input.addEventListener("load", function(){
+             iti.setNumber(iti.getNumber());
+         });
+        // on blur: validate
+        input.addEventListener('blur', function() {
+            if (input.value.trim()) {
+                if (iti.isValidNumber()) {
+                    //validMsg.classList.remove("hide");
+                } else {
+                    console.log("erreur");
+                    tel_parent.classList.add("tel-errors");
+                    document.getElementById("btn-etudiant-edit-profile").disabled = true;
+                }
+            }
+        });
+        // on keyup / change flag: reset
+        input.addEventListener('change', reset);
+        input.addEventListener('keyup', reset);
+      });
+
+    </script>
+
+{% endblock %}
+

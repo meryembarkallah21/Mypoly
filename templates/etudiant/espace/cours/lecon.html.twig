@@ -1,0 +1,445 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+{% block title %}Voir cours{% endblock %}
+
+{% block main %}
+
+    <style>
+
+        li{
+            margin-left: 10px;
+        }
+        .fa-video
+        {
+            color: #00A5E3;
+        }
+        .fa-file-pdf{
+            color: red;
+        }
+        .fa-file-audio
+        {
+            color: #00a65a ;
+        }
+
+        .titre
+        {
+            margin-top: 15px;
+            font-size: 20px;
+        }
+        .float-right
+        {
+            margin-top: 30px;
+        }
+
+        .fixe{
+            position:fixed;
+            top:30px;
+            right:0;
+
+            width: 325px;
+            border: 2px solid #338AFF;
+            border-radius:15px ;
+        }
+        .bg-info2{
+            background-color: rgb(0,113,175);;
+        }
+
+        .osahan-chat-box > .card-body
+        {
+            border-radius: 15px;
+            padding-top: 5px;
+            padding-bottom: 0px;
+
+
+        }
+        .osahan-chat-box
+        {
+            height:450px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+
+        }
+        .C>.card-header
+        {
+            width: 100%;
+        }
+        .gauche
+        {
+         padding-right:3% ;
+        }
+         .fa-thumbs-up
+         {
+             font-size: 25px;
+
+         }
+         .reacted
+         {
+             color:blue;
+         }
+        .react
+        {
+            color:gray;
+        }
+         .a{
+             border: none;
+             background-color: transparent;
+             margin-top: -10px;
+         }
+         .b{
+             display: inline-block;
+             font-weight: bold;
+         }
+         .like
+         {
+             list-style-type: none;
+             float:right;
+             margin-top: 15px;
+         }
+         .likes{
+             margin-bottom: 2px;
+         }
+         .avatar{
+             margin-left: -15px;
+         }
+         .avatar1{
+             margin-right: -15px;
+         }
+         #avatar{
+             width: 30px;
+             height: 30px;
+         }
+         .moi{
+             margin-left:25px;
+             margin-right: 4px;
+             color:white;
+             margin-top: -12px;
+             background-color: rgba(34,154,225,0.9);
+         }
+         .autre{
+             color:white;
+             margin-right: 25px;
+             margin-left: 4px;
+             margin-top: -12px;
+             background-color: #40b590;
+         }
+        .monNom{
+            float: right;
+            margin-right: -10px;
+            margin-top: 5px;
+        }
+    </style>
+
+    <section onselectstart="return false" oncontextmenu="return false" ondragstart="return false" onMouseOver="window.status='..message perso .. '; return true;">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item "><a href="{{ path('etudiant') }}" class="text-info">Tableau de Bord</a></li>
+                                <li class="breadcrumb-item "><a href="{{ path('mes_mentions') }}" class="text-info">mes mentions</a></li>
+                                <li class="breadcrumb-item "><a href="{{ path('mes_cours',{'id': inscri.id }) }}" class="text-info">Ec</a></li>
+                                <li class="breadcrumb-item active">Cours</li>
+                            </ol>
+
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-9 mb-4 col-sm-12 gauche"  name="c">
+                        <div class="like">
+                            <a  onClick="bascule('boite','c');" >commenter
+                                <span class="text-success fa fa-comment" style="font-size: 20px;"></span>
+                            </a>
+                            <a style="margin-left: 20px">{% if reacted %} réagi :{% else %} réagir :{% endif%}</a>
+                            <a class="likes btn a">
+                                <i class="fas fa-thumbs-up  reaction {% if reacted %} reacted {% else %} react {% endif%} "></i>
+                            </a>
+                        </div>
+                        <center>
+                            <h3 class="text-center titre badge badge-dark">{{ cours.titre }}</h3>
+                        </center>
+                        <br>
+                        <div class="card mb-4 card-body">
+                            <center><h6 >Description du cours:</h6></center>
+                            <center><p class="text-black-50"><b>{{ cours.description | raw }}</b></p></center>
+                            <iframe onselectstart="return false" oncontextmenu="return false" ondragstart="return false" onMouseOver="window.status='..message perso .. '; return true;" src="{{ app.request.schemeAndHttpHost()~asset('images/fichier_cours/'~cours.fichier )}}#toolbar=0&navpanes=0&scrollbar=0"
+                            type="application/pdf"   allowfullscreen  width="100%"  height="460px">
+
+                            </iframe>
+                        </div>
+
+
+                        <div class="card C">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <center>
+                                            <i data-toggle="modal" data-target="#pdfModal">
+                                                <button class="btn btn-sm btn-danger">Pdf <span class="fa text-white fa-file-pdf"></span></button>
+                                            </i>
+                                        </center>
+
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <center>
+                                            <i data-toggle="modal" data-target="#audioModal">
+                                                <button class="btn btn-sm btn-success">Audio <span class="fa fa-music text-white"></span></button>
+                                            </i>
+                                        </center>
+
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <center>
+                                            <i data-toggle="modal" data-target="#videoModal">
+                                            <button class="btn btn-sm btn-primary">Vidéo <span class="fa text-white fa-video"></span></button>
+                                            </i>
+                                        </center>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-3 col-xl-3 fixe bg-info2 float-right" name="boite" id="boite" style="margin-top: 5%;visibility: visible">
+                        <div class="p-2">
+                            <h4 class="text-white b">commentaires</h4>
+                            <a style="float: right" onClick="bascule('boite');" class="b">
+                                <span style="color: red;font-weight: bold;" class="feather-x-square btn" ></span>
+                            </a>
+                        </div>
+                        <div class="osahan-chat-box bg-white border-top">
+                            {% for commentaire in cours.commentaire %}
+                                <div class="text-center my-3">
+                                    <span class="px-3 py-2 small shadow-sm  rounded"> {{ commentaire.time |format_datetime(locale='en') }} </span>
+                                </div>
+                                <div class="d-flex align-items-center card-body
+                                    {% if user == commentaire.auteur %}
+                                        moi
+                                    {% else%}
+                                        autre
+                                    {% endif %}
+                                osahan-post-header">
+
+
+                                    <div class="row">
+
+                                        {% if user == commentaire.auteur %}
+                                            <div class="col-lg-1 col-md-1 col-sm-1  col-1">
+                                                <a href="{{ path('delete_comment',{'id': commentaire.id }) }}" class="text-danger">
+                                                    <span class="fa fa-trash" ></span>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                                                <div class="badge monNom badge-dark ">{{ commentaire.auteur.name }}</div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-2">
+                                                <div class="dropdown-list-image avatar1">
+                                                    <img class="rounded-circle" id="avatar" src="{{ asset('images/avatars/'~commentaire.auteur.avatar )}}" alt="">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <p class="text-center text-white">{{ commentaire.contenu }}</p>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-2">
+                                                <div class="dropdown-list-image avatar">
+                                                    <img class="rounded-circle" id="avatar" src="{{ asset('images/avatars/'~commentaire.auteur.avatar )}}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                                                <div class="badge badge-dark h6">{{ commentaire.auteur.name }}</div>
+                                            </div>
+                                            {% if user == commentaire.auteur %}
+                                                <div class="col-lg-1 col-md-1 col-sm-1 col-1">
+                                                    <a href="{{ path('delete_comment',{'id': commentaire.id }) }}" class="text-danger">
+                                                        <span class="fa fa-trash" ></span>
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                            <div class="col-md-12">
+                                                <p class="text-center text-white">{{ commentaire.contenu }}</p>
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        {{ form_start( form) }}
+                                <div class="w-100 border-top border-bottom">
+                                    <input type="text" name="contenu" value="" class="form-control" placeholder="commenter ...">
+                                </div>
+                                <div class="p-3 d-flex align-items-center">
+                                    <div class="overflow-hidden">
+
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                            <i class="feather-paperclip"></i>
+                                        </button>
+
+                                    </div>
+                                    <span class="ml-auto">
+                                    <button type="submit" class="btn btn-primary btn-sm rounded">
+                                        <i class="feather-send"></i> Send
+                                    </button>
+                                </span>
+                                </div>
+                        {{ form_end( form ) }}
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <!-- Modal -->
+            <div id="audioModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h4 class="modal-title">Support Audio</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% for audio in cours.audio %}
+                                    <div class="row card-header">
+                                        <div class="col-md-4">{{ audio.title }} :</div>
+                                        <div class="col-md-8">
+                                            <audio preload="auto" controls width="50%" class="center-block">
+                                                <source src="{{ asset('images/fichier_audio/' ~audio.fichier) }}" type="video/ogg">
+                                                <p>{{ audio.fichier }}</p>
+                                            </audio>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <p class="text-center">Aucun audio disponible pour l'instant</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pdfModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h4 class="modal-title">Support Pdf</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% for fichier in cours.fichierSupport %}
+                            <div class="row card-header">
+                                <div class="col-md-6">{{ fichier.title }} :</div>
+                                <div class="col-md-6">
+                                    <a href="{{ asset('images/fichier_support/' ~fichier.fichier) }}" class="btn align-items-center btn-outline-primary btn-sm rounded lien" download>
+                                        <i class="feather-download"> télécharger ici </i>
+                                    </a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <p class="text-center">Aucun fichier disponible pour l'instant</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div id="videoModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning">
+                            <h4 class="modal-title">Support vidéo</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% for video in cours.video %}
+                                    <div class="row card-header">
+                                        <div class="col-md-5">{{ video.title }}</div>
+                                        <div class="col-md-7">
+                                            <iframe class="myIframe" width="90%" frameborder="0" allowfullscreen></iframe>
+                                            <script type="text/javascript">
+                                                var url = "{{ video.lienUrl }}";
+                                                var id = url.split("?v=")[1]; //sGbxmsDFVnE
+
+                                                var embedlink = "http://www.youtube.com/embed/" + id;
+
+                                                var ytube1 = document.getElementsByClassName("myIframe");
+
+                                                ytube1[{{loop.index0}}].src = embedlink;
+                                            </script>
+                                            <br>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <p class="text-center">Aucune vidéo disponible pour l'instant</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Modal -->
+
+    </section>
+
+
+    <!-- Jquery JS-->
+    <script src="{{ asset('inscription/vendor/jquery/jquery.min.js') }}"></script>
+    <!-- Main JS-->
+    <script type="text/javascript">
+
+
+        jQuery(document).ready(function ($) {
+            $(".reaction").click(function(){
+
+                var data = "cours=" + '{{ cours }}' + "&user=" + '{{ user }}';
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ path('like_get_fee') }}",
+                    data: data,
+                    success: function(data){
+                        if(data.like){
+                            $(".fa-thumbs-up").css({'color':'blue'});
+                        }else {
+                            $(".fa-thumbs-up").css({'color':'gray'});
+                        }
+
+                    }
+                })
+            })
+
+        });
+
+        function bascule(elem,c)
+        {
+            // Quel est l'état actuel ?
+            etat=document.getElementById(elem).style.visibility;
+            if(etat=="hidden"){
+                document.getElementById(elem).style.visibility="visible";
+                document.getElementById(c).className="col-md-8";
+
+            }
+            else{document.getElementById(elem).style.visibility="hidden";}
+        }
+    </script>
+
+{% endblock %}
+

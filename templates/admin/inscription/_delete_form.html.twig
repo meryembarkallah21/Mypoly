@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('adimn_inscrire_delete', {'id': item.id}) }}" onsubmit="return confirm('Voulez-vous supprimer vraiment ??');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+    <button class="btn btn-sm btn-danger"><span class="fas fa-trash-alt"></span></button>
+</form>

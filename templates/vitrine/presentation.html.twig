@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}POLYTECH SOUSSE  | Présentation{% endblock %}
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('vitrine/style.css') }}">
+    <style>
+        .nav-link{
+            font-size:18px;
+        }
+        .nav-link>a{
+            color: #756f6f;
+        }
+        .top-navbar{
+            margin-left:-15px;
+            margin-right:-15px;
+        }
+        #carousel-item{
+            height:500px;
+        }
+        .carousel-indicators .active{
+            height: 3px;
+            width: 27px;
+        }
+        .dropdown-item{
+            font-size: 15px;
+            font-weight: bold;
+        }
+        #lead{
+            font-weight: bold;
+        }
+        #overviews{
+            margin-top:-20px;
+            margin-right:-15px;
+            margin-left:-15px;
+        }
+        .fadeIn{
+            margin-bottom:150px;
+            margin-left:100px;
+        }
+        #copyrights{
+            margin-left:-15px;
+            margin-right:-15px;
+        }
+        .mg{
+            margin-top:70px;
+            margin-bottom:20px;
+        }
+        .bg-new{
+            background-color: #eff3f3;
+        }
+        p{
+            color:#333333;
+            font-weight:500;
+        }
+    </style>
+    <!-- LOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="progress-br float shadow">
+                <div class="progress__item"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END LOADER -->
+    <div class="container-fluid">
+        <!-- ======= Top nav ======= -->
+        <!-- Start header -->
+        {{ include('vitrine/header.html.twig') }}
+        <!-- End header -->
+        <div id="overviews" class="section lb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                      
+
+                    </div>
+                    <
+                    <div class="col-md-12">
+                        <div class="bg-new">
+                            <div class="message-box">
+                                <p> Fondée en 2009, L'Ecole Polytechnique de Sousse est une grande école privée d'enseignement et de recherche à vocation internationale, accréditée EUR- ACE et qui a pour unique vocation de former des ingénieurs ayant un niveau technique et scientifique conforme aux meilleurs standards internationaux. Elle se fixe résolument comme mission de garantir une excellente insertion professionnelle à ses jeunes diplômés en les propulsant directement à l’employabilité.
+Nos principaux leviers résident dans :
+-Une accréditation EUR-ACE qui accorde à nos futurs ingénieurs un niveau de diplôme conforme aux standards internationaux via l'excellence de nos formations continues et de nos programmes et qui leur permettront de recevoir, et de manière systématique, la totale reconnaissance de leurs diplômes partout en Europe.
+- Un corps professoral de très haut niveau associant un profil académique à des expertises professionnelles à même d'assurer un suivi pédagogique individualisé et professionnalisant de nos étudiants.
+- La vie associative que nous considérons comme étant un élément essentiel et complémentaire à la formation d’ingénieur. A travers le projet socio-culturel (PSC), l'opportunité est donnée à nos étudiants de s'impliquer dans la vie sociétale pour leur permettre de développer des compétences toutes liées aux préoccupations et aux besoins réels et imminents de la société.
+- La place privilégiée accordée aux langues étrangères est un pilier fondamental dans le cursus d’ingénieur. Grâce à nos prestigieux partenaires, organismes de langues, nos étudiants ont l'opportunité de passer plusieurs diplômes et certifications tels que le DELF et le DALF. Le TOEIC, le TOEFL ainsi que d'autres certifications en langue. Des atouts qui leur permettront d'optimiser leurs chances à l’employabilité.
+-Une infrastructure qui répond à de hautes exigences techniques et technologiques, avec plus de 40 laboratoires spécialisés tous équipés d'un matériel innovant qui obéit à la pointe d'une technologie avancée et rigoureuse.
+- Plus de 100 partenariats nationaux et internationaux. D'une part, des partenariats académiques dans le cadre d'une double diplomation et d'échanges un peu partout dans le monde et notamment en France et au Canada, permettant à nos étudiants une forte mobilité internationale, favorisant ainsi l'ouverture académique et sociale, d'autre part, des partenariats professionnels avec qui nous échangeons assidûment afin d’ajuster notre cursus académique au niveau des besoins du marché de l'emploi.</p>
+                            </div><!-- end messagebox -->
+                        </div>
+                    </div>
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end section -->
+        <!---- footer ---------------->
+        {{ include('vitrine/footer.html.twig') }}
+        <!---- end footer ------------>
+    </div>
+    {% block main %}
+    {% endblock %}
+{% endblock %}

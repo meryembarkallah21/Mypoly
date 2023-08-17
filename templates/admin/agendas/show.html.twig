@@ -1,0 +1,30 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+{% block title %} Agendas{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .tb{
+            color: royalblue;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">Agendas {{ emploi_du_temp.mention.parcours }} -- {{ emploi_du_temp.mention }}</h1>
+        <ol class="breadcrumb mb-4">
+            <li><a href="{{ path('admin_dashboard') }}" class="tb">Tableau de bord /</a></li>
+            <li class="breadcrumb-item active">Agendas/ </li>
+            <li><a href="{{ path('admin_agendas_liste') }}" class="text-primary">Liste/</a></li>
+            <li>Voir</li>
+        </ol>
+        <div class="container-fluid">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <iframe src="{{ app.request.schemeAndHttpHost~asset('images/mes_agenda/'~emploi_du_temp.fichier) }}" type="application/pdf" width="100%" height="500px" ></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}
+

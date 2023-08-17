@@ -1,0 +1,36 @@
+<div class="card mb-4">
+    <div class="card-header" id="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Liste
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr class="text-uppercase">
+                    <th>Mention</th>
+                    <th>Semestre</th>
+                    <th>Nom</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ue in ues %}
+                    <tr>
+                        <td>{{ ue.mention }}</td>
+                        <td>{{ ue.semestre }}</td>
+                        <td>{{ ue.name }}</td>
+                        <td>
+                            <center>{{ include('admin/ue/_delete_form.html.twig') }}</center>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

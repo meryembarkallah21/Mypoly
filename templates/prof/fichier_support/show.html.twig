@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FichierSupport{% endblock %}
+
+{% block body %}
+    <h1>FichierSupport</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fichier_support.id }}</td>
+            </tr>
+            <tr>
+                <th>Fichier</th>
+                <td>{{ fichier_support.fichier }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('fichier_support_index') }}">back to list</a>
+
+    <a href="{{ path('fichier_support_edit', {'id': fichier_support.id}) }}">edit</a>
+
+    {{ include('prof/fichier_support/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Inscrire{% endblock %}
+
+{% block body %}
+    <h1>Edit Inscrire</h1>
+
+    {{ include('inscrire/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('inscrire_index') }}">back to list</a>
+
+    {{ include('inscrire/_delete_form.html.twig') }}
+{% endblock %}

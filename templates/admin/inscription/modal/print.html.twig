@@ -1,0 +1,122 @@
+{# empty Twig template #}
+<!-- Modal -->
+<style>
+    .f-p{
+        color:white;
+    }
+</style>
+<div id="print" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header btn-info">
+                <h4 class="modal-title"><i class="fa fa-print f-p"></i>Imprimer</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ path('admin_inscrire_pdf') }}" method="post" class="validate">
+                <div class="modal-body">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content" style="display: block;">
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-4" for="annee">Année scolaire <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <select class="form-control validate" name="annee" required>
+                                            <option value="">-- Choisir année --</option>
+                                            {%for item in years %}
+                                                <option value="{{item.id}}">{{item.year}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-4" for="mention">Mention <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <select id="_f" class="form-control validate" name="mention" required>
+                                            <option value="" >-- Choisir mention --</option>
+                                            {%for item in mentions %}
+                                                <option value="{{item.id}}">{{item.name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-4" for="niveau">Niveau <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <select id="_n" class="form-control validate" name="niveau" required>
+                                            <option value="" >-- Choisir niveau --</option>
+                                            {%for item in niveau %}
+                                                <option value="{{item.id}}">{{item.code}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-4" for="parcours">Parcours <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <select id="_p" class="form-control validate" name="parcours" required>
+                                            <option value="" >-- Choisir parcours --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-print f-p"></i></button>
+                </div>
+            </form>                       
+        </div>
+    </div>
+</div>
+<!--endmodal-->
+<!-- Main JS-->
+<script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+        $("#_f").change(function (){
+            var valfiliere = $(this).val();
+
+            $("#_n").change(function(){
+                var valNiveau = $(this).val();
+                var data = "niveau=" + valNiveau +"&code="+valfiliere;
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ path('get-parc') }}",
+                    data: data,
+                    success: function(data){
+                        $('#_p').empty();
+                        if(data.parcours){
+                            for(var i=0 ; i< data.parcours.length; i++){
+                                $('#_p').append('<option  value= "'+ data.parcours[i]['id'] +'">'+ data.parcours[i]['name'] +'</option>');
+                            }
+                        }
+
+                    }
+                })
+
+            })
+
+        })
+
+    });
+
+</script>

@@ -1,0 +1,86 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+{% block title %} Prof | Mon agenda {% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .tb{
+            color: royalblue;
+        }
+    </style>
+    {{ include('prof/mes_agenda/modal/supprimer.html.twig') }}
+    <div class="container-fluid">
+        <h1 class="mt-4">Mon agenda</h1>
+        <ol class="breadcrumb mb-4">
+            <li><a href="{{ path('prof_dashbord') }}" class="tb">Tableau de bord /</a></li>
+            <li><a href="{{ path('prof_mes_agenda') }}" class="tb">Mon agenda /</a></li>
+            <li>Liste</li>
+        </ol>
+        <div class="container-fluid">
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Description</th>
+                                <th>De</th>
+                                <th>A</th>
+                                <th>Date</th>
+                                <th>Mention</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for agenda in agendas %}
+                                <tr>
+                                    <td style="background-color:{{ agenda.backgroundColor }};color:{{ agenda.textColor }};border:2px solid {{ agenda.borderColor }};"><b>{{ agenda.title }}</b></td>
+                                    <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.description | raw}}</td>
+                                    <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.start | date('H:i:s') }}</td>
+                                    <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.end | date('H:i:s') }}</td>
+                                    <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.start | date('d-m-Y') }}</td>
+                                    {% if agenda.mention %}
+                                        <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.mention.parcours }} -- {{ agenda.mention.cycle.code }} en {{ agenda.mention.code.name }}</td>
+                                    {% else %}
+                                        <td style="border:2px solid {{ agenda.borderColor }};">Toutes les Mentions</td>
+                                    {% endif %}
+                                    <td width="100px" style="border:2px solid {{ agenda.borderColor }};">
+                                        <a href="{{ path('prof_edit_evenement',{id:agenda.id}) }}"  class="btn btn-rounded btn-success btn-sm btn-xs">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <!--endmodal-->
+                                        <button class="btn btn-rounded btn-danger btn-sm btn-xs delete-element" id="supprimer_{{ agenda.id }}" onclick="javascript:supprimerelement(this.id)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function supprimerelement(id_supprimer) {
+            var s = "supprimer_";
+            var t = s.length;
+            var idchoisi = id_supprimer.substring(t, id_supprimer.length);
+            var url = "{{ path('prof_mes_agenda_supprimer', {'id': 'supprimer'}) }}";
+            url = url.replace("supprimer", idchoisi);
+            $("#suppression_form").attr('action', url);
+            $("#titre_modal_suppression").text("Etes-vous d'accord pour la suppression de cet événement?");
+            $("#suppression").modal();
+        }
+    </script>
+{% endblock %}
+{% block javascript %}
+{% endblock %}
+

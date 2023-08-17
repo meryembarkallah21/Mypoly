@@ -1,0 +1,145 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+{% block title %}Mention index{% endblock %}
+
+
+
+{% block main %}
+<style>
+
+    .text-logo
+    {
+        font-family: 'Broadway BT', sans-serif;
+        text-shadow: 2px 2px #1839DO;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .filiere
+    {
+        margin: 15px 10%;
+        width: 80%;
+    }
+    .breadcrumb{
+        box-shadow: rgba(0,0,0,0.1) 0px 60px 40px -7px;
+        backdrop-filter: blur(4px);
+        color: rgba(59,76,255,0.91);
+        font-weight: bold;
+    }
+    .txt{
+        font-size: 25px;
+        width: 210px;
+    }
+    .modal-title{
+        font-weight: bold;
+    }
+    .card
+    {
+        border-radius:10px;
+    }
+    .content-header
+    {
+        margin-top: 20px;
+    }
+
+</style>
+    <div class="container-fluid">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+
+
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h2 class="m-0 breadcrumb txt text-dark text-black">Inscription </h2>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a class="text-info" href="{{ path('etudiant') }}">Tableau de Bord</a></li>
+                                <li class="breadcrumb-item active">inscription</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+      <div class="card" >
+          <div class="card-header">
+              <p class="text-logo text-info">Nos mentions</p>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                  {% for code in codes %}
+                      <div class="col-md-4">
+                          <div class="card bg-dark text-white mb-4">
+                              <div class="card-body filiere text-center"><img width="30px" style="margin-right: 20px" src="{{ asset('images/fichier_icon/'~code.icon) }}" alt="logo">{{ code.name }}</div>
+
+                              <div class="card-footer d-flex align-items-center justify-content-between">
+                                  <a class="btn btn-sm btn-primary" href="{{ path('etudiant_inscription', {'id': code.id}) }}">inscription</a>
+
+                                  <i  class="ri btn btn-sm  btn-success"
+                                     data-id="{{ code.id }}" data-toggle="modal" data-target="#MleModal">Réinscription
+                                  </i>
+
+                                  <div id="MleModal" class="modal fade" role="dialog">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <form  action="{{path('check_mle')}}" method="post">
+                                                  <div class="modal-header bg-warning">
+                                                      <h4 class="modal-title">Réinscription</h4>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <input type="hidden"  class="id" id="id" name="id">
+                                                      <div class="form-group row">
+                                                          <label for="inputName2" class="col-sm-4 col-form-label">Votre matricule : </label>
+                                                          <div class="col-sm-8">
+                                                              <input type="number" name="matricule"  class="form-control">
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="modal-footer justify-content-between">
+                                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Femer</button>
+                                                      <button type="submit" class="btn btn-success">Valider</button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                          <!-- /.modal-content -->
+                                      </div>
+                                      <!-- /.modal-dialog -->
+                                  </div>
+
+
+
+                              </div>
+                          </div>
+                      </div>
+                  {% endfor %}
+              </div>
+          </div>
+
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function () {
+
+            $('.ri').click(function () {
+                $('#id').val($(this).data('id'));
+            });
+        });
+    </script>
+
+{% endblock %}

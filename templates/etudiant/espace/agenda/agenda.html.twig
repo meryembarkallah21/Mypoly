@@ -1,0 +1,85 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+{% block title %}Agendas{% endblock %}
+
+{% block main %}
+    <style>
+        .tb{
+            color: royalblue;
+        }
+
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">Agendas</h1>
+        <ol class="breadcrumb mb-4">
+            <li><a href="" class="tb">Tableau de bord /</a></li>
+            <li class="breadcrumb-item active">Agendas
+        </ol>
+        <div class="container-fluid">
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Description</th>
+                                <th>De</th>
+                                <th>A</th>
+                                <th>Date</th>
+                                <th>Mention</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for agenda in agendas %}
+                                {% set cpt = 1 %}
+                                {% for inscrire in inscrires %}
+                                    {% if inscrire.mention == agenda.mention %}
+                                    <tr>
+                                        <td style="background-color:{{ agenda.backgroundColor }};color:{{ agenda.textColor }};border:2px solid {{ agenda.borderColor }};"><b>{{ agenda.title }}</b></td>
+                                        <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.description | raw}}</td>
+                                        <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.start | date('H:i:s') }}</td>
+                                        <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.end | date('H:i:s') }}</td>
+                                        <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.start | date('d-m-Y') }}</td>
+                                        {% if agenda.mention %}
+                                            <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.mention.parcours }} -- {{ agenda.mention.cycle.code }} en {{ agenda.mention.code.name }}</td>
+                                        {% else %}
+                                            <td style="border:2px solid {{ agenda.borderColor }};">Toutes les Mentions</td>
+                                        {% endif %}
+
+                                    </tr>
+                                    {% elseif agenda.mention == null and cpt %}
+                                        <tr>
+                                            <td style="background-color:{{ agenda.backgroundColor }};color:{{ agenda.textColor }};border:2px solid {{ agenda.borderColor }};"><b>{{ agenda.title }}</b></td>
+                                            <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.description | raw}}</td>
+                                            <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.start | date('H:i:s') }}</td>
+                                            <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.end | date('H:i:s') }}</td>
+                                            <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.start | date('d-m-Y') }}</td>
+                                            {% if agenda.mention %}
+                                                <td style="border:2px solid {{ agenda.borderColor }};">{{ agenda.mention.parcours }} -- {{ agenda.mention.cycle.code }} en {{ agenda.mention.code.name }}</td>
+                                            {% else %}
+                                                <td style="border:2px solid {{ agenda.borderColor }};">Toutes les Mentions</td>
+                                            {% endif %}
+
+                                        </tr>
+                                        {% set cpt = 0 %}
+                                    {% endif %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascript %}
+{% endblock %}
+

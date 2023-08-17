@@ -1,0 +1,501 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+{% block title %} Tableau de Bord{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .info-box {
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+            border-radius: 0.25rem;
+            background: #ffffff;
+            display: -ms-flexbox;
+            display: flex;
+            margin-bottom: 1rem;
+            min-height: 80px;
+            padding: .5rem;
+            position: relative;
+        }
+
+        .info-box .progress {
+            background-color: rgba(0, 0, 0, 0.125);
+            height: 2px;
+            margin: 5px 0;
+        }
+
+        .info-box .progress .progress-bar {
+            background-color: #ffffff;
+        }
+        .info-box-text{
+            color: #1d1c1c;
+        }
+        .info-box .info-box-icon {
+            border-radius: 0.25rem;
+            -ms-flex-align: center;
+            align-items: center;
+            display: -ms-flexbox;
+            display: flex;
+            font-size: 1.875rem;
+            -ms-flex-pack: center;
+            justify-content: center;
+            text-align: center;
+            width: 70px;
+        }
+
+        .info-box .info-box-icon > img {
+            max-width: 100%;
+        }
+
+        .info-box .info-box-content {
+            -ms-flex: 1;
+            flex: 1;
+            padding: 5px 10px;
+        }
+
+        .info-box .info-box-number {
+            display: block;
+            font-weight: 700;
+        }
+
+        .info-box .progress-description,
+        .info-box .info-box-text {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .info-box .info-box .bg-primary,
+        .info-box .info-box .bg-gradient-primary {
+            color: #ffffff;
+        }
+
+        .info-box .info-box .bg-primary .progress-bar,
+        .info-box .info-box .bg-gradient-primary .progress-bar {
+            background-color: #ffffff;
+        }
+
+        .info-box .info-box .bg-secondary,
+        .info-box .info-box .bg-gradient-secondary {
+            color: #ffffff;
+        }
+
+        .info-box .info-box .bg-secondary .progress-bar,
+        .info-box .info-box .bg-gradient-secondary .progress-bar {
+            background-color: #ffffff;
+        }
+
+        .info-box .info-box .bg-success,
+        .info-box .info-box .bg-gradient-success {
+            color: #ffffff;
+        }
+
+        .info-box .info-box .bg-success .progress-bar,
+        .info-box .info-box .bg-gradient-success .progress-bar {
+            background-color: #ffffff;
+        }
+
+        .info-box .info-box .bg-info,
+        .info-box .info-box .bg-gradient-info {
+            color: #ffffff;
+        }
+
+        .info-box .info-box .bg-info .progress-bar,
+        .info-box .info-box .bg-gradient-info .progress-bar {
+            background-color: #ffffff;
+        }
+
+        .info-box .info-box .bg-warning,
+        .info-box .info-box .bg-gradient-warning {
+            color: #1F2D3D;
+        }
+
+        .info-box .info-box .bg-warning .progress-bar,
+        .info-box .info-box .bg-gradient-warning .progress-bar {
+            background-color: #1F2D3D;
+        }
+
+        .info-box .info-box .bg-danger,
+        .info-box .info-box .bg-gradient-danger {
+            color: #ffffff;
+        }
+
+        .info-box .info-box .bg-danger .progress-bar,
+        .info-box .info-box .bg-gradient-danger .progress-bar {
+            background-color: #ffffff;
+        }
+
+        .info-box .info-box .bg-light,
+        .info-box .info-box .bg-gradient-light {
+            color: #1F2D3D;
+        }
+
+        .info-box .info-box .bg-light .progress-bar,
+        .info-box .info-box .bg-gradient-light .progress-bar {
+            background-color: #1F2D3D;
+        }
+
+        .info-box .info-box .bg-dark,
+        .info-box .info-box .bg-gradient-dark {
+            color: #ffffff;
+        }
+
+        .info-box .info-box .bg-dark .progress-bar,
+        .info-box .info-box .bg-gradient-dark .progress-bar {
+            background-color: #ffffff;
+        }
+
+        .info-box .info-box-more {
+            display: block;
+        }
+
+        .info-box .progress-description {
+            margin: 0;
+        }
+        .info-box-icon-fa{
+            color:#ffffff;
+        }
+        @media (min-width: 768px) {
+            .col-xl-2 .info-box .progress-description,
+            .col-lg-2 .info-box .progress-description,
+            .col-md-2 .info-box .progress-description {
+                display: none;
+            }
+            .col-xl-3 .info-box .progress-description,
+            .col-lg-3 .info-box .progress-description,
+            .col-md-3 .info-box .progress-description {
+                display: none;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-xl-2 .info-box .progress-description,
+            .col-lg-2 .info-box .progress-description,
+            .col-md-2 .info-box .progress-description {
+                font-size: 0.75rem;
+                display: block;
+            }
+            .col-xl-3 .info-box .progress-description,
+            .col-lg-3 .info-box .progress-description,
+            .col-md-3 .info-box .progress-description {
+                font-size: 0.75rem;
+                display: block;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .col-xl-2 .info-box .progress-description,
+            .col-lg-2 .info-box .progress-description,
+            .col-md-2 .info-box .progress-description {
+                font-size: 1rem;
+                display: block;
+            }
+            .col-xl-3 .info-box .progress-description,
+            .col-lg-3 .info-box .progress-description,
+            .col-md-3 .info-box .progress-description {
+                font-size: 1rem;
+                display: block;
+            }
+        }
+
+        .card-header-mention{
+            background-color: #3d4f52;
+            color:white;
+        }
+
+        #overlay{
+            background: url({{ asset('images/avatars/img-04.jpg') }}) no-repeat center;
+            background-size: cover;
+            opacity: 0.9;
+            background-color: #1623e5;
+        }
+        #overlay.overlay::before{
+            background-color: #1623e5;
+            opacity: 0.6;
+        }
+
+        .overlay{
+            position: relative;
+        }
+        .overlay::before{
+            position: absolute;
+            content:"";
+            width: 100%;
+            height: 100%;
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        .card-header-niveau{
+            background-color: #292b2b;
+            color:#e2dede;
+            opacity:0.9;
+        }
+        .img-bg-03 {
+            background: url({{ asset('images/avatars/bg-05.jpg') }}) no-repeat center;
+            background-size: cover;
+            opacity: 0.9;
+            background-color:#292b2b ;
+            height:auto;
+        }
+        .mb-txt{
+            color:#b8afaf;
+        }
+        .mb-nbr-fi{
+            color: #bde7e8;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .mb-nbr{
+            color: #e32c1c;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .mb-nbr2{
+            color: #f1ec09;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .bg-esp{
+            width:60px;
+            height:30px;
+            border-radius:3px;
+            color:#3d4f52;
+            text-align:center;
+        }
+        .liste{
+            float:right;
+            color: #8b94a3;
+        }
+        div.scrol{
+            padding: 5px;
+            position: relative;
+            width: 100%;
+            height: 100px;
+            overflow: auto;
+        }
+        div.scrol1{
+            padding: 5px;
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: auto;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">Tableau de bord</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Tableau de bord</li>
+        </ol>
+        <div class="container-fluid">
+            <!-- Info boxes -->
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas info-box-icon-fa fa-user-graduate"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Etudiants</span>
+                            <!----Somme des etudiant--->
+                            {% set somme = 0 %}
+                            {% for inscrire in inscrires %}
+                                {% set somme = somme + 1 %}
+                            {% endfor %}
+                            <span class="info-box-number">{{somme}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas info-box-icon-fa fa-users"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Professeurs</span>
+                            {% set nb_prof = 0 %}
+                            {% for prof in profs %}
+                                {% set nb_prof = nb_prof + 1 %}
+                            {% endfor %}
+                            <span class="info-box-number">{{ nb_prof }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+                <!-- fix for small devices only -->
+                <div class="clearfix hidden-md-up"></div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas info-box-icon-fa  fa-user-friends"></i></span>
+                        {% set nb_admin = 0 %}
+                        {% for admin in admins %}
+                            {% set nb_admin = nb_admin + 1 %}
+                        {% endfor %}
+                        <div class="info-box-content">
+                            <span class="info-box-text">Employés</span>
+                            <span class="info-box-number">{{ nb_prof + nb_admin }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="info-box-icon-fa fas fa-users-cog"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Admin</span>
+                            {#  {% set nb_admin = 0 %}
+                            {% for admin in admins %}
+                                {% set nb_admin = nb_admin + 1 %}
+                            {% endfor %} #}
+                            <span class="info-box-number">{{ nb_admin }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        <div class="row">
+            {% for mention in mentions %}
+            <div class="col-xl-12">
+                <div class="card mb-4">
+                    <div class="card-header card-header-mention">
+                        <!-----------Nombre des etudiants par mention ---->
+                        {% set i = 0 %}
+                        {% for inscrire in inscrires %}
+                            {% if inscrire.mention.code.name == mention.name %}
+                                {% set i = i + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                        <i class="fas fa-graduation-cap mr-1"></i>
+                        {{ mention.name }} <span class="mb-nbr-fi">[{{ i }}]</span>
+                    </div>
+                    <div class="card-body scrol1">
+                        <div class="row">
+                            {% for niveau in niveaux %}
+                                <div class="col-xl-4">
+                                    <div class="card mb-4">
+                                        <div class="card-header card-header-niveau">
+                                            <!-----------Nombre des etudiants par niveau ---->
+                                            {% set j = 0 %}
+                                            {% for inscrire in inscrires %}
+                                                {% if inscrire.mention.cycle.code == niveau.code and inscrire.mention.code.name == mention.name %}
+                                                    {% set j = j + 1 %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <i class="fas fa-project-diagram mr-1"></i>
+                                            {{ niveau.code }} <span class="mb-nbr">[{{ j }}]</span>
+                                        </div>
+                                        <div class="card-body img-bg-03 scrol">
+                                            <!-----------Nombre des etudiants par parcours ---->
+                                            {% set temp = 0 %}
+                                            {% set nbr = 0 %}
+                                            {% for parcour in parcours %}
+                                                {% set nbr = nbr + 1 %}
+                                                {% if parcour.code != null  and mention == parcour.code and niveau == parcour.cycle %}
+                                                    {% set somme = 0 %}
+                                                    {% for inscrire in inscrires %}
+                                                        {% if inscrire.parcours != null and inscrire.mention.parcours == parcour and inscrire.mention.cycle == niveau %}
+                                                            {% set somme = somme + 1 %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {% if somme > 0 %}
+                                                        <p class="mb-txt">{{ parcour.name }} <span class="mb-nbr2">[{{ somme }}]</span> <a class="liste" href="{{ path('liste_etudiant', {'id':parcour.id ,'cycle':niveau.code }) }}"><i class="fw fa fa-list-alt"></i> Liste</a></p>
+                                                    {% else %}
+                                                        <p class="mb-txt">{{ parcour.name }} <span class="mb-nbr2">[{{ somme }}]</span>
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% set temp = temp + 1 %}
+                                                {% endif %}
+                                            {% else %}
+                                                <div class="col-xl-12">no records found</div>
+                                            {% endfor %}
+                                            {% if temp == nbr %}
+                                                <p class="mb-txt" >Aucun Parcours</p>
+                                                {% set somme = 0 %}
+                                                {% set niv = null %}
+                                                {% set niv2 = null %}
+                                                {% for inscrire in inscrires %}
+                                                    {% if inscrire.parcours == null and inscrire.mention.code.name == mention.name and inscrire.mention.cycle.code == niveau.code %}
+                                                        {% set somme = somme + 1 %}
+                                                        {% set niv = inscrire.mention.cycle %}
+                                                        {% set niv2 = inscrire.mention.code %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if niveau == niv and mention == niv2 %}
+                                                    <p class="mb-txt">Etudiants <span class="mb-nbr2">[{{ somme }}]</span> <a class="liste" href="{{ path('list_etudiant', {'id':niv.id ,'name':mention.name }) }}"><i class="fw fa fa-list-alt"></i> Liste</a></p>
+                                                {% else %}
+                                                    <p class="mb-txt">Etudiants <span class="mb-nbr2">[0]</span></p>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="col-xl-12">Aucune mention</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                    <div class="col-xl-12">Aucune mention</div>
+            {% endfor %}
+        </div>
+        <div class="card mb-4">
+            <div class="card-header card-header-mention">
+                <i class="fas fa-table mr-1"></i>
+                Liste des étudiants
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr class="text-uppercase">
+                            <th>Profil</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Tél</th>
+                            <th>Niveau</th>
+                            <th>Mention</th>
+                            <th>Parcours</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!----><!---->
+                        {% for inscrire in inscrires %}
+                        <tr>
+                            <td><img class="img-profile rounded-circle" src="/images/avatars/{{ inscrire.etudiant.avatar }}"></td>
+                            <td>{{ inscrire.etudiant.name }}</td>
+                            <td>{{ inscrire.etudiant.email }}</td>
+                            <td>{{ inscrire.etudiant.tel }}</td>
+                            <td>{{ inscrire.mention.cycle.code }}</td>
+                            <td>{{ inscrire.mention.code.name }}</td>
+                            {% if inscrire.parcours != null %}
+                                  <td>{{ inscrire.parcours.name }}</td>
+                            {% else %}
+                                   <td>Aucun Parcours</td>
+                            {% endif%}
+                            <td><a href="{{ path('profil_show', {'id': inscrire.id}) }}" class="btn btn-primary btn-sm"><i class="fa fw fa-eye"></i> Voir</a></td>
+                        </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

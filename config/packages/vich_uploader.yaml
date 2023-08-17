@@ -1,0 +1,76 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        upload_avatar:
+            uri_prefix: /images/avatars
+            upload_destination: '%kernel.project_dir%/public/images/avatars'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+    
+        motif_inscription_file:
+            uri_prefix: /images/motif_inscription_file
+            upload_destination: '%kernel.project_dir%/public/images/motif_inscription_file'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        upload_fichier_cours:
+            uri_prefix: /images/fichier_cours
+            upload_destination: '%kernel.project_dir%/public/images/fichier_cours'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        upload_fichier_bibliotheque:
+            uri_prefix: /images/fichier_bibliotheque
+            upload_destination: '%kernel.project_dir%/public/images/fichier_bibliotheque'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        upload_fichier_support:
+            uri_prefix: /images/fichier_support
+            upload_destination: '%kernel.project_dir%/public/images/fichier_support'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        upload_fichier_audio:
+            uri_prefix: /images/fichier_audio
+            upload_destination: '%kernel.project_dir%/public/images/fichier_audio'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        upload_fichier_icon:
+            uri_prefix: /images/fichier_icon
+            upload_destination: '%kernel.project_dir%/public/images/fichier_icon'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        upload_photo_livre:
+            uri_prefix: /images/photo_livre
+            upload_destination: '%kernel.project_dir%/public/images/photo_livre'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Years{% endblock %}
+
+{% block body %}
+    <h1>Years</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ year.id }}</td>
+            </tr>
+            <tr>
+                <th>Current</th>
+                <td>{{ year.current ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ year.year ? year.year|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('years_index') }}">back to list</a>
+
+    <a href="{{ path('years_edit', {'id': year.id}) }}">edit</a>
+
+    {{ include('years/_delete_form.html.twig') }}
+{% endblock %}

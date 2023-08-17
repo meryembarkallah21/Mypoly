@@ -1,0 +1,51 @@
+{% extends 'prof/mes_cours/ajout_cours.html.twig' %}
+
+{% block title %}Nouveau FichierSupport{% endblock %}
+
+{% block fichier %}
+    <style>
+
+        .ai{
+            margin-bottom:20px;
+        }
+        .in{
+            margin-top:5px;
+        }
+        .bn{
+            margin-top:14px;
+        }
+        .form-width{
+            width:60%;
+        }
+    </style>
+    <div class="col-xl-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                {{ form_start(forms) }}
+                <div class="row in">
+                    <div class="col-xl-2 ai">
+                        Titre
+                    </div>
+                    <div class="col-xl-10" {% if not forms.title.vars.valid %}errors{% endif %} >
+                        <div class="form-width">{{ form_widget(forms.title) }}</div>
+                    </div>
+                    <div class="col-xl-2 ai">
+                        fichier Support
+                    </div>
+                    <div class="col-xl-10" {% if not forms.fichiersu.vars.valid %}errors{% endif %} >
+                        <div class="form-width">{{ form_widget(forms.fichiersu) }}</div>
+                    </div>
+                    <div class="col-xl-2 ai">
+                    </div>
+                    <div class="col-xl-10 ai">
+                        <button class="btn bn btn-danger">{{ button_label|default('Enregistrer') }}</button>
+                    </div>
+                </div>
+                {{ form_end(forms) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12">
+        {{ include('prof/fichier_support/index.html.twig') }}
+    </div>
+{% endblock %}

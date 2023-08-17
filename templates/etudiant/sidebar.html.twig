@@ -1,0 +1,39 @@
+<div class="col-md-3">
+    <div class="osahan-account-page-left shadow-sm bg-white h-100">
+        <div class="border-bottom p-4">
+        <div class="osahan-user text-center">
+            <div class="osahan-user-media">
+                <img class="mb-3 rounded-pill shadow-sm mt-1" width="200px" src="{{ asset('images/avatars/'~app.user.avatar )}}" alt="gurdeep singh osahan">
+                <div class="osahan-user-media-body">
+                    <h6 class="mb-2">{{ app.user.name }}</h6>
+                    <p class="mb-1">{{ app.user.tel }}</p>
+                    <p>{{ app.user.email }}</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        <ul class="nav nav-tabs flex-column border-0 pt-4 pl-4 pb-4" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" href="{{path('etudiant_profil')}}"><i class="icofont-user-alt-3"></i> Profil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#orders"><i class="icofont-food-cart"></i> Orders</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('etudiant') }}"><i class="icofont-sale-discount"></i>Acceuil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href=""><i class="icofont-heart"></i> Favourites</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#payments"><i class="icofont-credit-card"></i> Payments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#addresses"><i class="icofont-location-pin"></i> Addresses</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}"> <i class="icofont-logout"></i>Se déconnecter</a>
+        </li>
+        </ul>
+    </div>
+</div>

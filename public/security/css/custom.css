@@ -1,0 +1,695 @@
+/*
+Template Name: Osahan Eat - Online Food Ordering Website HTML Template
+Author: Askbootstrap
+Author URI: https://wrapbootstrap.com/user/gurdeep
+Version: 1.0
+*/
+
+a {
+    text-decoration: none !important;
+}
+
+.online-dot {
+    padding-left: 34px;
+    margin-top: -14px;
+}
+
+.sender-box {
+    border-radius: 5px 5px 5px 0px;
+}
+
+.badge {
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 11px;
+}
+
+.modal-content {
+    border-radius: 6px;
+    border: none;
+}
+
+.btn,
+.form-control {
+    border-radius: 6px;
+    font-size: 13px;
+    min-height: 37px;
+    line-height: 22px;
+}
+
+small,
+.small {
+    font-size: 12px;
+}
+
+.btn {
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.rounded {
+    border-radius: 6px !important;
+}
+
+.bg-light {
+    background-color: #f6f6f8 !important;
+}
+
+.osahan-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    color: #79797a;
+    min-width: 40px;
+}
+
+.sidebar-brand {
+    height: auto !important;
+    padding: 1rem !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebar-brand img {
+    height: 37px;
+}
+
+.text-black {
+    color: #000000;
+}
+
+.badge-primary {
+    color: #c60021;
+    background-color: rgb(198 0 33 / 7%);
+}
+
+.badge-light {
+    color: #e84a3a;
+    background-color: rgb(232 74 58 / 9%);
+}
+
+.badge-info {
+    color: #36b9cc;
+    background-color: rgb(54 185 204 / 0.07);
+}
+
+.badge-success {
+    color: #1cc88a;
+    background-color: rgb(28 200 138 / 0.07);
+}
+
+.osahan-progress {
+    padding: 0px;
+    border-radius: 50px;
+    height: 4px;
+}
+
+.osahan-progress .progress-bar {
+    border-radius: 100px;
+}
+
+.osahan-list .bg-light.p-3.rounded img {
+    height: 60px;
+    width: 60px;
+    min-width: 60px;
+}
+
+.osahan-list .badge {
+    padding: 5px 7px;
+}
+
+.osahan-list p.mb-2.text-black {
+    font-size: 15px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    background-color: rgba(0, 0, 0, .15);
+    -webkit-box-shadow: inset -1px -1px 0 rgba(0, 0, 0, .05), inset 1px 1px 0 rgba(0, 0, 0, .05);
+    box-shadow: inset -1px -1px 0 rgba(0, 0, 0, .05), inset 1px 1px 0 rgba(0, 0, 0, .05);
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 50px;
+    background: hsla(0, 0%, 53.3%, 0.4);
+}
+
+#wrapper {
+    position: relative;
+}
+
+.modal-content {
+    border-radius: .40rem!important;
+    border: none;
+    overflow: hidden;
+}
+
+.modal.fade {
+    display: block;
+    opacity: unset;
+    right: -400px;
+    left: auto;
+    width: 400px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal.fade.show {
+    right: 0px !important;
+    opacity: unset;
+}
+
+.modal .modal-dialog {
+    margin: 0 0 0 auto;
+    left: auto;
+    max-width: 400px;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal .modal-dialog .modal-content {
+    border-radius: 0px !important;
+    margin: 0px 0px 0px 0px;
+}
+
+.modal .modal-dialog .modal-content .modal-body {
+    height: calc(100vh - 133px);
+    overflow: auto;
+}
+
+.osahan-radio {
+    border: 1px solid #ececec;
+    margin: 0px 2px 6px 0 !important;
+    color: #7b7b7b;
+}
+
+.osahan-radio.active {
+    color: #fff !important;
+    background: #000 !important;
+    border-color: #000 !important;
+}
+
+
+/* card dots */
+
+.dots-circle {
+    font-size: 8px;
+}
+
+.border-input {
+    border-bottom: 1px solid #e3e3e3 !important;
+    box-shadow: none !important;
+}
+
+.card-no {
+    font-size: 4px;
+}
+
+
+/* custom radio buttons filter */
+
+.btn-group,
+.btn-group-vertical {
+    display: block !important;
+}
+
+
+/* brand logo */
+
+.brand-logo {
+    z-index: 1;
+}
+
+.heart-icon {
+    z-index: 1;
+    top: 23px;
+    right: 23px;
+}
+
+.close-icon {
+    z-index: 1;
+    right: 5px;
+    top: 5px;
+}
+
+.heart-fav {
+    z-index: 1;
+    right: 15px;
+    top: 15px;
+    background: #fff;
+    font-size: 16px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+}
+
+
+/* modal width */
+
+.modal-w {
+    width: 70%;
+}
+
+
+/* side bar */
+
+.sidepanel {
+    width: 0;
+    position: fixed;
+    z-index: 9;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.sidepanel a {
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidepanel a:hover {
+    color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+    position: absolute;
+    top: 11px;
+    right: 4px;
+}
+
+
+/* Chat */
+
+.osahabn-chat-box-body {
+    height: 454px;
+    overflow: auto;
+}
+
+.recieve-box,
+.sender-box {
+    padding: 10px 14px !important;
+}
+
+.osahabn-chat-box-footer textarea {
+    resize: none;
+    background: #f8f9fc !important;
+    border-radius: 50px !important;
+    padding: 10px 10px 10px 20px;
+}
+
+.osahabn-chat-box-footer .btn i {
+    font-size: 18px;
+    border: none !important;
+}
+
+.btn-ico {
+    height: calc(1.6em + 1.375rem + 2px);
+    width: calc(1.6em + 1.375rem + 2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-ico {
+    position: relative;
+    padding: 0;
+}
+
+.btn-sm {
+    font-size: 11px;
+    height: auto;
+    min-height: auto;
+    padding: 1px 8px;
+    text-transform: capitalize;
+}
+
+
+/* Login */
+
+.osahan-login-left {
+    background: url(../img/photo123.png);
+    background-size: cover;
+    height: 100vh;
+}
+
+
+
+/* Promo Code */
+
+.offer-card .card-title img {
+    height: 26px;
+    margin: 0 7px 0 0px;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    box-shadow: 0px 0px 4px #ccc;
+}
+
+.offer-card .card-title {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0 0 19px 0;
+}
+
+.offer-card h6.card-subtitle.mb-2.text-primary {
+    font-size: 14px;
+}
+
+.offer-card .card-link {
+    font-size: 12px;
+    margin: 0px 10px 0 0px;
+    display: inline-block;
+    border-radius: 6px;
+    color: #000;
+}
+
+
+/* Card Pay */
+
+.osahan-card-pay {
+    text-align: left;
+    padding: 15px;
+    position: relative;
+}
+
+.osahan-card-pay h1 {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.osahan-card-pay p.text-right.mb-0 {
+    position: absolute;
+    font-size: 45px;
+    right: 15px;
+    bottom: 15px;
+    color: #f6c23d !important;
+}
+
+.osahan-card-pay .d-flex.align-items-center.card-detials.small.mb-3 p span {
+    font-size: 18px;
+}
+
+.osahan-card-pay .d-flex.align-items-center.card-detials.small.mb-3 p span i {
+    font-size: 7px;
+}
+
+.osahan-card-pay .d-flex.align-items-center.card-detials.small.mb-3 p.small i {
+    font-size: 27px;
+}
+
+.osahan-card-pay p.small.mb-1 {
+    text-transform: uppercase;
+}
+
+.osahan-card-pay.active h1 {
+    color: #fff;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: auto;
+    overflow-x: hidden;
+    z-index: 9;
+}
+
+.sidebar-alert i.mdi.mdi-food {
+    color: #c60020;
+    font-size: 34px;
+    background: rgb(198 0 32 / 13%);
+    border-radius: 50px;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.sidebar-alert .close {
+    position: absolute;
+    right: 13px;
+    top: 10px;
+    font-size: 19px;
+    font-weight: 100;
+    color: #000;
+}
+
+.sidebar-alert p.small {
+    font-size: 11px;
+    letter-spacing: 0px;
+}
+
+.sidebar-alert .btn {
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.sidebar .nav-item .collapse-item {
+    font-size: 12px;
+    padding: 6px 10px !important;
+}
+
+.sidebar .nav-item .collapse-header {
+    padding: 6px 19px !important;
+    margin: 7px 0 0px 0 !important;
+}
+
+.sidebar-toggled .sidebar-alert {
+    display: none !important;
+}
+
+.sidebar-toggled .user.d-flex.align-items-center.p-3 {
+    display: none !important;
+}
+
+.sidebar-toggled span.rounded-circle.bg-white.text-primary.ml-auto.px-2.py-1 {
+    display: none;
+}
+
+.sidebar-toggled .sidebar .nav-item .nav-link {
+    font-size: 16px;
+    display: block !important;
+    padding: 8px 9px;
+}
+
+.sidebar-toggled .sidebar .nav-item .nav-link i {
+    margin: 0 0 !important;
+}
+
+.sidebar.toggled {
+    position: unset !important;
+    height: auto;
+    min-width: auto;
+}
+
+.nav-link {
+    border-radius: 6px;
+    font-size: 13px;
+    min-height: 37px;
+    line-height: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.sidebar-dark .sidebar-brand {
+    color: #fff;
+    background: rgb(255 255 255 / 15%);
+    width: 100%;
+    justify-content: center;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(58, 59, 69, 0.2) !important;
+    margin: 0 0 12px 0;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 224px !important;
+        min-width: 224px;
+    }
+    .sidebar .nav-item .nav-link span {
+        font-size: 12px;
+    }
+    .sidebar .nav-item .nav-link {
+        padding: 11px 15px;
+    }
+    .sidebar .nav-item .nav-link span.rounded-circle {
+        position: absolute;
+        right: 15px;
+        font-size: 10px;
+        padding: 0px !important;
+        min-width: 18px;
+        background: #ffffff !important;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+/* Mobile */
+
+
+/* responsive design */
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .row.osahan-login.m-0 {
+        padding: 0 20px;
+        height: 100vh;
+    }
+    .col-md-6.osahan-login-left.px-0 {
+        display: none;
+    }
+    .osahan-single-top-info .brand-logo {
+        width: 50px;
+    }
+    button#sidebarToggleTop {
+        background: #f1f1f1;
+        margin: 0 7px 0px 0px !important;
+    }
+    .osahan-t-loc {
+        margin: 0px !important;
+    }
+    .osahan-t-loc .nav-link {
+        padding: 0px !important;
+    }
+    .osahan-t-loc .nav-link span.ml-2 {
+        width: 121px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: capitalize;
+    }
+    .osahan-list .bg-light.p-3 {
+        padding: 9px !important;
+        margin: 0 0 0 13px;
+        padding: 9px !important;
+    }
+    .osahan-list .bg-light.p-3.rounded img {
+        height: 30px;
+        width: 30px;
+        min-width: 30px;
+    }
+    .osahan-t-pu,
+    .osahan-t-bd {
+        display: none !important;
+    }
+    form.d-none.d-sm-inline-block.form-inline.mx-2.my-2.my-md-0.mw-100.navbar-search {
+        display: none !important;
+    }
+    .sidebar .sidebar-alert {
+        display: none !important;
+    }
+    .sidebar .user.d-flex.align-items-center.p-3 {
+        display: none !important;
+    }
+    .sidebar span.rounded-circle.bg-white.text-primary.ml-auto.px-2.py-1 {
+        display: none;
+    }
+    .sidebar .nav-item .nav-link {
+        font-size: 16px;
+        display: block !important;
+        padding: 8px 9px;
+        width: auto;
+    }
+    .sidebar .nav-item .nav-link i {
+        margin: 0 0 !important;
+    }
+    .sidebar {
+        position: unset !important;
+        height: auto;
+        min-width: auto;
+        overflow: unset;
+    }
+    .modal.fade {
+        display: block;
+        opacity: unset;
+        right: -320px;
+        left: auto;
+        width: 320px;
+        -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+        -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+        -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+        transition: opacity 0.3s linear, right 0.3s ease-out;
+    }
+    .modal.fade .modal-dialog {
+        -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
+    }
+    .modal.fade.show {
+        right: 0px !important;
+        opacity: unset;
+    }
+    .modal .modal-dialog {
+        margin: 0 0 0 auto;
+        left: auto;
+        max-width: 320px;
+        -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .osahan-t-pu,
+    .osahan-t-bd {
+        display: none !important;
+    }
+    form.d-none.d-sm-inline-block.form-inline.mx-2.my-2.my-md-0.mw-100.navbar-search {
+        display: none !important;
+    }
+    .osahan-login .col-md-6.d-flex.justify-content-center.flex-column.px-0 {
+        padding: 0 30px !important;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1200px) {}

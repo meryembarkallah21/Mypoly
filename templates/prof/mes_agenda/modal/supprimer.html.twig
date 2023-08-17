@@ -1,0 +1,31 @@
+<!-- modal confirmation suppression -->
+<div class="bd-example">
+    <div class="modal fade" id="suppression" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: rgb(255, 65, 75);">
+                    <h4 class="modal-title">Confirmation avant suppression</h4>
+                    <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="suppression_form" method="POST">
+                    <div class="modal-body">
+                        <h4 id="titre_modal_suppression"></h4>
+                        <input type="hidden" name="suppressionselected" id="suppressionselected">
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <button type="button" class="form-control btn btn-default" style="background-color: #cccccc" data-dismiss="modal">Non</button>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <input type="submit" class="form-control btn btn-danger" value="Oui" >
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

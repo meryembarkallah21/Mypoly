@@ -1,0 +1,123 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+{% block title %}mes mentions{% endblock %}
+
+
+
+{% block main %}
+    <style>
+        .card.offer-card h5 {
+            border: 1px dotted #daceb7;
+            display: inline-table;
+            font-size: 15px;
+            padding: 2px 10px 2px 6px;
+            border-radius: 10px;
+            background: #fffae6;
+            position: relative;
+        }
+        .content-header
+        {
+            margin-top: 20px;
+        }
+        .content{
+            font-size: 25px;
+            margin: 10% 30%;
+            text-align: center;
+            font-weight: bold;
+            color:  blue;
+        }
+        .card-text{
+            width: 100%;
+            font-size: 18px;
+            font-family: cursive;
+        }
+        .parc{
+            font-weight: bold;
+        }
+        .bt{
+            margin-left: 70%;
+        }
+        .txt{
+            font-size: 25px;
+            width: 210px;
+            font-weight: bold;
+        }
+        .card
+        {
+            border-radius:10px;
+        }
+        .card-title{
+            border-radius: 60px;
+        }
+        .bg-back{
+            background-color:mediumseagreen;
+        }
+        .bt-voir{
+            background-color: #0a80cd;
+        }
+
+    </style>
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h2 class="m-0 breadcrumb text-primary txt text-info">Mes mentions </h2>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a class="text-info" href="{{ path('etudiant') }}">Tableau de Bord</a></li>
+                        <li class="breadcrumb-item active">mention</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-body">
+            <div class="row">
+                {% for inscrire in inscrires %}
+                    <div class="col-md-6 crd" style="margin-bottom: 20px;">
+                        <div class="card border-info bg-back text-white offer-card  shadow-sm">
+                            <div class="card-body ">
+                                <h5 class="card-title">
+                                    <img src="{{ asset('images/fichier_icon/'~inscrire.mention.code.icon) }}" width="30px" alt=" " style="margin-right:20px;"><b>{{ inscrire.mention.code }}</b>
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle mb-2 text-warning">
+                                            Niveau: <span class="text-white">{{ inscrire.mention.cycle }}</span>
+                                            <br>Parcours: <span class="text-white parc">{{ inscrire.parcours }}</span>
+                                            <br>Matricule: <span class="text-white parc">{{ inscrire.matricule}}</span>
+                                        </h6>
+                                    </div>
+                                    <div class="col-md-8 float-right">
+                                        <p class="card-text text-white">{{ inscrire.parcours.fullName }}</p>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-footer border-info d-flex">
+                                    <div class="bt">
+                                        <a class="btn btn-sm bt-voir" href="{{ path('mes_cours', {'id': inscrire.id }) }}">voir les cours</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="content">Vous n'êtes pas encore inscrit, <a href="{{ path('mention') }}">s'inscrire ici?</a></p>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}
+

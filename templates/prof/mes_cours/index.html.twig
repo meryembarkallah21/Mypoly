@@ -1,0 +1,99 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+{% block title %}Prof | Mes Cours{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .tb{
+            color:royalblue;
+            margin-right:5px;
+        }
+        .ui{
+            color:gray;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right:20px ;
+            border:1px solid royalblue;
+        }
+        .ui:hover{
+            background-color:royalblue;
+            color: white;
+        }
+        .ui:active{
+            background-color:royalblue;
+            color: white;
+        }
+        .status{
+            background-color: #1c7430;
+            padding:9px;
+            margin-right:10px;
+            margin-top:2px;
+            border-radius:9px;
+        }
+        .header-card{
+            background-color: #6695a0;
+            color:#fff;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">Mes Cours</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a class="tb" href="{{ path('prof_dashbord') }}">Tableau de bord</a>/ <a class="tb" href="{{ path('prof_mentions') }}">Mes Mentions</a>/ Mes Cours</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card text-white mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card text-black-50 mb-4">
+                                    {% set data = [] %}
+                                    {% set j = 0 %}
+                                    {% for ec in ecs %}
+                                        {% if ec.ue in data %}
+                                        {% else %}
+                                            {% set data = data| merge( { (j) : ec.ue } ) %}
+                                            {% set j = j+1 %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% set i=1 %}
+                                    {% for ue in ues %}
+                                        {% for u in data %}
+                                            {% if ue == u %}
+                                                <div class="card-header header-card">{{ ue.name }}</div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% for e in ecs %}
+                                            {% if e.ue == ue %}
+                                                <div class="gold-members p-3 border-bottom">
+                                                    <div class="float-right">
+                                                        {% for cour in cours %}
+                                                            {% if cour.ec.id == e.id  %}
+                                                                {% set i = cour %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <h6 class="badge badge-info" >Crédit: {{ e.coeff }}</h6>
+                                                        <a href="{{ path('cours_show' ,{'id': i.id }) }}" class="badge badge-secondary "><i class="feather-eye"></i></a>
+                                                        <a href="{{ path('prof_ajout_cours' ,{'id': i.id }) }}" class="badge badge-danger"><i class="feather-folder-plus"></i> Ajout support</a>
+                                                    </div>
+                                                    <div class="media">
+                                                        <div></div>
+                                                        <div class="media-body">
+                                                            <h6 class="mb-1">{{ e.name }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

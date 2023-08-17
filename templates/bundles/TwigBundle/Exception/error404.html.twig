@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} POLYTECH SOUSSE  | Page non trouvée {% endblock %}
+{% block body %}
+    <style>
+        .mg{
+            margin-bottom:30px;
+        }
+       .title{
+            text-transform:uppercase;
+            font-weight:bold;
+        }
+       .ct{
+           font-weight: bold;
+       }
+    </style>
+   {# <link rel="stylesheet" href="{{ asset('vitrine/style.css') }}">
+    <!-- LOADER -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="progress-br float shadow">
+                <div class="progress__item"></div>
+            </div>
+        </div>
+    </div>#}
+    <!-- END LOADER -->
+    <div class="container">
+        <div class="row justify-content-center vh-100 align-items-center">
+            <div class="col-lg-6">
+                <div class="text-center mt-4">
+                    <div class="card mg">
+                        <div class="card-body">
+                            <a href="{{ path('vitrine') }}">
+                            <img  src="{{ asset('images/logo-poly.png') }}" width="200px" alt="polytechniqueSousse"/>
+                            </a>
+                        </div>
+                    </div><br>
+                    <img class="mb-4 img-error" src="{{ asset('images/error/404_illustration.png') }}" />
+                    <h1 class="title">Page non trouvée</h1>
+                    <p class="ct">La page que vous cherchez n'a pas été trouvée.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block main %}
+    {% endblock %}
+{% endblock %}

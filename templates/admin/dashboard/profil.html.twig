@@ -1,0 +1,119 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block main %}
+<style>
+   .mt{
+       margin:10px auto;
+   }
+   .mh{
+       background-color: #3030c9;
+   }
+   .mk{
+       background-color: #3030c9;
+       width:115px;
+       padding:10px;
+       color:white;
+       margin-bottom:0px;
+       border-radius:5px;
+   }
+   #fa-eye{
+       color: #323839;
+       float: right;
+   }
+</style>
+<div class="container-fluid">
+    <h1 class="mt-4">Profil</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Profil</li>
+    </ol>
+    <div class="row">
+        <div class="col-xl-4 col-md-6">
+            <div class="card mb-4">
+                <div class="card-header mh">
+                </div>
+                <div class="card-body">
+                    <div class="osahan-user text-center">
+                        <div class="osahan-user-media">
+                            <img class="mb-3 rounded-pill shadow-sm mt-1" width="200px" src="{{ asset('images/avatars/'~inscrire.etudiant.avatar )}}" alt="gurdeep singh osahan">
+                            <div class="osahan-user-media-body">
+                                <h6 class="mb-2">{{ inscrire.etudiant.name }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control mt" disabled value="{{ inscrire.etudiant.email }}">
+                        <input type="text" class="form-control mt" disabled value="{{ inscrire.etudiant.tel }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <p class="mk">Informations</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6 mt">
+                            Mention
+                        </div>
+                        <div class="col-xl-8 col-md-6 mt">
+                            <input type="text" class="form-control" disabled value="{{ inscrire.mention.code.name }}">
+                        </div>
+                        <div class="col-xl-4 col-md-6 mt">
+                            Niveau
+                        </div>
+                        <div class="col-xl-8 col-md-6 mt">
+                            <input type="text" class="form-control" disabled value="{{ inscrire.mention.cycle.code }}">
+                        </div>
+                        {% if inscrire.parcours != null %}
+                            <div class="col-xl-4 col-md-6 mt">
+                                Parcours
+                            </div>
+                            <div class="col-xl-8 col-md-6 mt">
+                                <input type="text" class="form-control" disabled value="{{ inscrire.parcours.name }}">
+                            </div>
+                        {% endif %}
+                        <div class="col-xl-4 col-md-6 mt">
+                            Date d'inscription
+                        </div>
+                        <div class="col-xl-8 col-md-6 mt">
+                            <input type="text" class="form-control" disabled value="{{ inscrire.dateInscription.format("Y-m-d")}}">
+                        </div>
+                        <div class="col-xl-4 col-md-6 mt">
+                            Année universitaire
+                        </div>
+                        <div class="col-xl-8 col-md-6 mt">
+                            <input type="text" class="form-control" disabled value="{{ inscrire.year }}">
+                        </div>
+                        {% if inscrire.mention.cycle.code == "L1" %}
+                            <div class="col-xl-4 col-md-6 mt">
+                                Fichier de virement
+                            </div>
+                            <div class="col-xl-8 col-md-6 mt">
+                                {% if inscrire.fichierVirement %}
+                                    <div>
+                                        <figure>
+                                            <img src="{{ asset('images/avatars/'~inscrire.fichierVirement )}}" alt="..." width="100%">
+                                            <a href="{{ asset('images/avatars/'~inscrire.fichierVirement )}}" title="Diplôme Bacc ou relever des notes" id="fa-eye"><i class="fa fw fa-eye"></i> Voir</a>
+                                        </figure>
+                                    </div>
+                                {% else %}
+                                    <div><p>Aucune</p></div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        <div class="col-xl-4 col-md-6 mt"></div>
+                        <div class="col-xl-8 col-md-6 mt">
+                            {{ include('admin/inscrire/_supprimer_form.html.twig') }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

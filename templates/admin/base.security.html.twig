@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="ALLO CHEF ">
+        <meta name="author" content="ALLO CHEF">
+        <title>{% block title %}Bievenue!{% endblock %}</title>
+        <!-- Favicon Icon -->
+        <link rel="icon" type="image/png" href="{{ asset('images/polytechniqueSousse.ico') }}">
+        <!-- Feather Icon-->
+        <link href="{{ asset('espace/vendor/icons/feather.css') }}" rel="stylesheet" type="text/css">
+        <!-- Fontawesome Icon-->
+        <link href="{{ asset('espace/vendor/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet" type="text/css">
+        <!-- Bootstrap Css -->
+        <link href="{{ asset('espace/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom Css -->
+        <link href="{{ asset('espace/css/styles.css') }}" rel="stylesheet" />
+        <!-- Datatables css -->
+        <link href="{{ asset('espace/vendor/dataTables/dataTables/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+        <style>
+            .bg-img-containt{
+                background-image: url('/images/avatars/bg-login.jpg');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        </style>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body class="bg-primary bg-img-containt">
+        {% block body %}{% endblock %}
+        <!-- Jquery -->
+        <script src="{{ asset('espace/vendor/jquery/jquery.min.js') }}"></script>
+        <!-- Fontawesome -->
+        <script src="{{ asset('espace/vendor/fontawesome/js/all.min.js') }}"></script>
+        <!-- Bootstrap -->
+        <script src="{{ asset('espace/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- Custom Js -->
+        <script src="{{ asset('espace/js/scripts.js') }}"></script>
+        <!-- Ajax Chart Js -->
+
+        <!-- Chart Js -->
+        <!-- Datatable Js -->
+        <script src="{{ asset('espace/vendor/dataTables/dataTables/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('espace/vendor/dataTables/dataTables/js/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('espace/assets/demo/datatables-demo.js') }}"></script>
+        <!-- intlTelInput -->
+        <script src="{{ asset('vendor/tel/js/intlTelInput.js') }}"></script>
+        <script src="{{ asset('vendor/tel/js/intlTelInput-jquery.js') }}"></script>
+        <script src="{{ asset('vendor/dropzone/min/dropzone.min.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,69 @@
+{% extends 'admin/parametre/index.html.twig' %}
+
+{% block title %}Edit Mention{% endblock %}
+
+{% block contenu %}
+    <style>
+        #card-header{
+            background-color: #0f6674;
+            color:white;
+        }
+    </style>
+    <div class="col-xl-12">
+        <div class="card mb-4">
+            <div class="card-header" id="card-header">
+                <i class="fas fa-chart-bar mr-1"></i>
+                Editer Une Mention
+            </div>
+            <div class="card-body">
+                <form action="" method="post">
+                    <table>
+                        <tr>
+                            <td width="300px">Filière</td>
+                            <td width="500px">
+                                <select id="_filiere"  name="_filiere" class="form-control">
+                                    <option class="text-center" value="">--- Choisir une filière ---</option>
+                                    {% for filiere in filieres %}
+                                        {% if filiere == mention.code %}
+                                            <option value="{{ filiere.id }}" selected>{{ filiere.name }}</option>
+                                        {% else %}
+                                            <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+                                        {% endif%}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">Niveau</td>
+                            <td width="500px">
+                                <select id="_niveau"  name="_niveau" class="form-control">
+                                    <option class="text-center" value="">--- Choisir niveau ---</option>
+                                    {% for cycle in niveaux %}
+                                        {% if cycle == mention.cycle %}
+                                            <option  value="{{ cycle.id }}" selected> {{ cycle.code }}</option>
+                                        {% else %}
+                                            <option  value="{{ cycle.id }}"> {{ cycle.code }}</option>
+                                        {% endif%}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="300px">Parcours</td>
+                            <td  width="500px">
+                                <select id="_parcours"  name="_parcours" class="form-control">
+                                    <option value="{{ mention.parcours.id }}" selected>{{ mention.parcours.name }}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><br><button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        {% include 'admin/mention/affiche.html.twig' %}
+    </div>
+{% endblock %}

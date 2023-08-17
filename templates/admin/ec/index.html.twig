@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ec index{% endblock %}
+
+{% block body %}
+    <h1>Ec index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ec in ecs %}
+            <tr>
+                <td>{{ ec.id }}</td>
+                <td>{{ ec.code }}</td>
+                <td>{{ ec.name }}</td>
+                <td>
+                    <a href="{{ path('ec_show', {'id': ec.id}) }}">show</a>
+                    <a href="{{ path('ec_edit', {'id': ec.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ec_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscrire{% endblock %}
+
+{% block body %}
+    <h1>Inscrire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ inscrire.id }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ inscrire.motif }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ inscrire.ville }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('inscrire_index') }}">back to list</a>
+
+    <a href="{{ path('inscrire_edit', {'id': inscrire.id}) }}">edit</a>
+
+    {{ include('inscrire/_delete_form.html.twig') }}
+{% endblock %}

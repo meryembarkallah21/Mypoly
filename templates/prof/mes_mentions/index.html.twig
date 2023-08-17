@@ -1,0 +1,101 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+{% block title %}Prof | Mes Mentions{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .tb{
+            color:royalblue;
+            margin-right:5px;
+        }
+        .bg-ui{
+            background-color: #c1cbcb;
+        }
+        #overlay{
+            background-size: cover;
+            opacity: 0.9;
+            background-color: #737c7c;
+        }
+        .niveau{
+            background-color: #369d41;
+            padding:20px;
+            border-radius:30px;
+            color: #ffffff;
+            opacity:0.8;
+            font-weight: bold;
+            z-index: -1;
+        }
+        .tx-mg{
+            margin-top:20px;
+            color: #1c1b1b;
+            font-weight:bold;
+        }
+        .btn-cours{
+            color: royalblue;
+        }
+        .btn-cours:hover{
+            color: #e1416e;
+        }
+        .card-footer{
+            background-color: #dbdbf6;
+        }
+        .card-header{
+            background-color: #d9d9e5;
+        }
+        .text-royal{
+            color: royalblue;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">Mes Mentions</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a class="tb" href="{{ path('prof_dashbord') }}">Tableau de bord</a>/ Mes Mentions</li>
+        </ol>
+        <div class="row">
+            {% set data = [] %}
+            {% set i = 0 %}
+            {% for ec in ecs %}
+                {% if ec.ue.mention in data %}
+                {% else %}
+                    {% set data = data| merge( { (i) : ec.ue.mention } ) %}
+                    {% set i = i+1 %}
+                {% endif %}
+            {% endfor %}
+
+            {% set _data = [] %}
+            {% set i = 0 %}
+            {% for ec in ecs %}
+                {% if ec.ue.mention.parcours in _data %}
+                {% else %}
+                    {% set _data = _data| merge( { (i) : ec.ue.mention.parcours } ) %}
+                    {% set i = i+1 %}
+                {% endif %}
+            {% endfor %}
+
+            {% for item in data %}
+                <div class="col-xl-12">
+                <div class="card bg-ui text-royal mb-4">
+                    <div class="card-header"><i class="fas fa-graduation-cap mr-1"></i> {{ item.code.name }}</div>
+                    <div class="card-body" id="overlay">
+                        {% for parcour in _data %}
+                            {% if parcour == item.parcours %}
+                                <div class="row">
+                                    <div class="col-xl-4">
+                                        <div class="card bg-ui text-royal mb-4">
+                                            <div class="card-body ">
+                                                <p class="tx-mg"><span class="niveau">{{ item.cycle.code }}</span> {{ item.parcours.name }}</p>
+                                            </div>
+                                            <div class="card-footer"><a class="btn-cours" href="{{ path('prof_cours',{'id':item.id }) }}"><i class="feather-eye"></i> Voir les cours</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+       </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+
+{% block title %}Notification après inscription{% endblock %}
+
+
+{% block main %}
+            {% if inscrire.status %}
+                    <style>
+                        #section{
+                            margin-top:80px;
+                        }
+                        .mb-5{
+                            color:gray;
+                        }
+                    </style>
+                    <div class="col-md-12 d-flex justify-content-center flex-column px-0">
+                        <section class="section pt-5 pb-5">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="text-center" id="section">
+                                        <img class="img-fluid mb-5" src="security/img/thanks.png" alt="404">
+                                        <h1 class="mt-2 mb-2 text-success">Félicitation !</h1>
+                                        <h6 class="mb-5">votre inscription a bien été effectué avec succès , votre matricule est {{ inscrire.matricule }} <br> bonne continuation pour vos études</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+            {% else %}
+
+                        <style>
+                            #section{
+                                    margin-top:80px;
+                            }
+                            .mb-5{
+                                color:gray;
+                            }
+                        </style>
+                        <div class="col-md-12 d-flex justify-content-center flex-column px-0">
+                            <section class="section pt-5 pb-5">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="text-center" id="section">
+                                            <img class="img-fluid mb-5" src="security/img/thanks.png" alt="404">
+                                            <h1 class="mt-2 mb-2 text-success">Inscription en attente de validation</h1>
+                                            <h6 class="mb-5">Votre demande d’inscription a bien été prise en compte ,s'il vous plait
+                                                veuillez vous patientez le temps que notre responsable vérifie les informations de votre demande</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+            {% endif %}
+{% endblock %}
+

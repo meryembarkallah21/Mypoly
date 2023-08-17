@@ -1,0 +1,126 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+{% block title %}Prof | Mes Cours{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .tb{
+            color:royalblue;
+            margin-right:5px;
+        }
+        .ta{
+            color:gray;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .book-open{
+            color: #6c4079;
+        }
+        .iu{
+            margin-bottom:4px;
+        }
+        #card-header{
+            background-color:royalblue;
+            color: white;
+        }
+    </style>
+    <!-- modal confirmation suppression -->
+    <div class="bd-example">
+        <div class="modal fade" id="suppression" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(255, 65, 75);">
+                        <h4 class="modal-title">Confirmation avant suppression</h4>
+                        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="suppression_form" method="POST">
+                        <div class="modal-body">
+                            <h4 id="titre_modal_suppression"></h4>
+                            <input type="hidden" name="suppressionselected" id="suppressionselected">
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <input type="submit" class="form-control btn btn-danger" value="Supprimer" >
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <button type="button" class="form-control btn btn-default" style="background-color: #cccccc" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <h1 class="mt-4"><i class="feather-book-open book-open"></i> {{ cour.titre }}</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a class="tb" href="{{ path('prof_dashbord') }}">Tableau de bord</a>/ <a class="tb" href="{{ path('prof_mentions') }}">Mes Mentions</a>
+                / <a class="tb" href="{{ path('prof_cours',{'id':cour.ec.ue.mention.id }) }}">Mes Cours</a>/ Ajout Supports</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card text-black-50 mb-4">
+                    <div class="card-header">
+                    {{ include('prof/mes_cours/tab_menu.html.twig') }}
+                    </div>
+                    <div class="card-body cb">
+                        <!---formulaire d'ajout --->
+                        <fichier>
+                            {% block fichier %}
+                                <style>
+
+                                    .ai{
+                                        margin-bottom:20px;
+                                    }
+                                    .in{
+                                        margin-top:5px;
+                                    }
+                                    .bn{
+                                        margin-top:14px;
+                                    }
+                                    .form-width{
+                                        width:60%;
+                                    }
+                                </style>
+                                <div class="col-xl-12">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            {{ form_start(forms) }}
+                                            <div class="row in">
+                                                <div class="col-xl-2 ai">
+                                                    Titre
+                                                </div>
+                                                <div class="col-xl-10" {% if not forms.title.vars.valid %}errors{% endif %} >
+                                                    <div class="form-width">{{ form_widget(forms.title) }}</div>
+                                                </div>
+                                                <div class="col-xl-2 ai">
+                                                    fichier Support
+                                                </div>
+                                                <div class="col-xl-10" {% if not forms.fichiersu.vars.valid %}errors{% endif %} >
+                                                    <div class="form-width">{{ form_widget(forms.fichiersu) }}</div>
+                                                </div>
+                                                <div class="col-xl-2 ai">
+                                                </div>
+                                                <div class="col-xl-10 ai">
+                                                    <button class="btn bn btn-danger">{{ button_label|default('Enregistrer') }}</button>
+                                                </div>
+                                            </div>
+                                            {{ form_end(forms) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                   {{ include('prof/fichier_support/index.html.twig') }}
+                                </div>
+                            {% endblock %}
+                        </fichier>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'admin/parametre/index.html.twig' %}
+
+{% block title %}Edit Semestre{% endblock %}
+
+{% block contenu %}
+    <style>
+        #card-header{
+            background-color: #0f6674;
+            color:white;
+        }
+    </style>
+    <div class="col-xl-12">
+        <div class="card mb-4">
+            <div class="card-header" id="card-header">
+                <i class="fas fa-chart-bar mr-1"></i>
+                Editer un Semestriel
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                <table>
+
+                    <tr>
+                        <td width="300px">Nom</td>
+                        <td {% if not form.name.vars.valid %}errors{% endif %} width="500px">
+                            {{ form_widget(form.name) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="300px">Code</td>
+                        <td {% if not form.code.vars.valid %}errors{% endif %} width="500px">
+                            {{ form_widget(form.code) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><br><button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button></td>
+                    </tr>
+                </table>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        {% include 'admin/semestre/affiche.html.twig' %}
+    </div>
+{% endblock %}

@@ -1,0 +1,462 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+{% block title %} Inscription {% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .padding-li{
+            margin:0 2px;
+        }
+        .fa-print{
+            color:royalblue;
+        }
+        .action1{
+            color:darkgrey;
+        }
+        .action2{
+            color:darkgreen;
+        }
+        .action3{
+            color:darkred;
+        }
+
+        .imprim{
+            margin: 0 20px;
+        }
+        .modal-title{
+            color:white;
+        }
+        .modal-title{
+            color:white;
+        }
+        .marging-5{
+            margin:5px 0;
+        }
+    </style>
+
+
+    <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Inscription</h1>
+                </div>
+                <div class="col-sm-6">
+                   {#  {% for flash_message in app.flashes('success') %}
+                        <div class="alert alert-success" id="err_suc">
+                            <span class="fas fa-bell "></span> {{ flash_message }} !
+                        </div>
+                    {% endfor%}
+                    {% for flash_message in app.flashes('error') %}
+                        <div class="alert alert-danger" id="err_suc">
+                            <span class="fas fa-bell "></span> {{ flash_message }} !
+                        </div>
+                    {% endfor%}#}
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    {# empty Twig template #}
+    <!-- Modal -->
+    <div id="importer" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <form action="{{ path('admin_data_excel') }}" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left was-validated">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header bg-info">
+                        <h4 class="modal-title">Importer</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="x_panel">
+
+                            <div class="x_content" style="display: block;">
+                                <br>
+                                <label class="col-sm-12 col-form-label" for="file">Veuillez uploader le bon format xlsx excel (.xlsx) <span class="required">*</span>
+                                </label>
+                                <div class="form-group row">
+                                    <input type="file" name="file" class="form-control validate imprim"  required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Femer</button>
+                        <button type="submit" class="btn btn-danger">Exécuter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--endmodal-->
+    {# empty Twig template #}
+    <!-- Modal -->
+    <div id="exporter" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title">Exporter</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ path('admin_export_excel') }}" method="post" class="validate">
+                    <div class="modal-body">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2></h2>
+                                <ul class="nav navbar-right panel_toolbox">
+
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content" style="display: block;">
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-4" for="annee">Année scolaire <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <select class="form-control validate" name="annee" required>
+                                                <option value="">-- Choisir année --</option>
+                                                {%for item in years %}
+                                                    <option value="{{item.id}}">{{item.year}}</option>
+                                                {%endfor%}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-4" for="mention">Mention <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <select id="_filiere" class="form-control validate" name="mention" required>
+                                                <option value="" >-- Choisir mention --</option>
+                                                {%for item in mentions %}
+                                                    <option value="{{item.id}}">{{item.name}}</option>
+                                                {%endfor%}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-4" for="niveau">Niveau <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <select id="_niveau" class="form-control validate" name="niveau" required>
+                                                <option value="" >-- Choisir niveau --</option>
+                                                {%for item in niveau %}
+                                                    <option value="{{item.id}}">{{item.code}}</option>
+                                                {%endfor%}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-4" for="parcours">Parcours <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <select id="_parcours" class="form-control validate" name="parcours" required>
+                                                <option value="" >-- Choisir parcours --</option>s
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-danger">Exécuter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--endmodal-->
+    {{ include('admin/inscription/modal/inscription.html.twig')}}
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav float-right">
+                                {# <li class="padding-li"><a href="{{path('test_sendmail')}}"  class="pull-right btn btn-secondary"> <i class="fas-fa-mail"></i>test send mail</a></li> #}
+                                <li class="padding-li"><a href="#" data-toggle="modal" data-target="#importer" class="pull-right btn btn-secondary"> <i class="fa fa-upload"></i> Importer </a></li>
+                                {#<li class="padding-li"><a href="{{path('export_excel')}}"  class="pull-right btn btn-secondary"> <i class="fas fa-file-export"></i>Exporter!</a></li>  #}
+                                <li class="padding-li"><a href="#" data-toggle="modal" data-target="#exporter"  class="pull-right btn btn-info"> <i class="fas fa-file-export"></i>Exporter</a></li>
+                                {#  <li class="padding-li"><a href="#" data-toggle="modal" data-target="#resinscription" class="pull-right btn btn-info"> <i class="feather-edit"></i> Réinscription</a></li>#}
+                                <li class="padding-li"><a href="#" data-toggle="modal" data-target="#inscription" class="pull-right btn btn-primary"> <i class="fa fa-user-plus"></i> Inscription</a></li>
+                                <li class="padding-li"><a href="#" data-toggle="modal" data-target="#print"><i class="fa fa-print fa-2x" ></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-content">
+                                {# <div class='form-group row'>
+
+                                   <div class='col-lg-2 col-md-12 col-xs-12 col-sm-12'>
+                                        <input autocomplete='off' class='form-control' name='nom' placeholder='Nom' id="nom" aria-controls="dataTable" />
+                                    </div>
+                                    <div class='col-lg-3 col-md-12 col-xs-12 col-sm-12'>
+                                        <input autocomplete='off' class='form-control' name='email' id="email" placeholder='E-mail' data-col='email'/>
+                                    </div>
+                                    <div class='col-lg-2 col-md-12 col-xs-12 col-sm-12'>
+                                        <input type="text"   autocomplete='off' class='filter form-control' id="tel" name='tel'  data-col='tel'/>
+                                    </div>
+                                    <div class='filter-container col-lg-2 col-md-12 col-xs-12 col-sm-12'>
+                                        <select autocomplete='off' class='filter form-control' id="mention" name='mention' data-col='mention'>
+                                            <option value="">Choisir Mention</option>
+                                            {%for item in mentions %}
+                                                <option value="{{item.id}}">{{item.name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                    <div class='filter-container col-lg-2 col-md-12 col-xs-12 col-sm-12'>
+                                        <select autocomplete='off' class='filter form-control' id="mention" name='mention' data-col='parcours'>
+                                            <option value="">Choisir Parcours</option>
+                                            {%for item in parcours %}
+                                                <option value="{{item.id}}">{{item.name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                    <div class="filter-container  text-center float-right">
+                                        <a href="#" data-toggle="modal" data-target="#print"><i class="fa fa-print fa-2x" > </i></a>
+                                    </div>
+                                    <div class='clearfix'></div>
+                                </div>#}
+                                    <table class="table table-condensed table-striped table-hover table-bordered" id="dataTable">
+                                        <thead>
+                                        <tr>
+                                            <th data-property-name="photo">#</th>
+                                            <th data-property-name="nom">Nom</th>
+                                            <th data-property-name="email">E-mail</th>
+                                            <th data-property-name="tel">Tél</th>
+                                            <th data-property-name="mention">Mention</th>
+                                            <th data-property-name="niveau">Niveau</th>
+                                            <th data-property-name="parcours">Parcours</th>
+                                            <th data-property-name="Actions" class="text-center">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for key,item in etudiants %}
+                                            <tr data-id="{{key}}">
+                                                <td data-label="Photo">
+                                                    <img class="img-profile rounded-circle" src="/images/avatars/{{ item.etudiant.avatar }}">
+                                                </td>
+                                                <td data-label="nom">{{ item.etudiant.name }}</td>
+
+                                                <td data-label="email">{{ item.etudiant.email }}</td>
+                                                <td data-label="tel">{{ item.etudiant.tel }}</td>
+                                                <td data-label="mention">{{ item.mention.code.name }}</td>
+                                                <td data-label="niveau">{{ item.mention.cycle.code }}</td>
+                                                <td data-label="parcours">{{ item.parcours.name }}</td>
+                                                <td data-label="Action">
+                                                    <center>{{ include('admin/inscription/_delete_form.html.twig') }}</center>
+                                                </td>
+                                            </tr>
+
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <!-- /.tab-content -->
+                        </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+</div>
+<script>
+    window.setTimeout("document.getElementById('err_suc').style.display='none';", 5000);
+</script>
+<script src="{{ asset('vendor/jquery/jquery-3.3.1.slim.min.js') }}"></script>
+<!-- Jquery JS-->
+<script src="{{ asset('inscription/vendor/jquery/jquery.min.js') }}"></script>
+<!-- Main JS-->
+<script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+        $("#_filiere").change(function (){
+            var valfiliere = $(this).val();
+
+            $("#_niveau").change(function(){
+                var valNiveau = $(this).val();
+                var data = "niveau=" + valNiveau +"&code="+valfiliere;
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ path('get-parc') }}",
+                    data: data,
+                    success: function(data){
+                        $('#_parcours').empty();
+                        if(data.parcours){
+                            for(var i=0 ; i< data.parcours.length; i++){
+                                $('#_parcours').append('<option  value= "'+ data.parcours[i]['id'] +'">'+ data.parcours[i]['name'] +'</option>');
+                            }
+                        }
+
+                    }
+                })
+
+            })
+
+        })
+    });
+
+</script>
+<script>
+
+    $(document).ready(function() {
+        var phoneInputID = "#phone";
+        var input = document.querySelector(phoneInputID);
+        var iti = window.intlTelInput(input, {
+            // allowDropdown: false,
+            // autoHideDialCode: false,
+            // autoPlaceholder: "off",
+            // dropdownContainer: document.body,
+            // excludeCountries: ["us"],
+            formatOnDisplay: true,
+            // geoIpLookup: function(callback) {
+            //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+            //     var countryCode = (resp && resp.country) ? resp.country : "";
+            //     callback(countryCode);
+            //   });
+            // },
+            hiddenInput: "full_number",
+            // initialCountry: "auto",
+            // localizedCountries: { 'de': 'Deutschland' },
+            // nationalMode: false,
+            // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            // placeholderNumberType: "MOBILE",
+            preferredCountries: ['es'],
+            // separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+
+        $(phoneInputID).on("countrychange", function(event) {
+
+            // Get the selected country data to know which country is selected.
+            var selectedCountryData = iti.getSelectedCountryData();
+
+            // Get an example number for the selected country to use as placeholder.
+            newPlaceholder = intlTelInputUtils.getExampleNumber(selectedCountryData.iso2, true, intlTelInputUtils.numberFormat.INTERNATIONAL),
+
+                // Reset the phone number input.
+                iti.setNumber("");
+
+            // Convert placeholder as exploitable mask by replacing all 1-9 numbers with 0s
+            mask = newPlaceholder.replace(/[1-9]/g, "0");
+
+            // Apply the new mask for the input
+            $(this).mask(mask);
+        });
+
+
+        // When the plugin loads for the first time, we have to trigger the "countrychange" event manually,
+        // but after making sure that the plugin is fully loaded by associating handler to the promise of the
+        // plugin instance.
+
+        iti.promise.then(function() {
+            $(phoneInputID).trigger("countrychange");
+        });
+
+    });
+</script>
+<script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+        $("#_fi").change(function (){
+            var valfiliere = $(this).val();
+
+            $("#_ni").change(function(){
+                var valNiveau = $(this).val();
+                var data = "niveau=" + valNiveau +"&code="+valfiliere;
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ path('get-parc') }}",
+                    data: data,
+                    success: function(data){
+                        $('#_pa').empty();
+                        if(data.parcours){
+                            for(var i=0 ; i< data.parcours.length; i++){
+                                $('#_pa').append('<option  value= "'+ data.parcours[i]['id'] +'">'+ data.parcours[i]['name'] +'</option>');
+                            }
+                        }
+
+                    }
+                })
+
+            })
+
+        })
+    });
+
+</script>
+{#  <script>
+    $(document).ready(function () {
+        var table =  $('#dataTable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+        $('#nom').on( 'keyup', function () {
+            table
+                .columns( 2 )
+                .search( this.value )
+                .draw();
+        } );
+        $('#email').on( 'keyup', function () {
+            table
+                .columns( 3 )
+                .search( this.value )
+                .draw();
+        } );
+        $('#tel').on( 'keyup', function () {
+            table
+                .columns( 4 )
+                .search( this.value )
+                .draw();
+        } );
+        $('#niveau').on( 'change', function () {
+            table
+                .columns( 5 )
+                .search( this.value )
+                .draw();
+        } );
+        $('#mention').on( 'change', function () {
+            table
+                .columns( 6 )
+                .search( this.value )
+                .draw();
+        } );
+        $('#parcours').on( 'change', function () {
+            table
+                .columns( 7 )
+                .search( this.value )
+                .draw();
+        } );
+    });
+</script> #}
+
+{{include('admin/inscription/modal/print.html.twig')}}
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% set statut = etat_statut %}
+
+{% if (statut == 1 ) %}
+    <button disabled="" type="button" class="btn btn-sm btn-success btn-round">Activé</button>
+{% else %}
+    <button disabled="" type="button" class="btn btn-sm btn-danger btn-round">Désactivé</button>
+{% endif %}

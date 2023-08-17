@@ -1,0 +1,113 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+{% block title %} Gestion des cours | Cours_edit {% endblock %}
+
+
+
+{% block main %}
+    <style>
+        .tb{
+            color:royalblue;
+        }
+        .book-open{
+            color: #6c4079;
+        }
+        .add_top_32{
+            margin-top: 32px;
+        }
+        .btn-success{
+            background-color: #cd5757;
+            border-color:white;
+        }
+        .btn-success:hover{
+            background-color:royalblue;
+        }
+        #btn-admin-edit-profile{
+            margin-right: 323px;
+        }
+        .contenu{
+            padding:0 5%;
+        }
+        .float-center{
+            padding:0 30%;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4"><i class="feather-book-open book-open"></i> {{ cour.ec.name }}</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a class="tb text-info" href="{{ path('admin_dashboard') }}">
+                    Tableau de bord</a>
+                <a class="text-info" href="{{ path('index_admin_gestion_cours') }}">/Mention</a>
+                <a class="text-info" href="{{ path('parcours_admin_gestion_cours',{'id' : cour.ec.ue.mention.code.id }) }}">/Parcours/  </a>
+                <a class="text-info" href="{{ path('admin_cours',{'id' : cour.ec.ue.mention.id }) }}">Cours</a>/edit
+            </li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card mb-4 order-list col-md-12 mx-auto">
+                    <div class="gold-members p-4">
+                        {{ form_start(form) }}
+                        <div class="row contenu">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group {% if not form.titre.vars.valid %}errors{% endif %}">
+                                            <label>Titre *</label>
+                                            {{ form_widget(form.titre) }}
+                                            {{ form_errors(form.titre) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <div class="form-group {% if not form.titre.vars.valid %}errors{% endif %}">
+                                            <label>Prix *</label>
+                                            {{ form_widget(form.prix) }}
+                                            {{ form_errors(form.prix) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <div class="form-group float-center {% if not form.status.vars.valid %}errors{% endif %}">
+                                            <label>Status *</label><br>
+                                            {{ form_widget(form.status) }}
+                                            {{ form_errors(form.status) }}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group {% if not form.fichiercour.vars.valid %}errors{% endif %}">
+                                    <label>Fichier Cours *</label>
+                                    {{ form_widget(form.fichiercour) }}
+                                    {{ form_errors(form.fichiercour) }}
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group {% if not form.status.vars.valid %}errors{% endif %}">
+                                    <label>photo du livre</label><br>
+                                    {{ form_widget(form.fichierlivre) }}
+                                    {{ form_errors(form.fichierlivre) }}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group {% if not form.description.vars.valid %}errors{% endif %}">
+                                            <label>Description</label>
+                                            {{ form_widget(form.description) }}
+                                            {{ form_errors(form.description) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" id="btn-admin-edit-profile" class="btn btn-success">Enregistrer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

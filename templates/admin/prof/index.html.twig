@@ -1,0 +1,76 @@
+{% extends 'admin/dashboard/base.html.twig' %}
+
+{% block title %} Liste des professeurs!{% endblock %}
+
+{% block main %}
+    <style>
+      .breadcrumb-link{
+          color:royalblue;
+      }
+      .btn-ajout{
+          background-color: #115ea1;
+          border-color: white;
+          font-size: 15px;
+      }
+      a[disabled="disabled"] {
+          pointer-events: none;
+      }
+    </style>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title d-flex justify-content-between pt-5">
+                        Liste des professeurs
+                        <a href="{{ path('admin_prof_new') }}"  class="btn btn-primary btn-sm btn-ajout title-btn mr-1" ><i class="fas fa-user-plus"></i>
+                            <br>Prof</a>
+                    </h2>
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ path('admin_dashboard') }}" class="breadcrumb-link">Tableau de bord</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Liste</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Profil</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>tel</th>
+                                <th>Statut</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prof in profs %}
+                                <tr>
+                                    <td> <img class="rounded-circle" width="40px" src="{{ asset('images/avatars/'~prof.avatar )}}" alt="..."></td>
+                                    <td>{{ prof.name }}</td>
+                                    <td>{{ prof.email }}</td>
+                                    <td>{{ prof.tel }}</td>
+                                    <td>{{ include('admin/admin/status.html.twig', { 'etat_statut': prof.status}) }}</td>
+                                    <td>
+                                        {{ include('admin/prof/_delete_form.html.twig') }}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                    <tr>
+                                        <td colspan="5">no records found</td>
+                                    </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

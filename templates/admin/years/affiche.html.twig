@@ -1,0 +1,38 @@
+<div class="card mb-4">
+    <div class="card-header" id="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Liste
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr class="text-uppercase">
+                    <th width="150px">Actuel</th>
+                    <th width="480px">Annéé scolaire</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for year in years %}
+                    <tr>
+                        {% if year.current == false %}
+                            <td>Non</td>
+                        {% elseif year.current == true %}
+                            <td>Oui</td>
+                        {% endif%}
+                        <td>{{ year.year }}</td>
+                        <td>
+                           <center> {{ include('admin/years/_delete_form.html.twig') }}</center>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

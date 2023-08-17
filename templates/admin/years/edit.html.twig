@@ -1,0 +1,44 @@
+{% extends 'admin/parametre/index.html.twig' %}
+
+{% block title %}Edit Years{% endblock %}
+
+{% block contenu %}
+    <style>
+        #card-header{
+            background-color: #0f6674;
+            color:white;
+        }
+    </style>
+    <div class="col-xl-12">
+        <div class="card mb-4">
+            <div class="card-header" id="card-header">
+                <i class="fas fa-chart-bar mr-1"></i>
+                Editer Une Année Scolaire
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                <table>
+                    <tr>
+                        <td width="300px">Actuel</td>
+                        <td {% if not form.current.vars.valid %}errors{% endif %}>
+                            {{ form_widget(form.current) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="300px">Année Scolaire</td>
+                        <td {% if not form.year.vars.valid %}errors{% endif %} width="500px">
+                            {{ form_widget(form.year) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><br><button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button></td>
+                    </tr>
+                </table>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        {% include 'admin/years/affiche.html.twig' %}
+    </div>
+    {{ include('admin/years/_delete_form.html.twig') }}
+{% endblock %}

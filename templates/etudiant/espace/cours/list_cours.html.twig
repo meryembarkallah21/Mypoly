@@ -1,0 +1,57 @@
+{% extends 'etudiant/espace/base.html.twig' %}
+
+{% block title %}List cours{% endblock %}
+
+{% block main %}
+
+    <style>
+        h6
+        {
+            margin-right:100px;
+        }
+
+
+    </style>
+
+
+        <div class="container">
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="1">
+                    <div class="card-title">
+                        <h5 class="text-center">Liste les cours</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for cours in list %}
+                                <div class="col-md-12">
+                                    <div class="bg-white rounded border shadow-sm mb-4">
+
+                                        <div class=" p-3 border-bottom">
+                                            <div class="media">
+
+                                                    <div class="mr-3"><i class="icofont-ui-press text-success food-item"></i></div>
+                                                    <h6 class="mb-1"><span class="badge badge-info">Titre :</span><b class="text-info"> {{ cours.titre }}</b></h6>
+                                                    <h6><span class="badge badge-danger">Description: </span> {{ cours.description }}</h6>
+                                                    <a href="{{ path('cours' ,{ 'id' : cours.id }) }}"  class="btn btn-warning" >suivre le cours</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            {% else %}
+                                <p>Pas de cours disponible pour l"instant</p>
+
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                </div>
+
+        </div>
+
+
+
+{% endblock %}

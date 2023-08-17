@@ -1,0 +1,284 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+{% block title %} Tableau de Bord{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .bg-1{
+            background-color: #e75f99;
+        }
+        .bg-2{
+            background-color: #79cf17;
+        }
+        .bg-3{
+            background-color:#40C4FF;
+        }
+        .bg-4{
+            background-color: #be60c6;
+        }
+        .bg-1>.card-body>a ,.bg-1>.card-body>i {
+            color:white;
+        }
+        .bg-2>.card-body>a {
+            color:white;
+        }
+        .bg-3>.card-body>a , .bg-3>.card-body>i{
+            color:white;
+        }
+        .bg-4>.card-body>a , .bg-4>.card-body>i{
+            color:white;
+        }
+        .text-auther{
+            color: #7e7d7d;
+            font-weight: bold;
+            text-shadow:1px 1px 1px 1px  #fff3cd;
+        }
+        .bg-white-2{
+            background-color: #e7e7e7;
+        }
+        /*== start of code for tooltips ==*/
+        .tool {
+            cursor: help;
+            position: relative;
+        }
+
+
+        /*== common styles for both parts of tool tip ==*/
+        .tool::before,
+        .tool::after {
+            left: 50%;
+            opacity: 0;
+            position: absolute;
+            z-index: -100;
+        }
+        .tool:hover::before,
+        .tool:focus::before,
+        .tool:hover::after,
+        .tool:focus::after {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            z-index: 100;
+        }
+        /*== pointer tip ==*/
+        .tool::before {
+            border-style: solid;
+            border-width: 1em 0.75em 0 0.75em;
+            border-color: #3E474F transparent transparent transparent;
+            bottom: 100%;
+            content: "";
+            margin-left: -0.5em;
+            transition: all .65s cubic-bezier(.84,-0.18,.31,1.26), opacity .65s .5s;
+            transform:  scale(.6) translateY(-90%);
+        }
+
+        .tool:hover::before,
+        .tool:focus::before {
+            transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+        }
+
+
+        /*== speech bubble ==*/
+        .tool::after {
+            background: #3E474F;
+            border-radius: .25em;
+            bottom: 180%;
+            color: #EDEFF0;
+            content: attr(data-tip);
+            margin-left: -8.75em;
+            margin-bottom:-42px;
+            padding: 1em;
+            transition: all .65s cubic-bezier(.84,-0.18,.31,1.26) .2s;
+            transform:  scale(.6) translateY(50%);
+            width: 17.5em;
+        }
+
+        .tool:hover::after,
+        .tool:focus::after  {
+            transition: all .65s cubic-bezier(.84,-0.18,.31,1.26);
+        }
+
+        @media (max-width: 760px) {
+            .tool::after {
+                font-size: .75em;
+                margin-left: -5em;
+                width: 10em;
+            }
+        }
+
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4">Tableau de bord</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Tableau de bord</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="mb-4 order-list col-md-12 mx-auto">
+                    <div class="gold-members p-4">
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <div class="card bg-1">
+                                    <div class="card-body text-center">
+                                        <i class="feather-user"></i>
+                                        <a href="{{ path('prof_profil') }}">Mon Profil</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card bg-2">
+                                    <div class="card-body text-center text-white">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        <a href="{{ path('prof_mentions') }}">Mes Mentions</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card bg-3">
+                                    <div class="card-body text-center">
+                                        <i class="feather-book-open"></i>
+                                        <a href="{{ path('prof_bibliotheque') }}">Bibliothèque</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="card bg-4">
+                                    <div class="card-body text-center">
+                                        <i class=" feather-clock"></i>
+                                        <a href="{{ path('prof_mes_agenda') }}">Mon agenda</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="border-bottom">
+                    <div class="card-header">
+                        <i class="feather-message-square mr-1"></i>
+                        Commentaires
+                    </div>
+                    <div class="card-body osahan-chat p-0">
+                        <div class="row m-0">
+                            <div class="border-bottom  border-info col-lg-5 col-xl-4 px-0">
+                                <div class="osahan-chat-left">
+                                    <div class="position-relative border-info text-truncate p-3 border">
+                                        <span style="font-weight: bold; text-align: center;">Ec</span>
+                                    </div>
+                                    <div class="osahan-chat-list">
+                                        {% for ec in ecs %}
+                                            {% for cour in cours %}
+                                                {% if cour.ec == ec %}
+                                                    <div class="p-3 d-flex align-items-center border-bottom osahan-post-header overflow-hidden">
+                                                        <div class="font-weight-bold mr-1 overflow-hidden">
+                                                            <div class="text-truncate">
+                                                                {{ ec.name }}
+                                                            </div>
+                                                        </div>
+                                                        <span class="ml-auto mb-auto">
+                                                        <div class="text-right text-muted pt-1 small"><a href="{{path('prof_commenter',{'id':cour.id })}}" class="btn btn-info rounded btn-sm"><span class="fas fa-eye"></span></a></div>
+                                                       </span>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="p-3 d-flex align-items-center border-bottom osahan-post-header overflow-hidden">
+                                                <div class="font-weight-bold mr-1 overflow-hidden">
+                                                    <div class="text-truncate">Aucun élément constitutif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-xl-8 px-0 ">
+                                <div class="p-3 d-flex align-items-center  border border-info osahan-post-header">
+                                    <div class="font-weight-bold mr-1 overflow-hidden">
+                                         <div class="text-truncate">Commentaires
+                                        </div>
+                                        <div class="small text-truncate overflow-hidden text-black-50"></div>
+                                    </div>
+                                    {# <span class="ml-auto">
+                                          <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                          <i class="feather-phone"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                          <i class="feather-video"></i>
+                                          </button>
+                                          <div class="btn-group">
+                                             <button type="button" class="btn btn-outline-primary btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             <i class="feather-more-vertical"></i>
+                                             </button>
+                                             <div class="dropdown-menu dropdown-menu-right">
+                                                <button class="dropdown-item" type="button"><i class="feather-trash"></i> Delete</button>
+                                                <button class="dropdown-item" type="button"><i class="feather-x-circle"></i> Turn Off</button>
+                                             </div>
+                                          </div>
+                                       </span>#}
+                                </div>
+                                <div class="osahan-chat-box p-3  border-info border bg-white-2">
+                                    {% for ec in ecs  %}
+                                        {% for cour in cours %}
+                                            {% if cour.ec == ec %}
+                                                {% for comment in commentaires %}
+                                                    {% if comment.cours == cour %}
+                                                        <div class="text-center my-3">
+                                                            <span class="px-3 py-2 small bg-white-2 shadow-sm rounded">{{ comment.time|format_date(locale='en') }}</span>
+                                                        </div>
+                                                        <div class="d-flex align-items-center osahan-post-header">
+                                                            <div class="dropdown-list-image mr-3 mb-auto"><img class="rounded-circle" src="{{asset('images/avatars/'~comment.auteur.avatar)}}" alt=""></div>
+                                                            <div class="mr-1">
+                                                                <div class="text-truncate text-auther h6 mb-3">{{ comment.auteur.email }}
+                                                                </div>
+                                                                <p>{{ comment.contenu }}</p>
+                                                            </div>
+                                                            <span class="ml-auto mb-auto">
+                                                                <div class="text-right text-muted pt-1 small">{{ comment.time|format_time(locale='en') }}<br>
+                                                                    {% if comment.auteur == app.user %}
+                                                                        <a href="{{ path('prof_suprimer_comment',{'id': comment.id }) }}"class="btn btn-sm"><span class="fas text-danger fa-trash-alt"></span></a>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                                <div class="w-100 border-top border border-info tool" data-tip="Veuillez choisir un élément constitutif." tabindex="1">
+                                    <textarea placeholder="Commenter…" class="form-control border-0 p-3 shadow-none" rows="2" disabled></textarea>
+                                </div>
+                                <div class="p-3 d-flex align-items-center border border-info">
+                                    <div class="overflow-hidden">
+                                        {#  <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                            <i class="feather-image"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                            <i class="feather-paperclip"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm rounded">
+                                            <i class="feather-camera"></i>
+                                        </button> #}
+                                    </div>
+                                    <span class="ml-auto">
+                                       <button type="button" class="btn btn-primary btn-sm rounded" disabled>
+                                       <i class="feather-send"></i> Envoyer
+                                       </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

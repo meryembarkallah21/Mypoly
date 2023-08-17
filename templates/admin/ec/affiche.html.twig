@@ -1,0 +1,46 @@
+<div class="card mb-4">
+    <div class="card-header" id="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Liste
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr class="text-uppercase">
+                    <th>Unité d'Enseignement</th>
+                    <th>Nom</th>
+                    <th>Code</th>
+                    <th>Prof</th>
+                    <th>Crédit</th>
+                    <th>Status</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ec in ecs %}
+                    <tr>
+                        <td>{{ ec.ue }}</td>
+                        <td>{{ ec.name }}</td>
+                        <td>{{ ec.code }}</td>
+                        {% if ec.prof == NULL %}
+                            <td>Auccun</td>
+                        {% else %}
+                            <td>{{ ec.prof }}</td>
+                        {% endif %}
+                        <td>{{ ec.coeff }}</td>
+                        <td>{{ ec.status }}</td>
+                        <td>
+                            <center>{{ include('admin/ec/_delete_form.html.twig') }}</center>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

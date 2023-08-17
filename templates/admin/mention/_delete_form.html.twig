@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('mention_delete', {'id': mention.id}) }}" onsubmit="return confirm('Vous etes sure que vous voulez supprimer cet item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ mention.id) }}">
+    <a class="btn btn-success btn-sm" href="{{ path('mention_edit', {'id': mention.id}) }}"><span class="fas fa-edit"></span></a>
+    <button class="btn btn-danger btn-sm"><i class="fa fw fa-trash-alt"></i></button>
+</form>

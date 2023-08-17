@@ -1,0 +1,124 @@
+{% extends 'prof/dashboard/base.html.twig' %}
+{% block title %}Bibliothèque /{{ cour.titre }}{% endblock %}
+{% block css %}
+{% endblock %}
+{% block main %}
+    <style>
+        .tb{
+            color:royalblue;
+            margin-right:5px;
+        }
+        .book-open{
+            color: #6c4079;
+        }
+
+        div.scrol{
+            background: #eeeeee none repeat scroll 0 0;
+            border: 1px solid royalblue;
+            padding: 5px;
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: auto;
+        }
+        .margin-crd{
+            margin-bottom:15px;
+        }
+        #audio{
+            background-color: royalblue;
+            opacity: 0.5;
+        }
+        .fig-audio{
+            color: #f8f3f4;
+            text-shadow: 2px 2px 2px black;
+            z-index:-2;
+        }
+    </style>
+    <div class="container-fluid">
+        <h1 class="mt-4"><i class="feather-book-open book-open"></i> {{ cour.titre }}</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">
+                <a class="tb" href="{{ path('prof_dashbord') }}">Tableau de bord</a>
+                / <a class="tb" href="{{ path('prof_bibliotheque')}}">Bibliothèque</a>/ {{ cour.titre }}
+            </li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-7">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <iframe src="{{ app.request.schemeAndHttpHost~asset('images/fichier_cours/'~cour.fichier) }}#toolbar=0" aria-hidden="true"  type="application/pdf" width="100%" height="584px"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5">
+            <div class="col-xl-12 margin-crd">
+                <div class="card-body scrol">
+                    {% set i=0 %}
+                    {% for  video in videos %}
+                        {% set i=i+1 %}
+                        <p>Cours {{ video.cours.titre }} n° {{ i }}</p>
+                        <iframe width="100%" height="190px" class="myIframe" allowfullscreen>
+                        </iframe>
+                        <script type="text/javascript">
+                            var url = "{{ video.lienUrl }}";
+                            var id = url.split("?v=")[1]; //sGbxmsDFVnE
+
+                            var embedlink = "http://www.youtube.com/embed/" + id;
+
+                            var ytube1 = document.getElementsByClassName("myIframe");
+
+                            ytube1[{{loop.index0}}].src = embedlink;
+                        </script>
+                    {% else %}
+                        <p>Aucune Vidéo</p>
+                    {% endfor %}
+                </div>
+            </div>
+                <div class="col-xl-12 margin-crd">
+                    <div class="card-body scrol" id="audio">
+                        {% set i=0 %}
+                        {% for audio in audios %}
+                            {% set i=i+1 %}
+                            <figure>
+                                <figcaption class="fig-audio">Cours {{ audio.cours.titre }} n° {{ i }}</figcaption>
+                                <audio controls src="{{ asset('images/fichier_audio/'~audio.fichier ) }}">
+                                    Votre navigateur aucun support
+                                    <code>audio</code> pour lire cet element.
+                                </audio>
+                            </figure>
+                        {% else %}
+                            <p class="text-black" style="color:black">Aucune audio</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            <div class="col-xl-12 margin-crd">
+                <div class="card-body scrol" >
+                    <div class="table-responsive">
+                        <table class="table" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Fichier</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for fichier_support in fichier_supports %}
+                                <tr>
+                                    <td><i class="fa fw fx fa-file-pdf"></i> {{ fichier_support.fichier }}</td>
+                                    <td width="150px">
+
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="2">Aucun fichier</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

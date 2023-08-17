@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mention index{% endblock %}
+
+{% block body %}
+    <h1>Mention index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Frais_inscription</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mention in mentions %}
+            <tr>
+                <td>{{ mention.id }}</td>
+                <td>{{ mention.code }}</td>
+                <td>{{ mention.fraisInscription }}</td>
+                <td>
+                    <a href="{{ path('mention_show', {'id': mention.id}) }}">show</a>
+                    <a href="{{ path('mention_edit', {'id': mention.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('mention_new') }}">Create new</a>
+{% endblock %}

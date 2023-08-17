@@ -1,0 +1,25 @@
+<!--tab-menu-->
+<style>
+    .ui{
+        color:gray;
+        font-size: 16px;
+        font-weight: bold;
+        border:1px solid royalblue ;
+        margin-right:3px;
+        margin-left:3px;
+    }
+    .fx{
+        color: #efd243;
+    }
+</style>
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link ui {{  fichier_support is defined ? 'active' : ''  }}" href="{{ path('fichier_support_new', {'id':cour.id }) }}"><i class="fa fx fw fa-file-pdf"></i> Fichier Support</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link ui {{ video is defined ? 'active' : ''  }}" href="{{ path('videos_new',{'id':cour.id}) }}"> <i class="fa fx fw fa-file-video"></i> Video</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link ui {{ audio is defined ? 'active' : ''  }}" href="{{ path('audio_new',{'id':cour.id}) }}"> <i class="fa fx fw fa-file-audio"></i> Audio</a>
+    </li>
+</ul>

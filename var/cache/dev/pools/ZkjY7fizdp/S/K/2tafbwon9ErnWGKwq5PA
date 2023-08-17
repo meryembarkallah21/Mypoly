@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CSemestre%2523getCode
+
+return [PHP_INT_MAX, []];

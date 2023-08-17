@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Inscription {{parcours.name}} {{niveau.code}} en {{ mention.name }}</title>
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('espace/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Datatables css -->
+    <link href="{{ asset('espace/vendor/dataTables/dataTables/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #33394c;
+        }
+        th:th:nth-child(1), th:th:nth-child(2) {
+            width: 40%;
+        }
+        th:th:nth-child(3) {
+            width: 20%;
+        }
+        th, td {
+            border: 1px solid #33394c;
+            text-align: center;
+        }
+        th{
+            background-color: #a7b2d0;
+        }
+        .an{
+            position: absolute;
+            right:0px;
+            top:97px;
+        }
+        h1{
+            color: #1a2058;
+        }
+    </style>
+    <script src="{{ asset('espace/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('espace/vendor/dataTables/dataTables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('espace/vendor/dataTables/dataTables/js/dataTables.bootstrap.min.js') }}"></script>
+</head>
+<body>
+<center><u><pre><h1>Liste des étudiants</h1></pre></u></center>
+<pre>Mention: {{parcours.name}} {{niveau.code}} en {{ mention.name }}</pre>         <pre class="an">Année scolaire:{{ years.year }}</pre>
+<table>
+    <table class="table" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr class="text-uppercase">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Tél</th>
+            <th>Niveau</th>
+            <th>Mention</th>
+            <th>Parcours</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!----><!---->
+        {% for inscrire in inscris %}
+            <tr>
+                <td>{{ inscrire.etudiant.name }}</td>
+                <td>{{ inscrire.etudiant.email }}</td>
+                <td>{{ inscrire.etudiant.tel }}</td>
+                <td>{{ inscrire.mention.cycle.code }}</td>
+                <td>{{ inscrire.mention.code.name }}</td>
+                <td>{{ inscrire.mention.parcours.name }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune etudiant</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</table>
+</body>
+</html>
